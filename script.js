@@ -12,6 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyTriggers();
   initContactForm();
   initLiveClock();
+  initCommandPalette();
+  initDocumentPreviewer();
+  initCardSpotlight();
 });
 
 /* ==========================================================================
@@ -238,6 +241,47 @@ db.catalog_items.createIndex(
       { val: 'Zero', desc: 'Deployment downtime' },
       { val: '60%', desc: 'Docker image size cut' }
     ]
+  },
+  'diagram': {
+    title: 'Enterprise Distributed System Topology',
+    file: 'system-architecture-topology.svg',
+    code: `<div class="arch-topology-view">
+  <div class="arch-node-box" data-node="clients">
+    <div class="node-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+    <div class="node-title">Web &amp; Mobile Clients</div>
+    <div class="node-desc">10,000+ DAU • HTTPS / WSS</div>
+  </div>
+  <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arch-node-box" data-node="ingress">
+    <div class="node-icon"><i class="fa-solid fa-dharmachakra"></i></div>
+    <div class="node-title">Kubernetes Ingress</div>
+    <div class="node-desc">TLS &amp; Rate Limiting</div>
+  </div>
+  <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arch-node-box active-node" data-node="spring">
+    <div class="node-icon"><i class="fa-solid fa-leaf"></i></div>
+    <div class="node-title">Spring Boot 3 Pods</div>
+    <div class="node-desc">Temurin 17 • HPA Autoscale</div>
+  </div>
+  <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arch-node-box" data-node="kafka">
+    <div class="node-icon"><i class="fa-solid fa-network-wired"></i></div>
+    <div class="node-title">Kafka Event Bus</div>
+    <div class="node-desc">&lt; 15ms Ingestion Lag</div>
+  </div>
+  <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+  <div class="arch-node-box" data-node="storage">
+    <div class="node-icon"><i class="fa-solid fa-database"></i></div>
+    <div class="node-title">Solr &amp; Mongo Cluster</div>
+    <div class="node-desc">50K Catalog • Covered Index</div>
+  </div>
+</div>`,
+    desc: 'High-level topology of production systems engineered for ATMA Research and enterprise clients. Traffic flows through TLS-terminated Kubernetes Ingress down to autoscaling Spring Boot microservice replicas, asynchronously decoupled through Apache Kafka partitions into optimized Apache Solr search nodes and MongoDB covered index clusters.',
+    stats: [
+      { val: '10K+', desc: 'Active daily users' },
+      { val: '99.9%', desc: 'Verified SLA uptime' },
+      { val: '< 15ms', desc: 'Event delivery lag' }
+    ]
   }
 };
 
@@ -248,6 +292,7 @@ function initArchitecturePlayground() {
   const blueprintTitle = document.getElementById('blueprintTitle');
   const blueprintDesc = document.getElementById('blueprintDesc');
   const statsContainer = document.getElementById('blueprintStats');
+  const copyBtn = document.getElementById('codeCopyBtn');
 
   if (!tabs.length || !codeBox) return;
 
@@ -280,33 +325,93 @@ function initArchitecturePlayground() {
     });
   });
 
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      const textToCopy = codeBox.innerText || codeBox.textContent;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const prevHtml = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="fa-solid fa-check" style="color: var(--accent-emerald);"></i> <span>Copied!</span>';
+        showToast('Snippet copied to clipboard');
+        setTimeout(() => { copyBtn.innerHTML = prevHtml; }, 2000);
+      });
+    });
+  }
+
   setArchitecture('kafka');
 }
 
 /* ==========================================================================
-   4. Project Filtering
+   4. Project Filtering & Real-Time Search
    ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
+  const searchInput = document.getElementById('projectSearchInput');
+  const clearBtn = document.getElementById('searchClearBtn');
+  const noProjectsMsg = document.getElementById('noProjectsMessage');
+  const resetBtn = document.getElementById('resetProjectFiltersBtn');
+
+  let activeCategory = 'all';
+  let searchQuery = '';
+
+  function applyFilters() {
+    let visibleCount = 0;
+    projectCards.forEach(card => {
+      const categories = card.getAttribute('data-category') || '';
+      const text = card.textContent.toLowerCase();
+      const matchesCategory = (activeCategory === 'all' || categories.includes(activeCategory));
+      const matchesSearch = (!searchQuery || text.includes(searchQuery));
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = 'flex';
+        visibleCount++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (noProjectsMsg) {
+      noProjectsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  }
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      projectCards.forEach(card => {
-        const categories = card.getAttribute('data-category') || '';
-        if (filter === 'all' || categories.includes(filter)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      activeCategory = btn.getAttribute('data-filter') || 'all';
+      applyFilters();
     });
   });
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      if (clearBtn) clearBtn.style.display = searchQuery ? 'block' : 'none';
+      applyFilters();
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      clearBtn.style.display = 'none';
+      applyFilters();
+      if (searchInput) searchInput.focus();
+    });
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      searchQuery = '';
+      if (clearBtn) clearBtn.style.display = 'none';
+      activeCategory = 'all';
+      filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === 'all'));
+      applyFilters();
+    });
+  }
 }
 
 /* ==========================================================================
@@ -535,61 +640,104 @@ const projectDetails = {
 function initProjectModal() {
   const modal = document.getElementById('projectModal');
   const closeBtn = document.getElementById('modalCloseBtn');
+  const prevBtn = document.getElementById('modalPrevBtn');
+  const nextBtn = document.getElementById('modalNextBtn');
+  const indexCounter = document.getElementById('modalIndexCounter');
   const projectCards = document.querySelectorAll('.project-card');
 
   if (!modal) return;
 
-  projectCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      // If clicking directly on an external link inside the card, let default action proceed
-      if (e.target.closest('a.external-card-link')) return;
+  const projectKeys = Object.keys(projectDetails);
+  let currentModalIndex = 0;
 
-      const id = card.getAttribute('data-project');
-      const data = projectDetails[id];
-      if (!data) return;
+  function renderModalProject(index) {
+    if (index < 0) index = projectKeys.length - 1;
+    if (index >= projectKeys.length) index = 0;
+    currentModalIndex = index;
 
-      document.getElementById('modalImg').src = data.image;
-      document.getElementById('modalImg').alt = data.title;
-      document.getElementById('modalCategory').textContent = data.category;
-      document.getElementById('modalDate').textContent = data.date;
-      document.getElementById('modalTitle').textContent = data.title;
-      document.getElementById('modalSubtitle').textContent = data.subtitle;
-      document.getElementById('modalOverview').textContent = data.overview;
+    const id = projectKeys[index];
+    const data = projectDetails[id];
+    if (!data) return;
 
-      const highlights = document.getElementById('modalHighlights');
-      highlights.innerHTML = '';
-      data.highlights.forEach(h => {
-        const li = document.createElement('li');
-        li.textContent = h;
-        highlights.appendChild(li);
-      });
+    document.getElementById('modalImg').src = data.image;
+    document.getElementById('modalImg').alt = data.title;
+    document.getElementById('modalCategory').textContent = data.category;
+    document.getElementById('modalDate').textContent = data.date;
+    document.getElementById('modalTitle').textContent = data.title;
+    document.getElementById('modalSubtitle').textContent = data.subtitle;
+    document.getElementById('modalOverview').textContent = data.overview;
 
-      const tech = document.getElementById('modalTech');
-      tech.innerHTML = '';
-      data.tech.forEach(t => {
-        const span = document.createElement('span');
-        span.className = 'tech-chip';
-        span.textContent = t;
-        tech.appendChild(span);
-      });
+    if (indexCounter) {
+      indexCounter.textContent = `Project ${index + 1} of ${projectKeys.length}`;
+    }
 
-      const ghLink = document.getElementById('modalGithubLink');
-      if (ghLink) ghLink.href = data.github;
+    const highlights = document.getElementById('modalHighlights');
+    highlights.innerHTML = '';
+    data.highlights.forEach(h => {
+      const li = document.createElement('li');
+      li.textContent = h;
+      highlights.appendChild(li);
+    });
 
-      const liveLink = document.getElementById('modalLiveLink');
-      if (liveLink) {
-        if (data.liveUrl) {
-          liveLink.href = data.liveUrl;
-          liveLink.style.display = 'inline-flex';
-        } else {
-          liveLink.style.display = 'none';
-        }
+    const tech = document.getElementById('modalTech');
+    tech.innerHTML = '';
+    data.tech.forEach(t => {
+      const span = document.createElement('span');
+      span.className = 'tech-chip';
+      span.textContent = t;
+      tech.appendChild(span);
+    });
+
+    const ghLink = document.getElementById('modalGithubLink');
+    if (ghLink) ghLink.href = data.github;
+
+    const liveLink = document.getElementById('modalLiveLink');
+    if (liveLink) {
+      if (data.liveUrl) {
+        liveLink.href = data.liveUrl;
+        liveLink.style.display = 'inline-flex';
+      } else {
+        liveLink.style.display = 'none';
       }
+    }
+  }
 
+  window.renderModalProject = renderModalProject;
+  window.openProjectModalById = function(id) {
+    const idx = projectKeys.indexOf(id);
+    if (idx !== -1) {
+      renderModalProject(idx);
       modal.showModal();
       document.body.style.overflow = 'hidden';
+    }
+  };
+
+  projectCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a.external-card-link')) return;
+      const id = card.getAttribute('data-project');
+      const idx = projectKeys.indexOf(id);
+      if (idx !== -1) {
+        renderModalProject(idx);
+        modal.showModal();
+        document.body.style.overflow = 'hidden';
+      }
     });
   });
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renderModalProject(currentModalIndex - 1);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renderModalProject(currentModalIndex + 1);
+    });
+  }
 
   function closeModal() {
     modal.close();
@@ -610,6 +758,17 @@ function initProjectModal() {
 
   modal.addEventListener('cancel', () => {
     document.body.style.overflow = '';
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (!modal.open) return;
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      renderModalProject(currentModalIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      renderModalProject(currentModalIndex + 1);
+    }
   });
 }
 
@@ -700,3 +859,244 @@ function initLiveClock() {
   tick();
   setInterval(tick, 1000);
 }
+
+/* ==========================================================================
+   9. Command Palette (Cmd + K)
+   ========================================================================== */
+function initCommandPalette() {
+  const dialog = document.getElementById('cmdPaletteDialog');
+  const triggerBtn = document.getElementById('cmdKTrigger');
+  const input = document.getElementById('cmdPaletteInput');
+  const resultsContainer = document.getElementById('cmdPaletteResults');
+
+  if (!dialog || !input || !resultsContainer) return;
+
+  function scrollToSection(selector) {
+    const el = document.querySelector(selector);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  const commands = [
+    // Navigation
+    { type: 'nav', title: 'About Abhishek', icon: 'fa-regular fa-user', action: () => scrollToSection('#about'), badge: 'Section' },
+    { type: 'nav', title: 'Experience & History', icon: 'fa-solid fa-briefcase', action: () => scrollToSection('#experience'), badge: 'Section' },
+    { type: 'nav', title: 'Architecture Playground', icon: 'fa-solid fa-terminal', action: () => scrollToSection('#architecture'), badge: 'Section' },
+    { type: 'nav', title: 'Live Projects (13 Total)', icon: 'fa-solid fa-layer-group', action: () => scrollToSection('#projects'), badge: 'Section' },
+    { type: 'nav', title: 'Technical Skills Matrix', icon: 'fa-solid fa-gears', action: () => scrollToSection('#skills'), badge: 'Section' },
+    { type: 'nav', title: 'Education & GATE / JEE', icon: 'fa-solid fa-graduation-cap', action: () => scrollToSection('#education'), badge: 'Section' },
+    { type: 'nav', title: 'Verified Credentials & Dossiers', icon: 'fa-solid fa-certificate', action: () => scrollToSection('#credentials'), badge: 'Section' },
+    { type: 'nav', title: 'Get In Touch', icon: 'fa-regular fa-envelope', action: () => scrollToSection('#contact'), badge: 'Section' },
+
+    // Actions
+    { type: 'action', title: 'Download Resume (PDF)', icon: 'fa-solid fa-file-pdf', action: () => { window.open('assets/Abhishek_Singh_Resume.pdf', '_blank'); }, badge: 'Download' },
+    { type: 'action', title: 'Copy Email Address', icon: 'fa-regular fa-copy', action: () => { navigator.clipboard.writeText('Abhisheksingh1thakur@gmail.com'); showToast('Copied email to clipboard!'); }, badge: 'Action' },
+    { type: 'action', title: 'View Embassy of Israel Letter', icon: 'fa-solid fa-award', action: () => window.openDocPreview('assets/Letter_of_Recommendation_Embassy_of_Israel.pdf', 'Embassy of Israel Recommendation', 'Signed by Avital Barak, Cultural Attaché'), badge: 'PDF' },
+    { type: 'action', title: 'View NCERT Project 20.09 Dossier', icon: 'fa-solid fa-file-contract', action: () => window.openDocPreview('assets/Bharat_Heritage_Project_Dossier.pdf', 'NCERT Bharat Heritage Dossier', 'Technical Compliance Build'), badge: 'PDF' },
+    { type: 'action', title: 'View JNU M.Tech Dissertation', icon: 'fa-solid fa-book-bookmark', action: () => window.openDocPreview('assets/Abhishek_Singh_MTech_Thesis_JNU.pdf', 'JNU M.Tech Dissertation', 'Computational NLP & Social Networks'), badge: 'PDF' },
+    { type: 'action', title: 'Open GitHub Profile (@Abhitvg)', icon: 'fa-brands fa-github', action: () => { window.open('https://github.com/Abhitvg', '_blank'); }, badge: 'External' },
+    { type: 'action', title: 'Toggle Dark / Light Theme', icon: 'fa-solid fa-circle-half-stroke', action: () => { document.getElementById('themeToggleBtn')?.click(); }, badge: 'Theme' },
+
+    // Projects
+    { type: 'project', title: 'ATMA AI – Distributed Microservices Hub', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('atma'), badge: 'Kafka / Java' },
+    { type: 'project', title: 'NCERT Virasat – Cultural Heritage Explorer', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('virasat'), badge: 'React / Three.js' },
+    { type: 'project', title: 'DocFlow – Real-Time Collaborative Workspace', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('docflow'), badge: 'Next.js 15 / Tiptap' },
+    { type: 'project', title: 'Quorum – AI Video & Meeting Intelligence', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('quorum'), badge: 'WebRTC / Whisper' },
+    { type: 'project', title: 'AI Interview Assistant (IAC)', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('iac'), badge: 'Electron / Ollama' },
+    { type: 'project', title: 'The Balance Bite – Nutrition Tracker', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('balancebite'), badge: 'Android / Firebase' },
+    { type: 'project', title: 'Zubin Mehta Cultural Portal', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('zubin-mehta'), badge: 'Embassy of Israel' },
+    { type: 'project', title: 'Indian Eurasia Research Forum (IERF)', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('ierf'), badge: 'Next.js / ISR' },
+    { type: 'project', title: 'DoonSilk – Co-Operative Supply Chain', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('doonsilk'), badge: 'MERN Stack' },
+    { type: 'project', title: 'Sheetal Electrotech – 3D Industrial Portal', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('sheetal'), badge: 'Three.js / Draco' },
+    { type: 'project', title: 'Fashion Look – Luxury Tailoring Storefront', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('fashion-look'), badge: 'Next.js / Firebase' },
+    { type: 'project', title: 'Porcupine – Local-First AI Orchestrator', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('porcupine'), badge: 'Local RAG' },
+    { type: 'project', title: 'NLP Media Bias Detection Engine', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('media-bias'), badge: 'JNU M.Tech Thesis' }
+  ];
+
+  let selectedIndex = 0;
+  let filteredCommands = [...commands];
+
+  function renderList() {
+    resultsContainer.innerHTML = '';
+    if (filteredCommands.length === 0) {
+      resultsContainer.innerHTML = `<div style="padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.88rem;">No commands or projects found matching search.</div>`;
+      return;
+    }
+
+    let currentGroup = '';
+    filteredCommands.forEach((cmd, idx) => {
+      let groupName = cmd.type === 'nav' ? 'Navigation' : (cmd.type === 'action' ? 'Quick Actions' : 'Projects');
+      if (groupName !== currentGroup) {
+        currentGroup = groupName;
+        const groupEl = document.createElement('div');
+        groupEl.className = 'cmd-group-title';
+        groupEl.textContent = groupName;
+        resultsContainer.appendChild(groupEl);
+      }
+
+      const item = document.createElement('div');
+      item.className = 'cmd-item' + (idx === selectedIndex ? ' active' : '');
+      item.innerHTML = `
+        <div class="cmd-item-left">
+          <i class="${cmd.icon} cmd-item-icon"></i>
+          <span>${cmd.title}</span>
+        </div>
+        <span class="cmd-item-badge">${cmd.badge}</span>
+      `;
+
+      item.addEventListener('click', () => {
+        closePalette();
+        cmd.action();
+      });
+
+      resultsContainer.appendChild(item);
+    });
+
+    const activeEl = resultsContainer.querySelector('.cmd-item.active');
+    if (activeEl) activeEl.scrollIntoView({ block: 'nearest' });
+  }
+
+  function openPalette() {
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+    input.value = '';
+    filteredCommands = [...commands];
+    selectedIndex = 0;
+    renderList();
+    setTimeout(() => input.focus(), 60);
+  }
+
+  function closePalette() {
+    dialog.close();
+    document.body.style.overflow = '';
+  }
+
+  if (triggerBtn) triggerBtn.addEventListener('click', openPalette);
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (dialog.open) {
+        closePalette();
+      } else {
+        openPalette();
+      }
+    } else if (dialog.open) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % filteredCommands.length;
+        renderList();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + filteredCommands.length) % filteredCommands.length;
+        renderList();
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (filteredCommands[selectedIndex]) {
+          const action = filteredCommands[selectedIndex].action;
+          closePalette();
+          action();
+        }
+      } else if (e.key === 'Escape') {
+        closePalette();
+      }
+    }
+  });
+
+  input.addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) {
+      filteredCommands = [...commands];
+    } else {
+      filteredCommands = commands.filter(c =>
+        c.title.toLowerCase().includes(q) ||
+        c.badge.toLowerCase().includes(q)
+      );
+    }
+    selectedIndex = 0;
+    renderList();
+  });
+
+  dialog.addEventListener('click', (e) => {
+    const rect = dialog.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+      closePalette();
+    }
+  });
+}
+
+/* ==========================================================================
+   10. Document Previewer Modal
+   ========================================================================== */
+function initDocumentPreviewer() {
+  const dialog = document.getElementById('docPreviewDialog');
+  const closeBtn = document.getElementById('docPreviewCloseBtn');
+  const titleEl = document.getElementById('docPreviewTitle');
+  const metaEl = document.getElementById('docPreviewMeta');
+  const iframe = document.getElementById('docPreviewIframe');
+  const downloadBtn = document.getElementById('docPreviewDownloadBtn');
+  const previewBtns = document.querySelectorAll('.preview-doc-btn');
+
+  if (!dialog || !iframe) return;
+
+  window.openDocPreview = function(src, title, meta) {
+    if (titleEl) titleEl.textContent = title;
+    if (metaEl) metaEl.textContent = meta;
+    iframe.src = src;
+    if (downloadBtn) {
+      downloadBtn.href = src;
+      downloadBtn.setAttribute('download', src.split('/').pop());
+    }
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+
+  previewBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const src = btn.getAttribute('data-doc-src');
+      const title = btn.getAttribute('data-doc-title') || 'Document';
+      const meta = btn.getAttribute('data-doc-meta') || 'Verified Document';
+      window.openDocPreview(src, title, meta);
+    });
+  });
+
+  function closeDocPreview() {
+    dialog.close();
+    iframe.src = '';
+    document.body.style.overflow = '';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeDocPreview);
+
+  dialog.addEventListener('click', (e) => {
+    const rect = dialog.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+      closeDocPreview();
+    }
+  });
+
+  dialog.addEventListener('cancel', () => {
+    iframe.src = '';
+    document.body.style.overflow = '';
+  });
+}
+
+/* ==========================================================================
+   11. Ambient Card Spotlight Illumination
+   ========================================================================== */
+function initCardSpotlight() {
+  const interactiveCards = document.querySelectorAll('.project-card, .experience-card, .playground-card, .doc-card, .skills-group');
+
+  interactiveCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+}
+
