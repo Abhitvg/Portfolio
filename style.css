@@ -98,6 +98,15 @@
   padding: 0;
 }
 
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+p, h1, h2, h3, h4, h5, h6, span {
+  overflow-wrap: break-word;
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -892,7 +901,7 @@ section {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
   gap: 1.75rem;
 }
 
@@ -1105,7 +1114,7 @@ section {
    ========================================================================== */
 .skills-categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.5rem;
 }
 
@@ -1323,7 +1332,7 @@ section {
    ========================================================================== */
 .verified-docs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
   gap: 1rem;
   margin-top: 1.75rem;
   width: 100%;
@@ -1454,6 +1463,8 @@ section {
   font-size: 0.92rem;
   font-weight: 600;
   color: var(--text-main);
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .copy-btn {
@@ -2344,16 +2355,92 @@ dialog#projectModal::backdrop {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Comprehensive Responsive Breakpoints (Desktop -> Tablet -> Mobile)
    ========================================================================== */
-@media (max-width: 992px) {
+
+/* Prevent grid children from blowing past container width */
+.hero-layout > *,
+.about-grid > *,
+.playground-content > *,
+.edu-grid > *,
+.contact-layout > *,
+.project-card,
+.experience-card,
+.skills-group,
+.doc-card {
+  min-width: 0;
+}
+
+/* 1. Large Tablets & Small Laptops (<= 1080px) */
+@media (max-width: 1080px) {
+  /* Navigation switch to drawer before 8 desktop links cram the bar */
+  .mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: 1px solid var(--border-medium);
+    color: var(--text-main);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+
+  .mobile-toggle:hover {
+    background: var(--bg-surface-elevated);
+    border-color: var(--border-strong);
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: var(--bg-surface-elevated);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.25rem 1.5rem;
+    gap: 0.35rem;
+    border-bottom: 1px solid var(--border-medium);
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    transform: translateY(-130%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 999;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    background: var(--bg-surface);
+    color: var(--text-main);
+  }
+
   .hero-layout {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.75rem;
   }
 
   .hero-portrait-card {
-    max-width: 360px;
+    max-width: 340px;
     margin: 0 auto;
   }
 
@@ -2366,47 +2453,430 @@ dialog#projectModal::backdrop {
 
   .metrics-strip {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
-    background: var(--bg-surface);
-    flex-direction: column;
-    padding: 1.5rem;
     gap: 1.25rem;
-    border-bottom: 1px solid var(--border-medium);
-    transform: translateY(-120%);
-    transition: transform var(--transition-normal);
-  }
-
-  .nav-menu.open {
-    transform: translateY(0);
-  }
-
-  .mobile-toggle {
-    display: block;
   }
 
   .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* 2. Tablets & Mobile Landscape (<= 768px) */
+@media (max-width: 768px) {
+  section {
+    padding: 3.75rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.65rem, 6.2vw, 2.1rem);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.85rem, 6.5vw, 2.45rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .hero-bio {
+    font-size: 0.98rem;
+    line-height: 1.68;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-actions {
+    gap: 0.65rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-portrait-card {
+    max-width: 300px;
+  }
+
+  .metrics-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .metric-val {
+    font-size: 1.5rem;
+  }
+
+  .metric-label {
+    font-size: 0.76rem;
+  }
+
+  /* Interactive Architecture & Code Playground */
+  .playground-content {
+    padding: 1rem;
+    gap: 1.25rem;
+  }
+
+  .arch-topology-view {
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1rem;
+  }
+
+  .arch-arrow {
+    transform: rotate(90deg);
+    margin: -0.15rem 0;
+  }
+
+  .code-editor-header {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .code-editor-body {
+    font-size: 0.75rem;
+    padding: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .code-file-name {
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Projects Section */
+  .projects-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .project-controls-bar {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.85rem;
+    margin-bottom: 1rem;
   }
 
   .project-search-box {
+    min-width: 0;
     max-width: 100%;
+    width: 100%;
+  }
+
+  .project-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 0.45rem;
+    padding-bottom: 6px;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .project-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 0.42rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .tech-filter-pills {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    margin-top: 0.25rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .tech-filter-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tech-pill-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .project-card-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Experience Cards */
+  .experience-card {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .exp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  .exp-meta {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  .exp-role-title {
+    font-size: 1.15rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    padding-left: 1.15rem;
+  }
+
+  /* Skills Matrix */
+  .skills-categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .skills-group {
+    padding: 1.25rem;
+  }
+
+  /* Education & Verified Dossiers */
+  .edu-box {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .endorsement-card {
+    padding: 1.5rem 1.15rem;
+    margin-top: 1.75rem;
+  }
+
+  .endorsement-quote {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .endorsement-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .endorsement-footer .doc-download-pill {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .verified-docs-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .doc-card {
+    padding: 1.1rem;
+  }
+
+  /* Contact Section */
+  .contact-form {
+    padding: 1.35rem 1.15rem;
+  }
+
+  .contact-row {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .contact-value {
+    font-size: 0.85rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .social-link-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Native Modals & Dialogs */
+  dialog#projectModal {
+    width: 95vw;
+    max-height: 92vh;
+    border-radius: var(--radius-md);
+  }
+
+  .modal-content-area {
+    padding: 1.25rem 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.25rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.88rem;
+    margin-bottom: 1rem;
+  }
+
+  .modal-nav-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .modal-nav-btn.prev {
+    left: 0.35rem;
+  }
+
+  .modal-nav-btn.next {
+    right: 0.35rem;
+  }
+
+  .modal-actions-top {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .modal-icon-btn,
+  .modal-close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+
+  dialog#docPreviewModal {
+    width: 96vw;
+    height: 90vh;
+    margin: 4vh auto auto auto;
+    border-radius: var(--radius-md);
+  }
+
+  .doc-preview-header {
+    padding: 0.65rem 0.85rem;
+  }
+
+  .doc-preview-title {
+    font-size: 0.85rem;
+  }
+
+  dialog#cmdPalette {
+    width: 95vw;
+    margin: 5vh auto auto auto;
+    border-radius: var(--radius-md);
+  }
+
+  .cmd-palette-footer {
+    display: none;
   }
 
   .cmd-k-trigger .cmd-k-label {
     display: none;
+  }
+
+  .cmd-k-trigger .cmd-k-kbd {
+    display: none;
+  }
+}
+
+/* 3. Small Mobile Phones (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .nav-brand-title {
+    font-size: 0.95rem;
+    max-width: 135px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-avatar-mini {
+    width: 28px;
+    height: 28px;
+  }
+
+  .cmd-k-trigger {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .theme-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-portrait-card {
+    max-width: 260px;
+    padding: 0.75rem;
+  }
+
+  .portrait-footer {
+    padding: 0.75rem 0.25rem 0;
+  }
+
+  .metrics-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .metric-val {
+    font-size: 1.35rem;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+  }
+
+  .blueprint-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-card-btn-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem;
+  }
+
+  .doc-card-btn {
+    font-size: 0.74rem;
+    padding: 0.45rem 0.3rem;
+    justify-content: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 }
 
