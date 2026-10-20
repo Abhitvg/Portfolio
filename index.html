@@ -170,22 +170,22 @@
               </a>
             </div>
 
-            <!-- Engineering Metrics -->
-            <div class="metrics-strip">
+            <!-- Engineering Metrics with Scroll-Triggered Counters -->
+            <div class="metrics-strip" id="metricsStrip">
               <div class="metric-item">
-                <span class="metric-val">10K<span class="unit">+</span></span>
+                <span class="metric-val"><span class="counter-num" data-target="10" data-suffix="K+">10K+</span></span>
                 <span class="metric-label">Daily Users on Production</span>
               </div>
               <div class="metric-item">
-                <span class="metric-val">99.9<span class="unit">%</span></span>
+                <span class="metric-val"><span class="counter-num" data-target="99.9" data-decimals="1" data-suffix="%">99.9%</span></span>
                 <span class="metric-label">Production SLA Uptime</span>
               </div>
               <div class="metric-item">
-                <span class="metric-val">-35<span class="unit">%</span></span>
+                <span class="metric-val"><span class="counter-num" data-target="35" data-prefix="-" data-suffix="%">-35%</span></span>
                 <span class="metric-label">DB Read Latency Reduction</span>
               </div>
               <div class="metric-item">
-                <span class="metric-val">-40<span class="unit">%</span></span>
+                <span class="metric-val"><span class="counter-num" data-target="40" data-prefix="-" data-suffix="%">-40%</span></span>
                 <span class="metric-label">SQL Execution Time Cut</span>
               </div>
             </div>
@@ -625,6 +625,21 @@
           </div>
         </div>
 
+        <!-- Quick Tech Filter Chips -->
+        <div class="tech-filter-pills" id="techFilterPills">
+          <span class="tech-filter-label"><i class="fa-solid fa-filter" style="font-size: 0.7rem; margin-right: 0.3rem;"></i>Stack:</span>
+          <button class="tech-pill-btn active" data-tech="all">All</button>
+          <button class="tech-pill-btn" data-tech="Kubernetes">Kubernetes</button>
+          <button class="tech-pill-btn" data-tech="Docker">Docker</button>
+          <button class="tech-pill-btn" data-tech="Spring Boot">Spring Boot</button>
+          <button class="tech-pill-btn" data-tech="Kafka">Kafka</button>
+          <button class="tech-pill-btn" data-tech="Next.js">Next.js</button>
+          <button class="tech-pill-btn" data-tech="React">React.js</button>
+          <button class="tech-pill-btn" data-tech="Three.js">Three.js / 3D</button>
+          <button class="tech-pill-btn" data-tech="Electron">Electron</button>
+          <button class="tech-pill-btn" data-tech="Python">Python</button>
+        </div>
+
         <div id="noProjectsMessage" class="no-projects-msg" style="display: none;">
           <i class="fa-solid fa-cube no-projects-icon"></i>
           <p>No projects matched your search criteria.</p>
@@ -635,10 +650,11 @@
         <div class="projects-grid" id="projectsGrid">
           
           <!-- Project 1: ATMA AI -->
-          <article class="project-card" data-category="distributed" data-project="atma">
+          <article class="project-card" data-category="distributed" data-project="atma" data-tech="Java Spring Boot Kafka Solr MongoDB Oracle">
             <div class="project-img-box">
-              <img src="assets/project-distributed.jpg" alt="ATMA Microservices Hub" loading="lazy">
-              <span class="project-category-badge">Distributed Systems & Cloud</span>
+              <img src="assets/project-atma.webp" alt="ATMA Microservices Hub" loading="lazy">
+              <span class="project-category-badge">Distributed Systems &amp; Cloud</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live Production</span>
             </div>
             <div class="project-body">
               <span class="project-date">Jul 2025 – Present</span>
@@ -670,10 +686,11 @@
           </article>
 
           <!-- Project 2: NCERT Virasat -->
-          <article class="project-card" data-category="frontend web" data-project="virasat">
+          <article class="project-card" data-category="frontend web" data-project="virasat" data-tech="React Three.js TopoJSON SVG WebGL">
             <div class="project-img-box">
               <img src="assets/project-virasat.webp" alt="CIET-NCERT Virasat Map Engine" loading="lazy">
-              <span class="project-category-badge">Frontend Architecture & WebGL</span>
+              <span class="project-category-badge">Frontend Architecture &amp; WebGL</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live Portal</span>
             </div>
             <div class="project-body">
               <span class="project-date">Nov 2025 – Jun 2026</span>
@@ -705,10 +722,11 @@
           </article>
 
           <!-- Project 3: Embassy of Israel Zubin Mehta Portal -->
-          <article class="project-card" data-category="frontend web" data-project="zubin-mehta">
+          <article class="project-card" data-category="frontend web" data-project="zubin-mehta" data-tech="React CSS WebP LazyLoading">
             <div class="project-img-box">
-              <img src="assets/project-zubin.jpg" alt="Zubin Mehta Portal" loading="lazy">
-              <span class="project-category-badge">Frontend & Cultural Tech</span>
+              <img src="assets/project-zubin.webp" alt="Zubin Mehta Portal" loading="lazy">
+              <span class="project-category-badge">Frontend &amp; Cultural Tech</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live Site</span>
             </div>
             <div class="project-body">
               <span class="project-date">May 2026</span>
@@ -739,10 +757,11 @@
           </article>
 
           <!-- Project 4: Indian Eurasia Research Forum -->
-          <article class="project-card" data-category="web" data-project="ierf">
+          <article class="project-card" data-category="web" data-project="ierf" data-tech="Next.js TypeScript SEO CICD Cloud">
             <div class="project-img-box">
-              <img src="assets/project-ierf.png" alt="IERF Platform" loading="lazy">
+              <img src="assets/project-ierf.webp" alt="IERF Platform" loading="lazy">
               <span class="project-category-badge">Digital Infrastructure</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live Platform</span>
             </div>
             <div class="project-body">
               <span class="project-date">Oct 2025 – Jul 2026</span>
@@ -773,10 +792,11 @@
           </article>
 
           <!-- Project 5: DoonSilk -->
-          <article class="project-card" data-category="web distributed" data-project="doonsilk">
+          <article class="project-card" data-category="web distributed" data-project="doonsilk" data-tech="MERN Next.js MongoDB Node Express">
             <div class="project-img-box">
-              <img src="assets/project-doonsilk.jpg" alt="DoonSilk Cooperative Platform" loading="lazy">
-              <span class="project-category-badge">Full Stack & Supply Chain</span>
+              <img src="assets/project-doonsilk.webp" alt="DoonSilk Cooperative Platform" loading="lazy">
+              <span class="project-category-badge">Full Stack &amp; Supply Chain</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>State Co-op</span>
             </div>
             <div class="project-body">
               <span class="project-date">Jan 2024</span>
@@ -807,10 +827,11 @@
           </article>
 
           <!-- Project 6: Sheetal Electrotech -->
-          <article class="project-card" data-category="web frontend" data-project="sheetal">
+          <article class="project-card" data-category="web frontend" data-project="sheetal" data-tech="Next.js TypeScript Three.js Draco i18n">
             <div class="project-img-box">
               <img src="assets/project-sheetal.webp" alt="Sheetal Electrotech Portal" loading="lazy">
-              <span class="project-category-badge">Full Stack & 3D Web</span>
+              <span class="project-category-badge">Full Stack &amp; 3D Web</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live 3D Portal</span>
             </div>
             <div class="project-body">
               <span class="project-date">Oct 2026</span>
@@ -842,10 +863,11 @@
           </article>
 
           <!-- Project 7: Fashion Look -->
-          <article class="project-card" data-category="web" data-project="fashion-look">
+          <article class="project-card" data-category="web" data-project="fashion-look" data-tech="Next.js Firebase Firestore TypeScript Tailwind">
             <div class="project-img-box">
-              <img src="assets/project-fashion.png" alt="Fashion Look Luxury Tailoring" loading="lazy">
-              <span class="project-category-badge">Full Stack & E-Commerce</span>
+              <img src="assets/project-fashion.webp" alt="Fashion Look Luxury Tailoring" loading="lazy">
+              <span class="project-category-badge">Full Stack &amp; E-Commerce</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live E-Commerce</span>
             </div>
             <div class="project-body">
               <span class="project-date">Sep 2026</span>
@@ -877,10 +899,11 @@
           </article>
 
           <!-- Project 8: Porcupine -->
-          <article class="project-card" data-category="ai distributed" data-project="porcupine">
+          <article class="project-card" data-category="ai distributed" data-project="porcupine" data-tech="Electron ONNX Transformers SQLite Next.js AI">
             <div class="project-img-box">
-              <img src="assets/project-porcupine.png" alt="Porcupine AI Orchestrator" loading="lazy">
-              <span class="project-category-badge">Local AI & Architecture</span>
+              <img src="assets/project-porcupine.webp" alt="Porcupine AI Orchestrator" loading="lazy">
+              <span class="project-category-badge">Local AI &amp; Architecture</span>
+              <span class="project-status-badge"><span class="status-dot-pulse" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>Open Source</span>
             </div>
             <div class="project-body">
               <span class="project-date">February 2026</span>
@@ -912,10 +935,11 @@
           </article>
 
           <!-- Project 9: M.Tech Thesis NLP Engine -->
-          <article class="project-card" data-category="ai" data-project="media-bias">
+          <article class="project-card" data-category="ai" data-project="media-bias" data-tech="Python NetworkX NLP BERT Pandas TopicModeling">
             <div class="project-img-box">
-              <img src="assets/project-thesis.jpg" alt="M.Tech Thesis NLP Media Bias Analysis" loading="lazy">
-              <span class="project-category-badge">Computational NLP & Graphs</span>
+              <img src="assets/project-thesis.webp" alt="M.Tech Thesis NLP Media Bias Analysis" loading="lazy">
+              <span class="project-category-badge">Computational NLP &amp; Graphs</span>
+              <span class="project-status-badge"><span class="status-dot-pulse" style="background: #a855f7; box-shadow: 0 0 8px #a855f7;"></span>JNU Thesis</span>
             </div>
             <div class="project-body">
               <span class="project-date">2024 – 2025 (JNU Thesis)</span>
@@ -947,10 +971,11 @@
           </article>
 
           <!-- Project 10: DocFlow -->
-          <article class="project-card" data-category="web distributed" data-project="docflow">
+          <article class="project-card" data-category="web distributed" data-project="docflow" data-tech="Next.js Tiptap Prisma PostgreSQL Docker">
             <div class="project-img-box">
-              <img src="assets/project-docflow.jpg" alt="DocFlow Collaborative Workspace" loading="lazy">
+              <img src="assets/project-docflow.webp" alt="DocFlow Collaborative Workspace" loading="lazy">
               <span class="project-category-badge">Full Stack &amp; Distributed State</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live App</span>
             </div>
             <div class="project-body">
               <span class="project-date">2025 – 2026</span>
@@ -982,10 +1007,11 @@
           </article>
 
           <!-- Project 11: Quorum -->
-          <article class="project-card" data-category="ai web distributed" data-project="quorum">
+          <article class="project-card" data-category="ai web distributed" data-project="quorum" data-tech="WebRTC Socket.io Whisper FastAPI Kubernetes Docker Redis">
             <div class="project-img-box">
-              <img src="assets/project-quorum.jpg" alt="Quorum WebRTC &amp; Meeting AI" loading="lazy">
+              <img src="assets/project-quorum.webp" alt="Quorum WebRTC &amp; Meeting AI" loading="lazy">
               <span class="project-category-badge">WebRTC &amp; Audio AI</span>
+              <span class="project-status-badge"><span class="status-dot-pulse" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>Open Source</span>
             </div>
             <div class="project-body">
               <span class="project-date">2026</span>
@@ -1016,10 +1042,11 @@
           </article>
 
           <!-- Project 12: AI Interview Assistant (IAC) -->
-          <article class="project-card" data-category="ai web" data-project="iac">
+          <article class="project-card" data-category="ai web" data-project="iac" data-tech="Electron React Ollama Whisper Chrome MV3 TypeScript">
             <div class="project-img-box">
-              <img src="assets/project-iac.jpg" alt="AI Interview Assistant Cockpit" loading="lazy">
+              <img src="assets/project-iac.webp" alt="AI Interview Assistant Cockpit" loading="lazy">
               <span class="project-category-badge">Local AI &amp; Systems</span>
+              <span class="project-status-badge"><span class="status-dot-pulse" style="background: #38bdf8; box-shadow: 0 0 8px #38bdf8;"></span>Desktop + MV3</span>
             </div>
             <div class="project-body">
               <span class="project-date">2026</span>
@@ -1050,10 +1077,11 @@
           </article>
 
           <!-- Project 13: The Balance Bite -->
-          <article class="project-card" data-category="web" data-project="balancebite">
+          <article class="project-card" data-category="web" data-project="balancebite" data-tech="Android Java Kotlin Firebase Material3">
             <div class="project-img-box">
-              <img src="assets/project-balancebite.jpg" alt="The Balance Bite Mobile App" loading="lazy">
+              <img src="assets/project-balancebite.webp" alt="The Balance Bite Mobile App" loading="lazy">
               <span class="project-category-badge">Mobile &amp; Cloud</span>
+              <span class="project-status-badge"><span class="status-dot-pulse" style="background: #f59e0b; box-shadow: 0 0 8px #f59e0b;"></span>Android App</span>
             </div>
             <div class="project-body">
               <span class="project-date">2025</span>
@@ -1509,16 +1537,21 @@
   <dialog id="projectModal" aria-labelledby="modalTitle">
     <div class="modal-wrap">
       <div class="modal-banner">
-        <img id="modalImg" src="assets/project-porcupine.png" alt="Project preview">
+        <img id="modalImg" src="assets/project-atma.webp" alt="Project preview">
         <button class="modal-nav-btn prev" id="modalPrevBtn" aria-label="Previous project" title="Previous project (←)">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
         <button class="modal-nav-btn next" id="modalNextBtn" aria-label="Next project" title="Next project (→)">
           <i class="fa-solid fa-chevron-right"></i>
         </button>
-        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <div class="modal-actions-top">
+          <button class="modal-icon-btn" id="modalShareBtn" aria-label="Copy direct link" title="Copy project direct link">
+            <i class="fa-solid fa-link"></i>
+          </button>
+          <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
       </div>
 
       <div class="modal-content-area">

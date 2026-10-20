@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCommandPalette();
   initDocumentPreviewer();
   initCardSpotlight();
+  initAnimatedCounters();
+  initProjectDeepLinking();
 });
 
 /* ==========================================================================
@@ -341,10 +343,11 @@ function initArchitecturePlayground() {
 }
 
 /* ==========================================================================
-   4. Project Filtering & Real-Time Search
+   4. Project Filtering, Tech Stack Chips & Real-Time Search
    ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
+  const techPills = document.querySelectorAll('.tech-pill-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const searchInput = document.getElementById('projectSearchInput');
   const clearBtn = document.getElementById('searchClearBtn');
@@ -352,17 +355,21 @@ function initProjectFilters() {
   const resetBtn = document.getElementById('resetProjectFiltersBtn');
 
   let activeCategory = 'all';
+  let activeTech = 'all';
   let searchQuery = '';
 
   function applyFilters() {
     let visibleCount = 0;
     projectCards.forEach(card => {
       const categories = card.getAttribute('data-category') || '';
+      const cardTech = (card.getAttribute('data-tech') || '').toLowerCase();
       const text = card.textContent.toLowerCase();
+      
       const matchesCategory = (activeCategory === 'all' || categories.includes(activeCategory));
-      const matchesSearch = (!searchQuery || text.includes(searchQuery));
+      const matchesTech = (activeTech === 'all' || cardTech.includes(activeTech.toLowerCase()) || text.includes(activeTech.toLowerCase()));
+      const matchesSearch = (!searchQuery || text.includes(searchQuery) || cardTech.includes(searchQuery));
 
-      if (matchesCategory && matchesSearch) {
+      if (matchesCategory && matchesTech && matchesSearch) {
         card.style.display = 'flex';
         visibleCount++;
       } else {
@@ -380,6 +387,15 @@ function initProjectFilters() {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeCategory = btn.getAttribute('data-filter') || 'all';
+      applyFilters();
+    });
+  });
+
+  techPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      techPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeTech = pill.getAttribute('data-tech') || 'all';
       applyFilters();
     });
   });
@@ -408,7 +424,9 @@ function initProjectFilters() {
       searchQuery = '';
       if (clearBtn) clearBtn.style.display = 'none';
       activeCategory = 'all';
+      activeTech = 'all';
       filterBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === 'all'));
+      techPills.forEach(p => p.classList.toggle('active', p.getAttribute('data-tech') === 'all'));
       applyFilters();
     });
   }
@@ -423,7 +441,7 @@ const projectDetails = {
     subtitle: 'Spring Boot 3, Kafka event streaming, Solr search & Mongo optimization',
     date: 'Jul 2025 – Present',
     category: 'Distributed Systems & Cloud',
-    image: 'assets/project-distributed.jpg',
+    image: 'assets/project-atma.webp',
     liveUrl: 'https://www.atma-ai.co.in/',
     github: 'https://github.com/Abhitvg/ATMA-AI-Backend',
     tech: ['Java 8/17+', 'Spring Boot', 'Apache Kafka', 'Apache Solr', 'MongoDB', 'Oracle SQL', 'JUnit', 'Mockito'],
@@ -458,7 +476,7 @@ const projectDetails = {
     subtitle: 'Interactive frontend portal commemorating Maestro Zubin Mehta',
     date: 'May 2026',
     category: 'Frontend & Cultural Tech',
-    image: 'assets/project-zubin.jpg',
+    image: 'assets/project-zubin.webp',
     liveUrl: 'https://ipomehta-mural.com/',
     github: 'https://github.com/Abhitvg/zubin-mehta-project',
     tech: ['React.js', 'Modern CSS', 'Asset Pipelines', 'Lazy Loading', 'Responsive Audio/Visual'],
@@ -474,7 +492,7 @@ const projectDetails = {
     subtitle: 'Digital infrastructure for international geopolitics & research dissemination',
     date: 'Oct 2025 – Jul 2026',
     category: 'Digital Infrastructure',
-    image: 'assets/project-ierf.png',
+    image: 'assets/project-ierf.webp',
     liveUrl: 'https://www.indiaeurasia.org/',
     github: 'https://github.com/Abhitvg/india-eurasia-research-forum',
     tech: ['Next.js', 'TypeScript', 'Cloud Hosting', 'SEO Optimization', 'CI/CD Pipelines'],
@@ -490,7 +508,7 @@ const projectDetails = {
     subtitle: 'Real-time supply chain networking platform for artisan sericulture',
     date: 'Jan 2024',
     category: 'Full Stack & Supply Chain',
-    image: 'assets/project-doonsilk.jpg',
+    image: 'assets/project-doonsilk.webp',
     liveUrl: 'https://doonsilk.com/',
     github: 'https://github.com/Abhitvg/uk-coop-main',
     tech: ['MERN Stack', 'Next.js', 'MongoDB', 'Express', 'Node.js', 'REST APIs'],
@@ -522,7 +540,7 @@ const projectDetails = {
     subtitle: 'Multilingual e-commerce & custom apparel tailoring portal',
     date: 'Sep 2026',
     category: 'Full Stack & E-Commerce',
-    image: 'assets/project-fashion.png',
+    image: 'assets/project-fashion.webp',
     liveUrl: 'https://www.fashion-look.in/en',
     github: 'https://github.com/Abhitvg/fashion-look',
     tech: ['Next.js', 'Firebase / Firestore', 'Tailwind CSS', 'TypeScript', 'Cloud Messaging'],
@@ -538,7 +556,7 @@ const projectDetails = {
     subtitle: 'Multi-agent ERP desktop application with secure offline RAG',
     date: 'February 2026',
     category: 'Local AI & Architecture',
-    image: 'assets/project-porcupine.png',
+    image: 'assets/project-porcupine.webp',
     liveUrl: '',
     github: 'https://github.com/Abhitvg/porcupine',
     tech: ['Electron', 'Node.js', 'Next.js', 'SQLite (SQLCipher)', 'ONNX Runtime', 'Xenova Transformers', 'Tailwind CSS'],
@@ -555,7 +573,7 @@ const projectDetails = {
     subtitle: 'M.Tech Thesis at JNU: Social Network Analysis across 50,000+ articles',
     date: '2024 – 2025 (JNU Thesis)',
     category: 'Computational NLP & Graphs',
-    image: 'assets/project-thesis.jpg',
+    image: 'assets/project-thesis.webp',
     liveUrl: '',
     github: 'https://github.com/Abhitvg/Media-Bias-Analysis-in-Indian-News-Articles',
     tech: ['Python', 'NLP Pipelines', 'NetworkX', 'Graph Data Science', 'Topic Modeling', 'Pandas', 'BERT Embeddings'],
@@ -572,7 +590,7 @@ const projectDetails = {
     subtitle: 'Next.js 15, Tiptap 3 rich editor, Prisma ORM & live cloud collaboration',
     date: '2025 – 2026',
     category: 'Full Stack & Distributed State',
-    image: 'assets/project-docflow.jpg',
+    image: 'assets/project-docflow.webp',
     liveUrl: 'https://docflow-ashy.vercel.app',
     github: 'https://github.com/Abhitvg/docflow',
     tech: ['Next.js 15', 'React 19', 'Tiptap 3', 'Prisma 5', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vercel'],
@@ -589,7 +607,7 @@ const projectDetails = {
     subtitle: 'WebRTC, Live Speech-to-Text Transcription & Automated Action Item Synthesis',
     date: '2026',
     category: 'WebRTC & Audio AI',
-    image: 'assets/project-quorum.jpg',
+    image: 'assets/project-quorum.webp',
     liveUrl: '',
     github: 'https://github.com/Abhitvg/Quorum',
     tech: ['WebRTC', 'Node.js', 'Socket.io', 'FastAPI', 'Whisper STT', 'Docker', 'Kubernetes', 'Redis'],
@@ -606,7 +624,7 @@ const projectDetails = {
     subtitle: '100% Local AI-Powered Technical Interview Coach & Real-Time Code Assistant',
     date: '2026',
     category: 'Local AI & Systems',
-    image: 'assets/project-iac.jpg',
+    image: 'assets/project-iac.webp',
     liveUrl: '',
     github: 'https://github.com/Abhitvg/IAC',
     tech: ['Electron', 'React 18', 'TypeScript', 'Vite', 'Ollama (Local LLM)', 'Whisper STT', 'Chrome Extension MV3'],
@@ -623,7 +641,7 @@ const projectDetails = {
     subtitle: 'Native Android Health & Diet Tracking with Firebase Realtime Sync',
     date: '2025',
     category: 'Mobile & Cloud',
-    image: 'assets/project-balancebite.jpg',
+    image: 'assets/project-balancebite.webp',
     liveUrl: '',
     github: 'https://github.com/Abhitvg/The-balance-Bite',
     tech: ['Android SDK', 'Java', 'Kotlin', 'Firebase Auth', 'Firebase Realtime DB', 'Material 3'],
@@ -739,9 +757,30 @@ function initProjectModal() {
     });
   }
 
+  const shareBtn = document.getElementById('modalShareBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const currentId = projectKeys[currentModalIndex];
+      const url = `${window.location.origin}${window.location.pathname}#project=${currentId}`;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('Direct link to project copied to clipboard!');
+        }).catch(() => {
+          prompt('Copy project link:', url);
+        });
+      } else {
+        prompt('Copy project link:', url);
+      }
+    });
+  }
+
   function closeModal() {
     modal.close();
     document.body.style.overflow = '';
+    if (window.location.hash && window.location.hash.startsWith('#project=')) {
+      history.replaceState(null, null, window.location.pathname);
+    }
   }
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -757,7 +796,7 @@ function initProjectModal() {
   });
 
   modal.addEventListener('cancel', () => {
-    document.body.style.overflow = '';
+    closeModal();
   });
 
   window.addEventListener('keydown', (e) => {
@@ -770,6 +809,66 @@ function initProjectModal() {
       renderModalProject(currentModalIndex + 1);
     }
   });
+}
+
+/* ==========================================================================
+   5b. Animated Metric Counters
+   ========================================================================== */
+function initAnimatedCounters() {
+  const strip = document.getElementById('metricsStrip');
+  const counters = document.querySelectorAll('.counter-num');
+  if (!strip || !counters.length) return;
+
+  let hasAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        counters.forEach(counter => {
+          const target = parseFloat(counter.getAttribute('data-target')) || 0;
+          const decimals = parseInt(counter.getAttribute('data-decimals') || '0', 10);
+          const prefix = counter.getAttribute('data-prefix') || '';
+          const suffix = counter.getAttribute('data-suffix') || '';
+          const duration = 1500;
+          const startTime = performance.now();
+
+          function updateCount(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+            const currentVal = (target * ease).toFixed(decimals);
+            counter.textContent = `${prefix}${currentVal}${suffix}`;
+
+            if (progress < 1) {
+              requestAnimationFrame(updateCount);
+            } else {
+              counter.textContent = `${prefix}${target.toFixed(decimals)}${suffix}`;
+            }
+          }
+
+          requestAnimationFrame(updateCount);
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  observer.observe(strip);
+}
+
+/* ==========================================================================
+   5c. Deep Linking URL Routing
+   ========================================================================== */
+function initProjectDeepLinking() {
+  if (window.location.hash && window.location.hash.startsWith('#project=')) {
+    const projId = window.location.hash.replace('#project=', '').trim();
+    if (window.openProjectModalById) {
+      setTimeout(() => {
+        window.openProjectModalById(projId);
+      }, 350);
+    }
+  }
 }
 
 /* ==========================================================================

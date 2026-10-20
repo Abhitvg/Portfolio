@@ -917,17 +917,31 @@ section {
 .project-img-box {
   width: 100%;
   aspect-ratio: 16/9;
-  background: var(--bg-surface-elevated);
+  background: #090a0f;
   overflow: hidden;
   position: relative;
   border-bottom: 1px solid var(--border-subtle);
+}
+
+.project-img-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  background: linear-gradient(180deg, rgba(9, 10, 15, 0.7) 0%, rgba(9, 10, 15, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .project-img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   transition: transform var(--transition-smooth);
+  display: block;
 }
 
 .project-card:hover .project-img-box img {
@@ -936,17 +950,53 @@ section {
 
 .project-category-badge {
   position: absolute;
-  top: 0.85rem;
-  left: 0.85rem;
+  top: 0.75rem;
+  left: 0.75rem;
   padding: 0.2rem 0.6rem;
-  background: rgba(9, 9, 11, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(9, 9, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-sm);
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: #ffffff;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  letter-spacing: 0.02em;
+}
+
+.project-status-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  background: rgba(9, 9, 11, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  backdrop-filter: blur(8px);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.status-dot-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  display: inline-block;
+  animation: pulseLiveDot 2.2s infinite ease-in-out;
+}
+
+@keyframes pulseLiveDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 .project-body {
@@ -1546,38 +1596,65 @@ dialog#projectModal::backdrop {
 .modal-banner {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/8;
-  background: #000000;
+  aspect-ratio: 16/9;
+  max-height: 420px;
+  background: #06070a;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.modal-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: linear-gradient(180deg, rgba(6, 7, 10, 0.75) 0%, rgba(6, 7, 10, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .modal-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
-.modal-close-btn {
+.modal-actions-top {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  width: 32px;
-  height: 32px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 3;
+}
+
+.modal-icon-btn,
+.modal-close-btn {
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: rgba(9, 9, 11, 0.8);
-  border: 1px solid var(--border-medium);
+  background: rgba(9, 9, 11, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 0.95rem;
-  backdrop-filter: blur(6px);
+  font-size: 0.85rem;
+  backdrop-filter: blur(8px);
   transition: all var(--transition-fast);
 }
 
+.modal-icon-btn:hover,
 .modal-close-btn:hover {
   background: #000;
-  transform: scale(1.05);
+  border-color: #ffffff;
+  transform: scale(1.08);
 }
 
 .modal-content-area {
@@ -1921,6 +1998,62 @@ dialog#projectModal::backdrop {
 .filter-btn.active .filter-count {
   background: rgba(99, 102, 241, 0.25);
   color: #fff;
+}
+
+/* Quick Tech Stack Filter Pills */
+.tech-filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.tech-filter-label {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 0.35rem;
+}
+
+.tech-pill-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.tech-pill-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text-main);
+  background: var(--bg-surface-elevated);
+}
+
+.tech-pill-btn.active {
+  background: var(--text-main);
+  color: var(--text-invert);
+  border-color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Metric Counter Smooth Transition */
+.counter-num {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.2s ease;
 }
 
 .no-projects-msg {
