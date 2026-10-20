@@ -195,6 +195,49 @@ db.catalog_items.createIndex(
       { val: '+ 20%', desc: 'Search CTR conversion' },
       { val: '< 180ms', desc: 'Sub-second query time' }
     ]
+  },
+  'k8s': {
+    title: 'Kubernetes Cluster Orchestration & Docker Containerization',
+    file: 'k8s-deployment.yaml & Dockerfile',
+    code: `<span class="cm"># 1. Multi-Stage Distroless Dockerfile (Spring Boot 3)</span>
+<span class="kw">FROM</span> eclipse-temurin:17-jdk-alpine <span class="kw">AS</span> builder
+<span class="kw">WORKDIR</span> /workspace
+<span class="kw">COPY</span> . .
+<span class="kw">RUN</span> ./mvnw clean package -DskipTests
+
+<span class="kw">FROM</span> gcr.io/distroless/java17-debian11:nonroot
+<span class="kw">COPY</span> --from=builder /workspace/target/*.jar app.jar
+<span class="kw">USER</span> nonroot:nonroot
+<span class="kw">ENTRYPOINT</span> [<span class="str">"java"</span>, <span class="str">"-XX:+UseG1GC"</span>, <span class="str">"-jar"</span>, <span class="str">"/app.jar"</span>]
+
+<span class="cm"># 2. Kubernetes Deployment with Rolling Updates &amp; Health Probes</span>
+<span class="kw">apiVersion</span>: apps/v1
+<span class="kw">kind</span>: Deployment
+<span class="kw">metadata</span>:
+  <span class="kw">name</span>: atma-api-deployment
+<span class="kw">spec</span>:
+  <span class="kw">replicas</span>: 3
+  <span class="kw">strategy</span>:
+    <span class="kw">rollingUpdate</span>: { <span class="kw">maxSurge</span>: 1, <span class="kw">maxUnavailable</span>: 0 }
+  <span class="kw">template</span>:
+    <span class="kw">spec</span>:
+      <span class="kw">containers</span>:
+      - <span class="kw">name</span>: api-service
+        <span class="kw">image</span>: registry.atma-ai.internal/api:v2.4
+        <span class="kw">ports</span>: [{ <span class="kw">containerPort</span>: 8080 }]
+        <span class="kw">livenessProbe</span>:
+          <span class="kw">httpGet</span>: { <span class="kw">path</span>: /actuator/health/liveness, <span class="kw">port</span>: 8080 }
+          <span class="kw">initialDelaySeconds</span>: 20
+        <span class="kw">readinessProbe</span>:
+          <span class="kw">httpGet</span>: { <span class="kw">path</span>: /actuator/health/readiness, <span class="kw">port</span>: 8080 }
+        <span class="kw">resources</span>:
+          <span class="kw">limits</span>: { <span class="kw">cpu</span>: <span class="str">"1000m"</span>, <span class="kw">memory</span>: <span class="str">"1Gi"</span> }
+          <span class="kw">requests</span>: { <span class="kw">cpu</span>: <span class="str">"250m"</span>, <span class="kw">memory</span>: <span class="str">"512Mi"</span> }`,
+    desc: 'Containerized Java Spring Boot microservices into lightweight non-root distroless Docker containers. Deployed across Kubernetes clusters with Horizontal Pod Autoscaling (HPA), zero-downtime rolling update strategies, and Actuator liveness/readiness probes.',
+    stats: [
+      { val: 'Zero', desc: 'Deployment downtime' },
+      { val: '60%', desc: 'Docker image size cut' }
+    ]
   }
 };
 
@@ -418,8 +461,76 @@ const projectDetails = {
       'Implemented unsupervised topic modeling (LDA & BERTopic) combined with transformer sentiment scoring to quantify political and socioeconomic framing.',
       'Defended thesis successfully before the JNU School of Computer and Systems Sciences committee with distinction.'
     ]
+  },
+  'docflow': {
+    title: 'DocFlow – Real-Time Collaborative Workspace',
+    subtitle: 'Next.js 15, Tiptap 3 rich editor, Prisma ORM & live cloud collaboration',
+    date: '2025 – 2026',
+    category: 'Full Stack & Distributed State',
+    image: 'assets/project-docflow.jpg',
+    liveUrl: 'https://docflow-ashy.vercel.app',
+    github: 'https://github.com/Abhitvg/docflow',
+    tech: ['Next.js 15', 'React 19', 'Tiptap 3', 'Prisma 5', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vercel'],
+    overview: 'A modern, distraction-free collaborative document workspace engineered with Next.js 15 App Router, Tiptap rich-text extensions, and PostgreSQL via Prisma ORM. Designed for real-time document editing, slash commands, hierarchical document nesting, and sub-100ms sync.',
+    highlights: [
+      'Architected a modular document editing engine leveraging Tiptap 3 with custom extensions for markdown shortcuts, code blocks, task lists, and real-time cursor presence.',
+      'Engineered schema-validated API routes with Prisma ORM and PostgreSQL connection pooling, handling nested page hierarchies and instant auto-save debouncing.',
+      'Packaged containerized multi-stage Docker environment for automated development and localized testing.',
+      'Deployed on Vercel with edge middleware authentication and instantaneous database indexing.'
+    ]
+  },
+  'quorum': {
+    title: 'Quorum – AI-Native Real-Time Video & Meeting Intelligence',
+    subtitle: 'WebRTC, Live Speech-to-Text Transcription & Automated Action Item Synthesis',
+    date: '2026',
+    category: 'WebRTC & Audio AI',
+    image: 'assets/project-quorum.jpg',
+    liveUrl: '',
+    github: 'https://github.com/Abhitvg/Quorum',
+    tech: ['WebRTC', 'Node.js', 'Socket.io', 'FastAPI', 'Whisper STT', 'Docker', 'Kubernetes', 'Redis'],
+    overview: 'An AI-native collaborative meeting platform combining peer-to-peer WebRTC video streaming with real-time speech transcription, speaker diarization, and automated meeting minutes generation.',
+    highlights: [
+      'Architected low-latency WebRTC mesh and SFU signaling layer using Socket.io with adaptive bitrate streaming and auto-reconnection resilience.',
+      'Engineered an asynchronous audio chunk ingestion pipeline feeding local Whisper models for sub-second live subtitle streaming.',
+      'Implemented automated post-call summarization generating markdown agendas, key decisions, and Jira/Linear task export hooks.',
+      'Containerized backend media and AI inference workers into Docker containers managed via Kubernetes manifests with autoscaling.'
+    ]
+  },
+  'iac': {
+    title: 'AI Interview Assistant (IAC) & Chrome Extension',
+    subtitle: '100% Local AI-Powered Technical Interview Coach & Real-Time Code Assistant',
+    date: '2026',
+    category: 'Local AI & Systems',
+    image: 'assets/project-iac.jpg',
+    liveUrl: '',
+    github: 'https://github.com/Abhitvg/IAC',
+    tech: ['Electron', 'React 18', 'TypeScript', 'Vite', 'Ollama (Local LLM)', 'Whisper STT', 'Chrome Extension MV3'],
+    overview: 'A privacy-first desktop application and companion Chrome extension designed for real-time technical interview prep. Runs 100% on local hardware with zero external cloud dependencies.',
+    highlights: [
+      'Engineered an Electron cross-platform cockpit interfacing with local Ollama LLMs and local Whisper servers for sub-second voice transcription.',
+      'Constructed automated Data Structures & Algorithms detection with structured response templates (Brute Force, Optimal, Time/Space Complexity, and Edge Cases).',
+      'Developed a Chrome Extension (Manifest V3) enabling seamless contextual text and problem forwarding via system-wide keyboard shortcuts.',
+      'Integrated resume parsing pipelines (PDF/DOCX) for tailored behavioral and system design interview simulations.'
+    ]
+  },
+  'balancebite': {
+    title: 'The Balance Bite – Nutrition & Meal Intelligence App',
+    subtitle: 'Native Android Health & Diet Tracking with Firebase Realtime Sync',
+    date: '2025',
+    category: 'Mobile & Cloud',
+    image: 'assets/project-balancebite.jpg',
+    liveUrl: '',
+    github: 'https://github.com/Abhitvg/The-balance-Bite',
+    tech: ['Android SDK', 'Java', 'Kotlin', 'Firebase Auth', 'Firebase Realtime DB', 'Material 3'],
+    overview: 'An intuitive native Android mobile application for daily nutrition tracking, calorie management, and macronutrient balance with instantaneous Firebase cloud synchronization.',
+    highlights: [
+      'Designed responsive Material 3 Android interfaces featuring custom circular progress rings and animated nutrition breakdown bars.',
+      'Engineered Firebase Realtime Database schemas with offline persistence and automatic conflict resolution for spotty network conditions.',
+      'Implemented local caching and background synchronization services with WorkManager to maximize battery life.'
+    ]
   }
 };
+
 
 function initProjectModal() {
   const modal = document.getElementById('projectModal');

@@ -97,9 +97,19 @@
 
             <p class="hero-bio" style="margin-top: -0.75rem; font-size: 1.05rem;">
               Currently, I own production backend services at <strong>ATMA Research</strong> using <strong>Java</strong>, 
-              <strong>Spring Boot</strong>, and <strong>Apache Kafka</strong>, serving <strong>10,000+ daily active users</strong> 
+              <strong>Spring Boot</strong>, <strong>Apache Kafka</strong>, <strong>Docker</strong>, and <strong>Kubernetes</strong>, serving <strong>10,000+ daily active users</strong> 
               with <strong>99.9% uptime</strong>.
             </p>
+
+            <div class="hero-tech-stack" style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; margin-bottom: 1.6rem;">
+              <span class="tech-chip"><i class="fa-brands fa-java" style="color: #f89820;"></i> Java 17+</span>
+              <span class="tech-chip"><i class="fa-solid fa-leaf" style="color: #6db33f;"></i> Spring Boot</span>
+              <span class="tech-chip"><i class="fa-solid fa-network-wired" style="color: #e53e3e;"></i> Apache Kafka</span>
+              <span class="tech-chip"><i class="fa-solid fa-dharmachakra" style="color: #326ce5;"></i> Kubernetes</span>
+              <span class="tech-chip"><i class="fa-brands fa-docker" style="color: #2496ed;"></i> Docker</span>
+              <span class="tech-chip"><i class="fa-solid fa-database" style="color: #47a248;"></i> MongoDB</span>
+              <span class="tech-chip"><i class="fa-brands fa-react" style="color: #61dafb;"></i> React & Next.js</span>
+            </div>
 
             <div class="hero-actions">
               <a href="#projects" class="btn btn-primary" id="heroExpBtn">
@@ -260,6 +270,10 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>Apache Solr 50K Catalog</span>
               </button>
+              <button class="playground-tab" data-arch="k8s">
+                <i class="fa-solid fa-dharmachakra"></i>
+                <span>Kubernetes &amp; Docker</span>
+              </button>
             </div>
             <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); display: none;" class="d-md-block">
               Interactive Inspector
@@ -350,12 +364,17 @@
               <li>
                 <strong>Frontend & Quality:</strong> Delivered responsive <strong>Angular 8+</strong> interfaces from Figma specifications with <strong>85%+ test coverage</strong> using JUnit and Mockito.
               </li>
+              <li>
+                <strong>Container Orchestration:</strong> Built multi-stage distroless <strong>Docker</strong> images and managed <strong>Kubernetes</strong> cluster deployments with rolling updates, HPA, and health probes for zero-downtime releases.
+              </li>
             </ul>
 
             <div class="exp-stack">
               <span class="tech-chip">Java 8/17+</span>
               <span class="tech-chip">Spring Boot</span>
               <span class="tech-chip">Apache Kafka</span>
+              <span class="tech-chip">Kubernetes</span>
+              <span class="tech-chip">Docker</span>
               <span class="tech-chip">Apache Solr</span>
               <span class="tech-chip">MongoDB</span>
               <span class="tech-chip">Oracle SQL</span>
@@ -474,7 +493,7 @@
                 <strong>Decoupled Messaging:</strong> Integrated Kafka and ActiveMQ for reliable asynchronous order dispatch and notification processing.
               </li>
               <li>
-                <strong>CI/CD Pipelines:</strong> Built automated deployment workflows using Jenkins, GitHub Actions, and Docker, reducing post-release issues by <strong>45%</strong>.
+                <strong>CI/CD & Containers:</strong> Built automated deployment workflows using Jenkins, GitHub Actions, <strong>Docker</strong>, and <strong>Kubernetes</strong> manifests, reducing post-release issues by <strong>45%</strong>.
               </li>
             </ul>
 
@@ -482,8 +501,9 @@
               <span class="tech-chip">Spring Boot</span>
               <span class="tech-chip">Cassandra</span>
               <span class="tech-chip">ActiveMQ</span>
-              <span class="tech-chip">Jenkins</span>
+              <span class="tech-chip">Kubernetes</span>
               <span class="tech-chip">Docker</span>
+              <span class="tech-chip">Jenkins</span>
               <span class="tech-chip">GitHub Actions</span>
             </div>
           </article>
@@ -845,6 +865,143 @@
             </div>
           </article>
 
+          <!-- Project 10: DocFlow -->
+          <article class="project-card" data-category="web distributed" data-project="docflow">
+            <div class="project-img-box">
+              <img src="assets/project-docflow.jpg" alt="DocFlow Collaborative Workspace" loading="lazy">
+              <span class="project-category-badge">Full Stack &amp; Distributed State</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">2025 – 2026</span>
+              <h3 class="project-name">
+                <span>DocFlow – Real-Time Collaborative Workspace</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Modern collaborative document workspace engineered with Next.js 15, Tiptap 3 rich editor extensions, 
+                and PostgreSQL via Prisma ORM. Real-time slash commands, hierarchical document nesting, and sub-100ms sync.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Next.js 15</span>
+                <span class="tech-chip">Tiptap 3</span>
+                <span class="tech-chip">Prisma ORM</span>
+                <span class="tech-chip">PostgreSQL</span>
+                <span class="tech-chip">Docker</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://docflow-ashy.vercel.app" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live App
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 11: Quorum -->
+          <article class="project-card" data-category="ai web distributed" data-project="quorum">
+            <div class="project-img-box">
+              <img src="assets/project-quorum.jpg" alt="Quorum WebRTC &amp; Meeting AI" loading="lazy">
+              <span class="project-category-badge">WebRTC &amp; Audio AI</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">2026</span>
+              <h3 class="project-name">
+                <span>Quorum – AI Video &amp; Meeting Intelligence</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                AI-native video collaboration platform featuring low-latency WebRTC mesh streaming, real-time Whisper speech-to-text transcription, and automated post-call meeting summaries with action items.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">WebRTC</span>
+                <span class="tech-chip">Socket.io</span>
+                <span class="tech-chip">Whisper AI</span>
+                <span class="tech-chip">FastAPI</span>
+                <span class="tech-chip">Kubernetes</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://github.com/Abhitvg/Quorum" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link" style="color: var(--text-main); border-color: var(--border-medium); background: var(--bg-surface-elevated);">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 12: AI Interview Assistant (IAC) -->
+          <article class="project-card" data-category="ai web" data-project="iac">
+            <div class="project-img-box">
+              <img src="assets/project-iac.jpg" alt="AI Interview Assistant Cockpit" loading="lazy">
+              <span class="project-category-badge">Local AI &amp; Systems</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">2026</span>
+              <h3 class="project-name">
+                <span>AI Interview Assistant &amp; Chrome Extension</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                100% local, privacy-first technical interview coaching assistant. Electron desktop cockpit, local Ollama LLMs, local Whisper transcription, and Manifest V3 Chrome extension with zero data leaks.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Electron</span>
+                <span class="tech-chip">React 18</span>
+                <span class="tech-chip">Ollama (Local LLM)</span>
+                <span class="tech-chip">Whisper</span>
+                <span class="tech-chip">Chrome MV3</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://github.com/Abhitvg/IAC" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link" style="color: var(--text-main); border-color: var(--border-medium); background: var(--bg-surface-elevated);">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 13: The Balance Bite -->
+          <article class="project-card" data-category="web" data-project="balancebite">
+            <div class="project-img-box">
+              <img src="assets/project-balancebite.jpg" alt="The Balance Bite Mobile App" loading="lazy">
+              <span class="project-category-badge">Mobile &amp; Cloud</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">2025</span>
+              <h3 class="project-name">
+                <span>The Balance Bite – Nutrition Tracker</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Native Android nutrition tracking application engineered in Java/Kotlin. Features Material 3 circular progress indicators, real-time Firebase DB sync, and resilient offline WorkManager queues.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Android SDK</span>
+                <span class="tech-chip">Java</span>
+                <span class="tech-chip">Kotlin</span>
+                <span class="tech-chip">Firebase</span>
+                <span class="tech-chip">Material 3</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://github.com/Abhitvg/The-balance-Bite" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link" style="color: var(--text-main); border-color: var(--border-medium); background: var(--bg-surface-elevated);">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -929,16 +1086,19 @@
 
           <div class="skills-group">
             <h3 class="skills-group-title">
-              <i class="fa-solid fa-gears" style="color: var(--accent-light);"></i>
-              <span>DevOps & Testing</span>
+              <i class="fa-solid fa-dharmachakra" style="color: var(--accent-light);"></i>
+              <span>DevOps, Containers &amp; Cloud</span>
             </h3>
             <div class="skills-tags-wrap">
-              <span class="skill-pill">Docker</span>
-              <span class="skill-pill">Jenkins</span>
+              <span class="skill-pill">Kubernetes (K8s)</span>
+              <span class="skill-pill">Docker &amp; Distroless</span>
+              <span class="skill-pill">HPA &amp; Rolling Updates</span>
+              <span class="skill-pill">Helm Charts</span>
+              <span class="skill-pill">Jenkins CI/CD</span>
               <span class="skill-pill">GitHub Actions</span>
-              <span class="skill-pill">Git / Linux CLI</span>
-              <span class="skill-pill">AWS</span>
-              <span class="skill-pill">JUnit & Mockito</span>
+              <span class="skill-pill">AWS (EC2, S3, RDS)</span>
+              <span class="skill-pill">Linux CLI &amp; Bash</span>
+              <span class="skill-pill">JUnit &amp; Mockito</span>
               <span class="skill-pill">Postman / Swagger</span>
             </div>
           </div>
