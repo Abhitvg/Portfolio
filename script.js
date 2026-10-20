@@ -619,23 +619,6 @@ const projectDetails = {
       'Containerized backend media and AI inference workers into Docker containers managed via Kubernetes manifests with autoscaling.'
     ]
   },
-  'iac': {
-    title: 'AI Interview Assistant (IAC) & Chrome Extension',
-    subtitle: '100% Local AI-Powered Technical Interview Coach & Real-Time Code Assistant',
-    date: '2026',
-    category: 'Local AI & Systems',
-    image: 'assets/project-iac.webp',
-    liveUrl: '',
-    github: 'https://github.com/Abhitvg/IAC',
-    tech: ['Electron', 'React 18', 'TypeScript', 'Vite', 'Ollama (Local LLM)', 'Whisper STT', 'Chrome Extension MV3'],
-    overview: 'A privacy-first desktop application and companion Chrome extension designed for real-time technical interview prep. Runs 100% on local hardware with zero external cloud dependencies.',
-    highlights: [
-      'Engineered an Electron cross-platform cockpit interfacing with local Ollama LLMs and local Whisper servers for sub-second voice transcription.',
-      'Constructed automated Data Structures & Algorithms detection with structured response templates (Brute Force, Optimal, Time/Space Complexity, and Edge Cases).',
-      'Developed a Chrome Extension (Manifest V3) enabling seamless contextual text and problem forwarding via system-wide keyboard shortcuts.',
-      'Integrated resume parsing pipelines (PDF/DOCX) for tailored behavioral and system design interview simulations.'
-    ]
-  },
   'balancebite': {
     title: 'The Balance Bite – Nutrition & Meal Intelligence App',
     subtitle: 'Native Android Health & Diet Tracking with Firebase Realtime Sync',
@@ -982,7 +965,7 @@ function initCommandPalette() {
     { type: 'nav', title: 'About Abhishek', icon: 'fa-regular fa-user', action: () => scrollToSection('#about'), badge: 'Section' },
     { type: 'nav', title: 'Experience & History', icon: 'fa-solid fa-briefcase', action: () => scrollToSection('#experience'), badge: 'Section' },
     { type: 'nav', title: 'Architecture Playground', icon: 'fa-solid fa-terminal', action: () => scrollToSection('#architecture'), badge: 'Section' },
-    { type: 'nav', title: 'Live Projects (13 Total)', icon: 'fa-solid fa-layer-group', action: () => scrollToSection('#projects'), badge: 'Section' },
+    { type: 'nav', title: 'Live Projects (12 Total)', icon: 'fa-solid fa-layer-group', action: () => scrollToSection('#projects'), badge: 'Section' },
     { type: 'nav', title: 'Technical Skills Matrix', icon: 'fa-solid fa-gears', action: () => scrollToSection('#skills'), badge: 'Section' },
     { type: 'nav', title: 'Education & GATE / JEE', icon: 'fa-solid fa-graduation-cap', action: () => scrollToSection('#education'), badge: 'Section' },
     { type: 'nav', title: 'Verified Credentials & Dossiers', icon: 'fa-solid fa-certificate', action: () => scrollToSection('#credentials'), badge: 'Section' },
@@ -1002,7 +985,6 @@ function initCommandPalette() {
     { type: 'project', title: 'NCERT Virasat – Cultural Heritage Explorer', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('virasat'), badge: 'React / Three.js' },
     { type: 'project', title: 'DocFlow – Real-Time Collaborative Workspace', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('docflow'), badge: 'Next.js 15 / Tiptap' },
     { type: 'project', title: 'Quorum – AI Video & Meeting Intelligence', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('quorum'), badge: 'WebRTC / Whisper' },
-    { type: 'project', title: 'AI Interview Assistant (IAC)', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('iac'), badge: 'Electron / Ollama' },
     { type: 'project', title: 'The Balance Bite – Nutrition Tracker', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('balancebite'), badge: 'Android / Firebase' },
     { type: 'project', title: 'Zubin Mehta Cultural Portal', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('zubin-mehta'), badge: 'Embassy of Israel' },
     { type: 'project', title: 'Indian Eurasia Research Forum (IERF)', icon: 'fa-solid fa-cube', action: () => window.openProjectModalById('ierf'), badge: 'Next.js / ISR' },
