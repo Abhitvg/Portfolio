@@ -1612,6 +1612,7 @@ dialog#projectModal::backdrop {
   background: #06070a;
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
 }
 
 .modal-banner::before {
@@ -2131,11 +2132,154 @@ dialog#projectModal::backdrop {
   transform: translateY(-50%) scale(1.06);
 }
 
+.modal-slide-caption-bar {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(9, 9, 11, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 5;
+  max-width: calc(100% - 1.7rem);
+}
+
+.modal-slide-counter-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--accent-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.modal-slide-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-slide-dots {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  display: flex;
+  gap: 0.35rem;
+  z-index: 5;
+  background: rgba(9, 9, 11, 0.7);
+  padding: 0.35rem 0.55rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.slide-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.slide-dot.active {
+  background: var(--accent-light);
+  width: 18px;
+  border-radius: 4px;
+}
+
+/* Interactive Gallery Thumbnails Strip */
+.modal-gallery-strip {
+  display: flex;
+  gap: 0.65rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--bg-surface-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  flex-shrink: 0;
+}
+
+.gallery-thumb-btn {
+  position: relative;
+  flex-shrink: 0;
+  width: 92px;
+  height: 52px;
+  aspect-ratio: 16/9;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid var(--border-medium);
+  background: #000;
+  cursor: pointer;
+  padding: 0;
+  transition: all var(--transition-fast);
+}
+
+.gallery-thumb-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.65;
+  transition: opacity var(--transition-fast);
+}
+
+.gallery-thumb-btn:hover img,
+.gallery-thumb-btn.active img {
+  opacity: 1;
+}
+
+.gallery-thumb-btn.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.35);
+  transform: translateY(-2px);
+}
+
+.modal-project-nav-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+}
+
+.modal-proj-nav-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.modal-proj-nav-btn:hover {
+  color: var(--text-main);
+  border-color: var(--border-strong);
+  background: var(--bg-surface);
+}
+
 .modal-index-counter {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   color: var(--text-muted);
-  margin-left: auto;
 }
 
 /* ==========================================================================
@@ -2733,6 +2877,30 @@ dialog#projectModal::backdrop {
   .modal-subtitle {
     font-size: 0.88rem;
     margin-bottom: 1rem;
+  }
+
+  .modal-slide-caption-bar {
+    bottom: 0.5rem;
+    left: 0.5rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .modal-slide-title {
+    max-width: 140px;
+  }
+
+  .modal-slide-dots {
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .modal-gallery-strip {
+    padding: 0.65rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .gallery-thumb-btn {
+    width: 72px;
   }
 
   .modal-nav-btn {

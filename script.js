@@ -442,6 +442,11 @@ const projectDetails = {
     date: 'Jul 2025 – Present',
     category: 'Distributed Systems & Cloud',
     image: 'assets/project-atma.webp',
+    gallery: [
+      { src: 'assets/project-atma-1.webp', title: 'Enterprise AI Hub & Platform Architecture', desc: 'Distributed AI Services Serving 10,000+ Daily Active Users' },
+      { src: 'assets/project-atma-2.webp', title: 'GenAI Solutions & Data Intelligence Modules', desc: 'Real-time Analytical Execution Plans & Microservice Contracts' },
+      { src: 'assets/project-atma-3.webp', title: 'Kafka Event Streams & Solr Query Pipeline', desc: 'High-Throughput Cluster Resilience & Compound Index Optimization' }
+    ],
     liveUrl: 'https://www.atma-ai.co.in/',
     github: 'https://github.com/Abhitvg/ATMA-AI-Backend',
     tech: ['Java 8/17+', 'Spring Boot', 'Apache Kafka', 'Apache Solr', 'MongoDB', 'Oracle SQL', 'JUnit', 'Mockito'],
@@ -460,6 +465,11 @@ const projectDetails = {
     date: 'Nov 2025 – Jun 2026',
     category: 'Frontend Architecture & WebGL',
     image: 'assets/project-virasat.webp',
+    gallery: [
+      { src: 'assets/project-virasat-1.webp', title: 'National Heritage Explorer Portal', desc: 'Bharat — Land of Timeless Heritage Educational Platform' },
+      { src: 'assets/project-virasat-2.webp', title: 'Interactive 3D Spatial Heritage Map', desc: 'WebGL 3D Engine with Zero Network Round-Trip Latency' },
+      { src: 'assets/project-virasat-3.webp', title: 'State Monument Cards & Curriculum Drill-down', desc: 'NCERT Survey of India-Compliant District Cultural Nodes' }
+    ],
     liveUrl: 'https://ncert-ruby.vercel.app/explore',
     github: 'https://github.com/Abhitvg/bharat-heritage',
     tech: ['React.js', '@react-three/fiber', 'Three.js', 'TopoJSON', 'SVG Engine', 'Local JSON Pipeline'],
@@ -477,6 +487,10 @@ const projectDetails = {
     date: 'May 2026',
     category: 'Frontend & Cultural Tech',
     image: 'assets/project-zubin.webp',
+    gallery: [
+      { src: 'assets/project-zubin-1.webp', title: 'Interactive Memorial Mural Canvas', desc: 'Commissioned by Embassy of Israel — High-Resolution Visual Retrospective' },
+      { src: 'assets/project-zubin-2.webp', title: 'Concert Archives & Historic Philharmonic Letters', desc: 'Archival Recordings, Letters from Avital Barak & Diplomatic Timeline' }
+    ],
     liveUrl: 'https://ipomehta-mural.com/',
     github: 'https://github.com/Abhitvg/zubin-mehta-project',
     tech: ['React.js', 'Modern CSS', 'Asset Pipelines', 'Lazy Loading', 'Responsive Audio/Visual'],
@@ -493,6 +507,10 @@ const projectDetails = {
     date: 'Oct 2025 – Jul 2026',
     category: 'Digital Infrastructure',
     image: 'assets/project-ierf.webp',
+    gallery: [
+      { src: 'assets/project-ierf-1.webp', title: 'Geopolitical Research Hub & Policy Portal', desc: 'Strategic Eurasian Dialogue Platform for Global Scholars' },
+      { src: 'assets/project-ierf-2.webp', title: 'Publications & Analytical Dispatches', desc: 'Automated Document Indexing & Incremental Static Regeneration' }
+    ],
     liveUrl: 'https://www.indiaeurasia.org/',
     github: 'https://github.com/Abhitvg/india-eurasia-research-forum',
     tech: ['Next.js', 'TypeScript', 'Cloud Hosting', 'SEO Optimization', 'CI/CD Pipelines'],
@@ -509,6 +527,11 @@ const projectDetails = {
     date: 'Jan 2024',
     category: 'Full Stack & Supply Chain',
     image: 'assets/project-doonsilk.webp',
+    gallery: [
+      { src: 'assets/project-doonsilk-1.webp', title: 'Luxury Silk Brand Hero Showcase', desc: 'Embrace Elegance, Wear Doon Silk — Where Luxury Meets Tradition' },
+      { src: 'assets/project-doonsilk-2.webp', title: 'Handwoven Pure Silk Saree Catalog', desc: 'Artisan Sericulture Catalog with Real-Time Stock Availability' },
+      { src: 'assets/project-doonsilk-3.webp', title: 'Artisan Cooperative Weaving Standards', desc: 'Batch Traceability & Fair-Wage Payout Records for Rural Weavers' }
+    ],
     liveUrl: 'https://doonsilk.com/',
     github: 'https://github.com/Abhitvg/uk-coop-main',
     tech: ['MERN Stack', 'Next.js', 'MongoDB', 'Express', 'Node.js', 'REST APIs'],
@@ -520,11 +543,17 @@ const projectDetails = {
     ]
   },
   'sheetal': {
-    title: 'Sheetal Electrotech – Enterprise Industrial Portal',
+    title: 'Sheetal Electrotech – LED Lighting & OEM Manufacturing Portal',
     subtitle: 'Full-stack industrial web architecture with 3D product rendering & i18n',
     date: 'Oct 2026',
-    category: 'Full Stack & 3D Web',
+    category: 'LED Lighting & OEM',
     image: 'assets/project-sheetal.webp',
+    gallery: [
+      { src: 'assets/project-sheetal-1.webp', title: 'Industrial Manufacturing Showcase & Hero', desc: 'Solving Complex Manufacturing Challenges — LED Lighting, Electronics & OEM Solutions' },
+      { src: 'assets/project-sheetal-2.webp', title: 'Commercial & Industrial Product Portfolio', desc: 'Comprehensive Grid of LED Bulbs, Downlights, Battens, Floodlights & Drivers' },
+      { src: 'assets/project-sheetal-3.webp', title: 'High-Precision SMT & CNC Manufacturing Lines', desc: 'State-of-the-art SMT Line, CNC Tool Room & Daman Complex Plant Facilities' },
+      { src: 'assets/project-sheetal-4.webp', title: 'Government BIS Testing & Technical Specs', desc: 'Certified Testing Labs, Photometric Compliance & Industrial Grade Standards' }
+    ],
     liveUrl: 'https://sheetal-electrotech-pvt-ltd.vercel.app/en',
     github: 'https://github.com/Abhitvg/Sheetal-Electrotech-Pvt.-Ltd',
     tech: ['Next.js', 'TypeScript', 'Three.js', 'Draco Compression', 'Tailwind CSS', 'Multi-Language i18n'],
@@ -532,7 +561,8 @@ const projectDetails = {
     highlights: [
       'Integrated Three.js with Google Draco geometry compression to render interactive 3D electrical products smoothly in the browser with sub-second asset decode times.',
       'Engineered Next.js App Router localization supporting multi-lingual international markets with zero hydration layout shifts.',
-      'Built automated catalog indexing and dynamic PDF specification sheet generation for enterprise commercial RFPs.'
+      'Built automated catalog indexing and dynamic PDF specification sheet generation for enterprise commercial RFPs.',
+      'Showcased industrial manufacturing processes including surface mount technology (SMT) and CNC tooling facilities.'
     ]
   },
   'fashion-look': {
@@ -541,6 +571,11 @@ const projectDetails = {
     date: 'Sep 2026',
     category: 'Full Stack & E-Commerce',
     image: 'assets/project-fashion.webp',
+    gallery: [
+      { src: 'assets/project-fashion-1.webp', title: 'Bespoke Luxury Tailoring Storefront', desc: 'Handcrafted Sartorial Elegance & Custom Suit Consultation' },
+      { src: 'assets/project-fashion-2.webp', title: 'Fabric Customizer & Product Catalog', desc: 'Interactive Fabric, Lapel, Button, and Cut Selection Engine' },
+      { src: 'assets/project-fashion-3.webp', title: 'Inspiration Gallery & Client Lookbook', desc: 'Curated Collection Gallery with Real-Time Fitting Booking' }
+    ],
     liveUrl: 'https://www.fashion-look.in/en',
     github: 'https://github.com/Abhitvg/fashion-look',
     tech: ['Next.js', 'Firebase / Firestore', 'Tailwind CSS', 'TypeScript', 'Cloud Messaging'],
@@ -557,6 +592,10 @@ const projectDetails = {
     date: 'February 2026',
     category: 'Local AI & Architecture',
     image: 'assets/project-porcupine.webp',
+    gallery: [
+      { src: 'assets/project-porcupine-1.webp', title: 'Local RAG Cockpit & Query Interface', desc: '100% On-Device Semantic Vector Search Running on CPU' },
+      { src: 'assets/project-porcupine-2.webp', title: 'Vector Space & Embedding Topology', desc: 'ONNX Runtime High-Dimensional Retrieval & Agent Supervisor Loop' }
+    ],
     liveUrl: '',
     github: 'https://github.com/Abhitvg/porcupine',
     tech: ['Electron', 'Node.js', 'Next.js', 'SQLite (SQLCipher)', 'ONNX Runtime', 'Xenova Transformers', 'Tailwind CSS'],
@@ -574,6 +613,10 @@ const projectDetails = {
     date: '2024 – 2025 (JNU Thesis)',
     category: 'Computational NLP & Graphs',
     image: 'assets/project-thesis.webp',
+    gallery: [
+      { src: 'assets/project-thesis-1.webp', title: 'NLP News Ingestion & Sentiment Topology', desc: 'JNU M.Tech Thesis: Deep Learning Analysis across 50,000+ National Articles' },
+      { src: 'assets/project-thesis-2.webp', title: 'NetworkX Citation & Entity Centrality Graph', desc: 'Social Co-Occurrence Networks, Stance Topologies & Topic Modeling' }
+    ],
     liveUrl: '',
     github: 'https://github.com/Abhitvg/Media-Bias-Analysis-in-Indian-News-Articles',
     tech: ['Python', 'NLP Pipelines', 'NetworkX', 'Graph Data Science', 'Topic Modeling', 'Pandas', 'BERT Embeddings'],
@@ -591,6 +634,10 @@ const projectDetails = {
     date: '2025 – 2026',
     category: 'Full Stack & Distributed State',
     image: 'assets/project-docflow.webp',
+    gallery: [
+      { src: 'assets/project-docflow-1.webp', title: 'Real-Time Document Editor Workspace', desc: 'Next.js 15 + Tiptap 3 Distraction-Free Rich Text Canvas' },
+      { src: 'assets/project-docflow-2.webp', title: 'CRDT Multiplayer Cursors & Document Dashboard', desc: 'Sub-100ms Live Collaboration, Presence Awareness & Auto-Save Debouncing' }
+    ],
     liveUrl: 'https://docflow-ashy.vercel.app',
     github: 'https://github.com/Abhitvg/docflow',
     tech: ['Next.js 15', 'React 19', 'Tiptap 3', 'Prisma 5', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vercel'],
@@ -608,6 +655,10 @@ const projectDetails = {
     date: '2026',
     category: 'WebRTC & Audio AI',
     image: 'assets/project-quorum.webp',
+    gallery: [
+      { src: 'assets/project-quorum-1.webp', title: 'Video Conference Multi-Party Room Grid', desc: 'Low-Latency Peer-to-Peer & SFU Signaling Layer with Socket.io' },
+      { src: 'assets/project-quorum-2.webp', title: 'Whisper AI Speech-to-Text & Diarization', desc: 'Asynchronous Audio Chunk Ingestion with Real-Time Subtitles & Minutes Export' }
+    ],
     liveUrl: '',
     github: 'https://github.com/Abhitvg/Quorum',
     tech: ['WebRTC', 'Node.js', 'Socket.io', 'FastAPI', 'Whisper STT', 'Docker', 'Kubernetes', 'Redis'],
@@ -625,6 +676,10 @@ const projectDetails = {
     date: '2025',
     category: 'Mobile & Cloud',
     image: 'assets/project-balancebite.webp',
+    gallery: [
+      { src: 'assets/project-balancebite-1.webp', title: 'Native Android Material 3 Dashboard', desc: 'Realtime Calorie Rings, Macronutrient Progress & Daily Goals' },
+      { src: 'assets/project-balancebite-2.webp', title: 'Macro Logging & Cloud Sync Engine', desc: 'Firebase Realtime DB Schemas with Offline Conflict Resolution' }
+    ],
     liveUrl: '',
     github: 'https://github.com/Abhitvg/The-balance-Bite',
     tech: ['Android SDK', 'Java', 'Kotlin', 'Firebase Auth', 'Firebase Realtime DB', 'Material 3'],
@@ -641,27 +696,84 @@ const projectDetails = {
 function initProjectModal() {
   const modal = document.getElementById('projectModal');
   const closeBtn = document.getElementById('modalCloseBtn');
-  const prevBtn = document.getElementById('modalPrevBtn');
-  const nextBtn = document.getElementById('modalNextBtn');
+  const slidePrevBtn = document.getElementById('modalSlidePrevBtn');
+  const slideNextBtn = document.getElementById('modalSlideNextBtn');
+  const prevProjBtn = document.getElementById('modalPrevProjectBtn');
+  const nextProjBtn = document.getElementById('modalNextProjectBtn');
   const indexCounter = document.getElementById('modalIndexCounter');
+  const modalImg = document.getElementById('modalImg');
+  const slideBadge = document.getElementById('modalSlideCounterBadge');
+  const slideTitle = document.getElementById('modalSlideTitle');
+  const slideDots = document.getElementById('modalSlideDots');
+  const galleryStrip = document.getElementById('modalGalleryStrip');
   const projectCards = document.querySelectorAll('.project-card');
 
   if (!modal) return;
 
   const projectKeys = Object.keys(projectDetails);
   let currentModalIndex = 0;
+  let currentSlideIndex = 0;
+
+  function renderSlide(slideIdx) {
+    const id = projectKeys[currentModalIndex];
+    const data = projectDetails[id];
+    if (!data || !data.gallery || data.gallery.length === 0) return;
+
+    if (slideIdx < 0) slideIdx = data.gallery.length - 1;
+    if (slideIdx >= data.gallery.length) slideIdx = 0;
+    currentSlideIndex = slideIdx;
+
+    const slide = data.gallery[slideIdx];
+    modalImg.src = slide.src;
+    modalImg.alt = slide.title;
+
+    if (slideBadge) {
+      slideBadge.innerHTML = `<i class="fa-solid fa-camera"></i> ${slideIdx + 1} / ${data.gallery.length}`;
+    }
+    if (slideTitle) {
+      slideTitle.textContent = slide.title;
+    }
+
+    if (slideDots) {
+      const dots = slideDots.querySelectorAll('.slide-dot');
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === slideIdx);
+      });
+    }
+
+    if (galleryStrip) {
+      const thumbs = galleryStrip.querySelectorAll('.gallery-thumb-btn');
+      thumbs.forEach((thumb, idx) => {
+        thumb.classList.toggle('active', idx === slideIdx);
+        if (idx === slideIdx) {
+          // Safely scroll ONLY the horizontal galleryStrip without scrolling parent modal
+          const thumbLeft = thumb.offsetLeft;
+          const thumbWidth = thumb.offsetWidth;
+          const stripWidth = galleryStrip.clientWidth;
+          galleryStrip.scrollTo({
+            left: thumbLeft - (stripWidth / 2) + (thumbWidth / 2),
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+  }
 
   function renderModalProject(index) {
     if (index < 0) index = projectKeys.length - 1;
     if (index >= projectKeys.length) index = 0;
     currentModalIndex = index;
+    currentSlideIndex = 0;
+
+    const modalWrap = modal.querySelector('.modal-wrap');
+    if (modalWrap) {
+      modalWrap.scrollTop = 0;
+    }
 
     const id = projectKeys[index];
     const data = projectDetails[id];
     if (!data) return;
 
-    document.getElementById('modalImg').src = data.image;
-    document.getElementById('modalImg').alt = data.title;
     document.getElementById('modalCategory').textContent = data.category;
     document.getElementById('modalDate').textContent = data.date;
     document.getElementById('modalTitle').textContent = data.title;
@@ -701,6 +813,49 @@ function initProjectModal() {
         liveLink.style.display = 'none';
       }
     }
+
+    // Build Gallery Dots & Strip
+    const gallery = data.gallery || [{ src: data.image, title: data.title, desc: data.subtitle }];
+    
+    if (slideDots) {
+      slideDots.innerHTML = '';
+      gallery.forEach((g, gIdx) => {
+        const dot = document.createElement('button');
+        dot.className = `slide-dot ${gIdx === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Go to photo ${gIdx + 1}`);
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          renderSlide(gIdx);
+        });
+        slideDots.appendChild(dot);
+      });
+      slideDots.style.display = gallery.length > 1 ? 'flex' : 'none';
+    }
+
+    if (galleryStrip) {
+      galleryStrip.innerHTML = '';
+      gallery.forEach((g, gIdx) => {
+        const thumb = document.createElement('button');
+        thumb.className = `gallery-thumb-btn ${gIdx === 0 ? 'active' : ''}`;
+        thumb.setAttribute('aria-label', g.title);
+        thumb.title = g.title;
+        thumb.innerHTML = `<img src="${g.src}" alt="${g.title}" loading="lazy">`;
+        thumb.addEventListener('click', (e) => {
+          e.stopPropagation();
+          renderSlide(gIdx);
+        });
+        galleryStrip.appendChild(thumb);
+      });
+      galleryStrip.style.display = gallery.length > 1 ? 'flex' : 'none';
+    }
+
+    if (slidePrevBtn && slideNextBtn) {
+      const showNav = gallery.length > 1;
+      slidePrevBtn.style.display = showNav ? 'flex' : 'none';
+      slideNextBtn.style.display = showNav ? 'flex' : 'none';
+    }
+
+    renderSlide(0);
   }
 
   window.renderModalProject = renderModalProject;
@@ -709,6 +864,8 @@ function initProjectModal() {
     if (idx !== -1) {
       renderModalProject(idx);
       modal.showModal();
+      const wrap = modal.querySelector('.modal-wrap');
+      if (wrap) wrap.scrollTop = 0;
       document.body.style.overflow = 'hidden';
     }
   };
@@ -721,23 +878,59 @@ function initProjectModal() {
       if (idx !== -1) {
         renderModalProject(idx);
         modal.showModal();
+        const wrap = modal.querySelector('.modal-wrap');
+        if (wrap) wrap.scrollTop = 0;
         document.body.style.overflow = 'hidden';
       }
     });
   });
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', (e) => {
+  // Photo Carousel Next / Prev
+  if (slidePrevBtn) {
+    slidePrevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renderSlide(currentSlideIndex - 1);
+    });
+  }
+
+  if (slideNextBtn) {
+    slideNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      renderSlide(currentSlideIndex + 1);
+    });
+  }
+
+  // Project Switcher Next / Prev
+  if (prevProjBtn) {
+    prevProjBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       renderModalProject(currentModalIndex - 1);
     });
   }
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', (e) => {
+  if (nextProjBtn) {
+    nextProjBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       renderModalProject(currentModalIndex + 1);
     });
+  }
+
+  // Touch Swipe on Banner
+  const banner = document.querySelector('.modal-banner');
+  if (banner) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    banner.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    banner.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 45) {
+        renderSlide(currentSlideIndex + 1);
+      } else if (touchEndX - touchStartX > 45) {
+        renderSlide(currentSlideIndex - 1);
+      }
+    }, { passive: true });
   }
 
   const shareBtn = document.getElementById('modalShareBtn');
@@ -786,9 +979,21 @@ function initProjectModal() {
     if (!modal.open) return;
     if (e.key === 'ArrowLeft') {
       e.preventDefault();
-      renderModalProject(currentModalIndex - 1);
+      if (e.shiftKey) {
+        renderModalProject(currentModalIndex - 1);
+      } else {
+        renderSlide(currentSlideIndex - 1);
+      }
     } else if (e.key === 'ArrowRight') {
       e.preventDefault();
+      if (e.shiftKey) {
+        renderModalProject(currentModalIndex + 1);
+      } else {
+        renderSlide(currentSlideIndex + 1);
+      }
+    } else if (e.key.toLowerCase() === 'p') {
+      renderModalProject(currentModalIndex - 1);
+    } else if (e.key.toLowerCase() === 'n') {
       renderModalProject(currentModalIndex + 1);
     }
   });

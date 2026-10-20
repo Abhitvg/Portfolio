@@ -827,21 +827,20 @@
           </article>
 
           <!-- Project 6: Sheetal Electrotech -->
-          <article class="project-card" data-category="web frontend" data-project="sheetal" data-tech="Next.js TypeScript Three.js Draco i18n">
+          <article class="project-card" data-category="web frontend" data-project="sheetal" data-tech="Next.js TypeScript Three.js Draco i18n Tailwind">
             <div class="project-img-box">
-              <img src="assets/project-sheetal.webp" alt="Sheetal Electrotech Portal" loading="lazy">
-              <span class="project-category-badge">Full Stack &amp; 3D Web</span>
-              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live 3D Portal</span>
+              <img src="assets/project-sheetal.webp" alt="Sheetal Electrotech – LED Lighting &amp; OEM Manufacturing Portal" loading="lazy">
+              <span class="project-category-badge">LED Lighting &amp; OEM</span>
+              <span class="project-status-badge"><span class="status-dot-pulse"></span>Live OEM Portal</span>
             </div>
             <div class="project-body">
               <span class="project-date">Oct 2026</span>
               <h3 class="project-name">
-                <span>Sheetal Electrotech – Enterprise Portal</span>
+                <span>Sheetal Electrotech – Industrial Portal</span>
                 <i class="fa-solid fa-arrow-right project-arrow"></i>
               </h3>
               <p class="project-description">
-                Corporate web portal and interactive digital showroom featuring 3D electrical product models (Three.js/Draco), 
-                international multi-language support (i18n), and dynamic technical catalog routing.
+                LED Lighting, Electronics &amp; OEM Manufacturing portal featuring interactive 3D product rendering, SMT line capabilities, multi-language i18n, and dynamic industrial catalog routing.
               </p>
               <div class="project-tags">
                 <span class="tech-chip">Next.js</span>
@@ -849,6 +848,7 @@
                 <span class="tech-chip">Three.js</span>
                 <span class="tech-chip">Draco</span>
                 <span class="tech-chip">i18n</span>
+                <span class="tech-chip">Tailwind</span>
               </div>
               <div class="project-card-actions">
                 <div class="project-footer-link">
@@ -1503,12 +1503,19 @@
     <div class="modal-wrap">
       <div class="modal-banner">
         <img id="modalImg" src="assets/project-atma.webp" alt="Project preview">
-        <button class="modal-nav-btn prev" id="modalPrevBtn" aria-label="Previous project" title="Previous project (←)">
+        <button class="modal-nav-btn prev" id="modalSlidePrevBtn" aria-label="Previous photo" title="Previous Photo (←)">
           <i class="fa-solid fa-chevron-left"></i>
         </button>
-        <button class="modal-nav-btn next" id="modalNextBtn" aria-label="Next project" title="Next project (→)">
+        <button class="modal-nav-btn next" id="modalSlideNextBtn" aria-label="Next photo" title="Next Photo (→)">
           <i class="fa-solid fa-chevron-right"></i>
         </button>
+        <div class="modal-slide-caption-bar" id="modalSlideCaptionBar">
+          <span class="modal-slide-counter-badge" id="modalSlideCounterBadge"><i class="fa-solid fa-camera"></i> 1 / 4</span>
+          <span class="modal-slide-title" id="modalSlideTitle">Hero Showcase</span>
+        </div>
+        <div class="modal-slide-dots" id="modalSlideDots">
+          <!-- Populated dynamically -->
+        </div>
         <div class="modal-actions-top">
           <button class="modal-icon-btn" id="modalShareBtn" aria-label="Copy direct link" title="Copy project direct link">
             <i class="fa-solid fa-link"></i>
@@ -1519,11 +1526,20 @@
         </div>
       </div>
 
+      <!-- Interactive Gallery Thumbnails Strip -->
+      <div class="modal-gallery-strip" id="modalGalleryStrip" aria-label="Page and feature views">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
       <div class="modal-content-area">
         <div class="modal-tags-row">
           <span class="project-category-badge" id="modalCategory" style="position: static;">Category</span>
           <span class="tech-chip" id="modalDate">Date</span>
-          <span class="modal-index-counter" id="modalIndexCounter">Project 1 of 12</span>
+          <div class="modal-project-nav-pills">
+            <button id="modalPrevProjectBtn" class="modal-proj-nav-btn" aria-label="Previous project" title="Previous project"><i class="fa-solid fa-arrow-left"></i></button>
+            <span class="modal-index-counter" id="modalIndexCounter">Project 1 of 12</span>
+            <button id="modalNextProjectBtn" class="modal-proj-nav-btn" aria-label="Next project" title="Next project"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
         </div>
 
         <h3 class="modal-title" id="modalTitle">Project Title</h3>
