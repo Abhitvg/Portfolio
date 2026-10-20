@@ -1,171 +1,50 @@
 /**
- * Abhishek Singh — Senior SDE & Distributed Systems Portfolio
- * Interactive Functionality & Modern UI Engines
+ * Abhishek Singh — Senior SDE & Distributed Systems Engineer
+ * Human-Crafted Client Logic & System Architecture Playground
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
-  initCanvasBackground();
   initNavigation();
-  initTerminal();
+  initArchitecturePlayground();
   initProjectFilters();
   initProjectModal();
-  initCopyButtons();
+  initCopyTriggers();
   initContactForm();
   initLiveClock();
 });
 
 /* ==========================================================================
-   1. Theme Management (Dark / Light with LocalStorage)
+   1. Theme Management (Minimalist Dark / Light Mode)
    ========================================================================== */
 function initTheme() {
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const themeIcon = document.getElementById('themeIcon');
   const storedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  const currentTheme = storedTheme || (prefersDark ? 'dark' : 'dark');
+  const currentTheme = storedTheme || 'dark';
+
   document.documentElement.setAttribute('data-theme', currentTheme);
-  updateThemeIcon(currentTheme);
+  updateIcon(currentTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const activeTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon(newTheme);
-      showToast(`Switched to ${newTheme === 'dark' ? 'Dark' : 'Light'} Mode`, 'info');
+      const active = document.documentElement.getAttribute('data-theme');
+      const next = active === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateIcon(next);
+      showToast(`Switched to ${next === 'dark' ? 'Dark' : 'Light'} Mode`);
     });
   }
 
-  function updateThemeIcon(theme) {
+  function updateIcon(theme) {
     if (!themeIcon) return;
-    if (theme === 'dark') {
-      themeIcon.className = 'fa-solid fa-moon';
-    } else {
-      themeIcon.className = 'fa-solid fa-sun';
-    }
+    themeIcon.className = theme === 'dark' ? 'fa-regular fa-moon' : 'fa-regular fa-sun';
   }
 }
 
 /* ==========================================================================
-   2. High Performance Interactive Canvas Particle Network
-   ========================================================================== */
-function initCanvasBackground() {
-  const canvas = document.getElementById('bg-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let animationFrameId;
-  let width, height;
-  let particles = [];
-  
-  const mouse = { x: null, y: null, radius: 150 };
-
-  window.addEventListener('mousemove', (e) => {
-    mouse.x = e.x;
-    mouse.y = e.y;
-  });
-
-  window.addEventListener('mouseout', () => {
-    mouse.x = null;
-    mouse.y = null;
-  });
-
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    createParticles();
-  }
-
-  window.addEventListener('resize', resize);
-
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.vx = (Math.random() - 0.5) * 0.6;
-      this.vy = (Math.random() - 0.5) * 0.6;
-      this.radius = Math.random() * 2 + 1;
-      this.baseColor = Math.random() > 0.4 ? 'rgba(56, 189, 248, ' : 'rgba(99, 102, 241, ';
-    }
-
-    update() {
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.x < 0 || this.x > width) this.vx *= -1;
-      if (this.y < 0 || this.y > height) this.vy *= -1;
-
-      // Mouse interactivity
-      if (mouse.x !== null && mouse.y !== null) {
-        const dx = mouse.x - this.x;
-        const dy = mouse.y - this.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < mouse.radius) {
-          const force = (mouse.radius - dist) / mouse.radius;
-          const dirX = dx / dist;
-          const dirY = dy / dist;
-          this.x -= dirX * force * 2;
-          this.y -= dirY * force * 2;
-        }
-      }
-    }
-
-    draw() {
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.baseColor + '0.6)';
-      ctx.fill();
-    }
-  }
-
-  function createParticles() {
-    particles = [];
-    const particleCount = Math.floor((width * height) / 16000);
-    const count = Math.min(Math.max(particleCount, 40), 90);
-    for (let i = 0; i < count; i++) {
-      particles.push(new Particle());
-    }
-  }
-
-  function connect() {
-    const maxDistance = 130;
-    for (let a = 0; a < particles.length; a++) {
-      for (let b = a + 1; b < particles.length; b++) {
-        const dx = particles[a].x - particles[b].x;
-        const dy = particles[a].y - particles[b].y;
-        const distance = Math.hypot(dx, dy);
-
-        if (distance < maxDistance) {
-          const opacity = 1 - distance / maxDistance;
-          ctx.strokeStyle = `rgba(56, 189, 248, ${opacity * 0.18})`;
-          ctx.lineWidth = 0.8;
-          ctx.beginPath();
-          ctx.moveTo(particles[a].x, particles[a].y);
-          ctx.lineTo(particles[b].x, particles[b].y);
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    for (let i = 0; i < particles.length; i++) {
-      particles[i].update();
-      particles[i].draw();
-    }
-    connect();
-    animationFrameId = requestAnimationFrame(animate);
-  }
-
-  resize();
-  animate();
-}
-
-/* ==========================================================================
-   3. Navigation, Active Spy, & Mobile Drawer
+   2. Navigation & Mobile Drawer
    ========================================================================== */
 function initNavigation() {
   const mobileToggle = document.getElementById('mobileToggle');
@@ -195,18 +74,15 @@ function initNavigation() {
     });
   }
 
-  // Active section spy on scroll
   window.addEventListener('scroll', () => {
     let current = '';
     const scrollY = window.pageYOffset;
 
     sections.forEach(section => {
-      const sectionHeight = section.offsetHeight;
-      const sectionTop = section.offsetTop - 120;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-        current = sectionId;
+      const top = section.offsetTop - 120;
+      const height = section.offsetHeight;
+      if (scrollY >= top && scrollY < top + height) {
+        current = section.getAttribute('id');
       }
     });
 
@@ -220,168 +96,154 @@ function initNavigation() {
 }
 
 /* ==========================================================================
-   4. Interactive Cockpit / Terminal Simulator (abhitvg@engine:~$ )
+   3. Interactive System Architecture & Code Playground
+   (Demonstrates actual Spring Boot, Kafka, and Database tuning)
    ========================================================================== */
-function initTerminal() {
-  const input = document.getElementById('terminalInput');
-  const output = document.getElementById('terminalOutput');
-  const quickBtns = document.querySelectorAll('.quick-cmd-btn');
-  let history = [];
-  let historyIndex = -1;
+const architectureData = {
+  'kafka': {
+    title: 'Kafka Event Ingestion & Decoupled Pipelines',
+    file: 'InventoryEventProducer.java',
+    code: `<span class="ann">@Service</span>
+<span class="kw">public class</span> <span class="fn">InventoryEventProducer</span> {
+    <span class="kw">private final</span> KafkaTemplate&lt;String, InventoryUpdateEvent&gt; kafkaTemplate;
+    <span class="kw">private static final</span> String TOPIC = <span class="str">"inventory.live.events"</span>;
 
-  const commands = {
-    'help': `Available Commands:
-  <span class="highlight">cat profile.json</span>        — View full engineer background & education
-  <span class="highlight">systemctl status arch</span>   — Production platforms uptime & telemetry
-  <span class="highlight">kafka-topics --describe</span> — Event streaming & decoupled queue specs
-  <span class="highlight">run benchmarks</span>          — Performance optimization & latency diffs
-  <span class="highlight">curl /skills</span>            — Categorized tech stack index
-  <span class="highlight">contact</span>                 — Reach out directly to Abhishek
-  <span class="highlight">clear</span>                   — Clear terminal buffer`,
-
-    'cat profile.json': `{
-  "name": "Abhishek Singh",
-  "title": "Software Development Engineer — Java Full Stack & Distributed Systems",
-  "education": {
-    "institution": "Jawaharlal Nehru University (JNU), New Delhi",
-    "degree": "Dual Degree: B.Tech & M.Tech in Computer Science & Engineering",
-    "gpa": "7.1 / 10",
-    "duration": "2020 – 2025"
+    <span class="ann">@Transactional</span>
+    <span class="kw">public void</span> <span class="fn">publishUpdate</span>(String sku, <span class="kw">int</span> delta, String warehouseId) {
+        InventoryUpdateEvent event = <span class="kw">new</span> InventoryUpdateEvent(sku, delta, warehouseId, Instant.now());
+        <span class="cm">// Partitioned by SKU to maintain strict per-item event ordering</span>
+        kafkaTemplate.send(TOPIC, sku, event).whenComplete((result, ex) -> {
+            <span class="kw">if</span> (ex != <span class="kw">null</span>) {
+                log.error(<span class="str">"Failed to emit event for SKU: {}"</span>, sku, ex);
+                <span class="cm">// Route to dead-letter queue (DLQ) for automated retry</span>
+            }
+        });
+    }
+}`,
+    desc: 'At ATMA Research, replaced legacy hourly batch sync with a fault-tolerant Kafka event streaming backbone. Enables instantaneous multi-datacenter inventory updates with zero consumer lag and guaranteed ordering.',
+    stats: [
+      { val: '100%', desc: 'Real-time consistency' },
+      { val: '< 25ms', desc: 'Event publish latency' }
+    ]
   },
-  "thesis": "Social Network Analysis on Media Bias in News Articles (50,000+ NLP dataset)",
-  "leadership": "Joint Secretary, JNU Alumni Association (2025–Present)",
-  "competitive": "GATE CS/IT 2024 Qualified | JEE Mains AIR 6126",
-  "github": "https://github.com/Abhitvg",
-  "linkedin": "https://www.linkedin.com/in/abhisheksingh22141"
-}`,
+  'database': {
+    title: 'Database Index & Execution Plan Optimization',
+    file: 'MongoDB_Covered_Index.json & Oracle_View.sql',
+    code: `<span class="cm">// 1. MongoDB Compound Covered Index (Slashing Read Latency)</span>
+db.catalog_items.createIndex(
+    { <span class="str">"organizationId"</span>: <span class="num">1</span>, <span class="str">"status"</span>: <span class="num">1</span>, <span class="str">"updatedAt"</span>: -<span class="num">1</span> },
+    { <span class="str">"name"</span>: <span class="str">"idx_org_status_updated"</span>, background: <span class="kw">true</span> }
+);
 
-    'systemctl status arch': `● atma-production-cluster.service - Distributed Enterprise Cloud
-     Loaded: loaded (/lib/systemd/system/cloud-orchestrator.service; enabled)
-     Active: <span class="success">active (running)</span> since Jul 2025; 99.98% uptime
-     Main PID: 1042 (java-spring-boot)
-     Tasks: 128 (limit: 4096)
-     Throughput: <span class="highlight">10,000+ Daily Active Users</span> across 3 core platforms
-     Memory: 4.2G / 16.0G (Optimized GC G1GC)
-     Status: "Zero-loss Kafka event ingestion, Solr 50k SKU search latency &lt;180ms"`,
+<span class="cm">// 2. Oracle SQL Materialized View for C-Level Dashboards</span>
+<span class="kw">CREATE MATERIALIZED VIEW</span> mv_exec_daily_metrics
+<span class="kw">BUILD IMMEDIATE REFRESH FAST ON COMMIT AS</span>
+<span class="kw">SELECT</span> p.platform_id, TRUNC(t.created_at) <span class="kw">AS</span> metric_date,
+       COUNT(t.id) <span class="kw">AS</span> total_transactions, SUM(t.amount) <span class="kw">AS</span> gross_volume
+<span class="kw">FROM</span> transactions t <span class="kw">JOIN</span> platforms p <span class="kw">ON</span> t.platform_id = p.id
+<span class="kw">GROUP BY</span> p.platform_id, TRUNC(t.created_at);`,
+    desc: 'Analyzed database query execution plans (EXPLAIN ANALYZE) to eliminate expensive table scans. Converted high-frequency queries to covered indexes in MongoDB and implemented FAST REFRESH materialized views in Oracle SQL.',
+    stats: [
+      { val: '35%', desc: 'MongoDB read latency cut' },
+      { val: '40%', desc: 'Oracle report speedup' }
+    ]
+  },
+  'rag': {
+    title: 'Local-First AI Vector Retrieval (Porcupine)',
+    file: 'local-retrieval-engine.ts',
+    code: `<span class="kw">import</span> { pipeline } <span class="kw">from</span> <span class="str">'@xenova/transformers'</span>;
+<span class="kw">import</span> Database <span class="kw">from</span> <span class="str">'better-sqlite3-multiple-ciphers'</span>;
 
-    'kafka-topics --describe': `Topic: telemetry.events.inventory   PartitionCount: 6  ReplicationFactor: 3
-Topic: user.promotions.realtime    PartitionCount: 4  ReplicationFactor: 3
-Topic: rag.offline.documents       PartitionCount: 3  ReplicationFactor: 2
-Consumer Group: [order-dispatch-service] -> Lag: <span class="success">0 msgs</span> (Event Pipeline active)
-Consumer Group: [search-indexer-solr]    -> Lag: <span class="success">0 msgs</span> (Sync batch replaced)`,
+<span class="kw">export class</span> <span class="fn">LocalVectorEngine</span> {
+  <span class="kw">private</span> embedder: <span class="kw">any</span>;
+  <span class="kw">private</span> db: Database;
 
-    'run benchmarks': `[BENCHMARK RESULTS: BEFORE vs AFTER OPTIMIZATION]
-1. MongoDB Query Latency (Compound Indexing):
-   [BEFORE] avg: 142ms | [AFTER] avg: 92ms  -> <span class="success">35.2% Latency Reduction</span>
-2. Solr Full-Text Search (50K-SKU Catalog):
-   [BEFORE] avg: 480ms | [AFTER] avg: 165ms -> <span class="success">Click-through up 20%</span>
-3. Oracle SQL Executive Report Execution Plans:
-   [BEFORE] avg: 18.4s | [AFTER] avg: 11.0s -> <span class="success">40.2% Report Time Cut</span>
-4. CI/CD Pipeline Automation:
-   Post-release defects down <span class="success">45%</span> via Jenkins + Docker workflows.`,
-
-    'curl /skills': `{
-  "languages": ["Java 8/17+", "JavaScript ES6+", "TypeScript", "Python", "C++"],
-  "backend": ["Spring Boot", "Spring MVC", "Spring Data", "Spring Security", "REST APIs", "Node.js"],
-  "frontend": ["Angular 8+", "React.js", "Next.js", "Redux", "Tailwind CSS", "Three.js"],
-  "data_systems": ["MongoDB", "PostgreSQL", "Oracle SQL", "Apache Kafka", "Apache Solr", "ActiveMQ"],
-  "devops_testing": ["Docker", "Jenkins", "GitHub Actions", "Linux", "AWS", "JUnit", "Mockito", "Swagger"]
-}`,
-
-    'contact': `Email: <span class="highlight">Abhisheksingh1thakur@gmail.com</span>
-Phone: <span class="highlight">+91-8850970898</span>
-GitHub: <a href="https://github.com/Abhitvg" target="_blank" class="highlight">github.com/Abhitvg</a>
-LinkedIn: <a href="https://www.linkedin.com/in/abhisheksingh22141" target="_blank" class="highlight">linkedin.com/in/abhisheksingh22141</a>
-Type 'clear' or explore other commands!`,
-
-    'whoami': 'Abhishek Singh — Software Development Engineer (Distributed Systems, Java Full Stack)',
-    'clear': 'CLEAR'
-  };
-
-  function executeCommand(rawCmd) {
-    const cmd = rawCmd.trim().toLowerCase();
-    if (!cmd) return;
-
-    history.push(rawCmd);
-    historyIndex = history.length;
-
-    if (cmd === 'clear') {
-      output.innerHTML = '';
-      return;
-    }
-
-    const commandBlock = document.createElement('div');
-    commandBlock.className = 'terminal-output-block';
-
-    const promptLine = document.createElement('div');
-    promptLine.className = 'terminal-prompt-line';
-    promptLine.innerHTML = `<span class="terminal-user">abhitvg</span><span class="terminal-at">@</span><span class="terminal-path">engine</span>:<span class="terminal-symbol">~$</span> <span class="terminal-command-text">${escapeHtml(rawCmd)}</span>`;
-    commandBlock.appendChild(promptLine);
-
-    const response = document.createElement('div');
-    response.className = 'terminal-response';
-
-    if (commands[cmd]) {
-      response.innerHTML = commands[cmd];
-    } else {
-      // Fuzzy search or command not found
-      let matchKey = Object.keys(commands).find(k => k.startsWith(cmd) || cmd.includes(k.split(' ')[0]));
-      if (matchKey && cmd.length > 2) {
-        response.innerHTML = `<span class="warn">Command '${escapeHtml(rawCmd)}' not found. Did you mean:</span> <span class="highlight">${matchKey}</span>?\nType '<span class="highlight">help</span>' for a list of commands.`;
-      } else {
-        response.innerHTML = `<span class="warn">zsh: command not found: ${escapeHtml(rawCmd)}</span>\nType '<span class="highlight">help</span>' to see valid operations.`;
-      }
-    }
-
-    commandBlock.appendChild(response);
-    output.appendChild(commandBlock);
-
-    // Auto-scroll to bottom of terminal
-    output.scrollTop = output.scrollHeight;
+  <span class="kw">async</span> <span class="fn">init</span>() {
+    <span class="cm">// Initialize quantized ONNX transformer model locally on desktop CPU</span>
+    <span class="kw">this</span>.embedder = <span class="kw">await</span> pipeline(<span class="str">'feature-extraction'</span>, <span class="str">'Xenova/all-MiniLM-L6-v2'</span>);
+    <span class="kw">this</span>.db = <span class="kw">new</span> Database(<span class="str">'secure_vault.enc'</span>);
+    <span class="kw">this</span>.db.pragma(<span class="str">"key = 'aes256_enterprise_key'"</span>);
   }
 
-  if (input) {
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const cmd = input.value;
-        input.value = '';
-        executeCommand(cmd);
-      } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (historyIndex > 0) {
-          historyIndex--;
-          input.value = history[historyIndex];
-        }
-      } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (historyIndex < history.length - 1) {
-          historyIndex++;
-          input.value = history[historyIndex];
-        } else {
-          historyIndex = history.length;
-          input.value = '';
-        }
-      }
+  <span class="kw">async</span> <span class="fn">semanticSearch</span>(query: <span class="kw">string</span>, limit = <span class="num">5</span>) {
+    <span class="kw">const</span> output = <span class="kw">await</span> <span class="kw">this</span>.embedder(query, { pooling: <span class="str">'mean'</span>, normalize: <span class="kw">true</span> });
+    <span class="kw">return this</span>.queryCosineSimilarity(Array.from(output.data), limit);
+  }
+}`,
+    desc: 'Engineered an offline-first semantic retrieval engine for desktop ERPs. Runs 100% locally on device CPU using ONNX Runtime with zero data transmission to external APIs, backed by AES-256 encrypted SQLite.',
+    stats: [
+      { val: '< 50ms', desc: 'Local vector search' },
+      { val: '0 bytes', desc: 'External data leakage' }
+    ]
+  },
+  'solr': {
+    title: 'Apache Solr 50K-SKU Full-Text Search',
+    file: 'solrconfig-schema.xml',
+    code: `<span class="cm">&lt;!-- Custom Schema FieldType with Phonetic &amp; N-Gram Filtering --&gt;</span>
+&lt;<span class="kw">fieldType</span> name=<span class="str">"text_autocomplete"</span> class=<span class="str">"solr.TextField"</span> positionIncrementGap=<span class="str">"100"</span>&gt;
+  &lt;<span class="kw">analyzer</span> type=<span class="str">"index"</span>&gt;
+    &lt;<span class="kw">tokenizer</span> class=<span class="str">"solr.StandardTokenizerFactory"</span>/&gt;
+    &lt;<span class="kw">filter</span> class=<span class="str">"solr.LowerCaseFilterFactory"</span>/&gt;
+    &lt;<span class="kw">filter</span> class=<span class="str">"solr.EdgeNGramFilterFactory"</span> minGramSize=<span class="str">"2"</span> maxGramSize=<span class="str">"15"</span>/&gt;
+  &lt;/<span class="kw">analyzer</span>&gt;
+  &lt;<span class="kw">analyzer</span> type=<span class="str">"query"</span>&gt;
+    &lt;<span class="kw">tokenizer</span> class=<span class="str">"solr.StandardTokenizerFactory"</span>/&gt;
+    &lt;<span class="kw">filter</span> class=<span class="str">"solr.LowerCaseFilterFactory"</span>/&gt;
+  &lt;/<span class="kw">analyzer</span>&gt;
+&lt;/<span class="kw">fieldType</span>&gt;`,
+    desc: 'Configured faceted filtering, auto-complete, and spellcheck over a 50,000+ item SKU catalog. Tuned Lucene segment caches to achieve sub-180ms response times under heavy concurrent user searches.',
+    stats: [
+      { val: '+ 20%', desc: 'Search CTR conversion' },
+      { val: '< 180ms', desc: 'Sub-second query time' }
+    ]
+  }
+};
+
+function initArchitecturePlayground() {
+  const tabs = document.querySelectorAll('.playground-tab');
+  const codeBox = document.getElementById('codeEditorBody');
+  const fileName = document.getElementById('codeFileName');
+  const blueprintTitle = document.getElementById('blueprintTitle');
+  const blueprintDesc = document.getElementById('blueprintDesc');
+  const statsContainer = document.getElementById('blueprintStats');
+
+  if (!tabs.length || !codeBox) return;
+
+  function setArchitecture(key) {
+    const data = architectureData[key];
+    if (!data) return;
+
+    tabs.forEach(t => {
+      t.classList.toggle('active', t.getAttribute('data-arch') === key);
+    });
+
+    fileName.textContent = data.file;
+    codeBox.innerHTML = data.code;
+    blueprintTitle.textContent = data.title;
+    blueprintDesc.textContent = data.desc;
+
+    statsContainer.innerHTML = '';
+    data.stats.forEach(s => {
+      const div = document.createElement('div');
+      div.className = 'blueprint-stat';
+      div.innerHTML = `<div class="val">${s.val}</div><div class="desc">${s.desc}</div>`;
+      statsContainer.appendChild(div);
     });
   }
 
-  // Quick command buttons
-  quickBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cmd = btn.getAttribute('data-cmd');
-      if (cmd) {
-        executeCommand(cmd);
-      }
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const archKey = tab.getAttribute('data-arch');
+      setArchitecture(archKey);
     });
   });
 
-  function escapeHtml(str) {
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  }
+  // Default
+  setArchitecture('kafka');
 }
 
 /* ==========================================================================
-   5. Project Filtering
+   4. Project Filtering
    ========================================================================== */
 function initProjectFilters() {
   const filterBtns = document.querySelectorAll('.filter-btn');
@@ -398,10 +260,6 @@ function initProjectFilters() {
         const categories = card.getAttribute('data-category') || '';
         if (filter === 'all' || categories.includes(filter)) {
           card.style.display = 'flex';
-          card.style.opacity = '0';
-          setTimeout(() => {
-            card.style.opacity = '1';
-          }, 50);
         } else {
           card.style.display = 'none';
         }
@@ -411,20 +269,19 @@ function initProjectFilters() {
 }
 
 /* ==========================================================================
-   6. Project Detailed Case Studies & Native Dialog Modal
+   5. Project Modal Details
    ========================================================================== */
-const projectData = {
+const projectDetails = {
   'porcupine': {
     title: 'Porcupine – Local-First AI Orchestrator',
     subtitle: 'Multi-agent ERP desktop application with secure offline RAG',
     date: 'February 2026',
-    category: 'AI & Distributed',
+    category: 'Local AI & Architecture',
     image: 'assets/project-porcupine.png',
     github: 'https://github.com/Abhitvg/porcupine',
-    demo: '#',
-    techStack: ['Electron', 'Node.js', 'Next.js', 'SQLite (Encrypted)', 'ONNX Runtime', 'Xenova/Transformers', 'Tailwind CSS'],
+    tech: ['Electron', 'Node.js', 'Next.js', 'SQLite (SQLCipher)', 'ONNX Runtime', 'Xenova Transformers', 'Tailwind CSS'],
     overview: 'Porcupine is an enterprise-grade desktop orchestrator designed for offline-first AI workflows, strict privacy governance, and multi-agent ERP management. It eliminates reliance on public cloud APIs for sensitive corporate data retrieval.',
-    architecturalHighlights: [
+    highlights: [
       'Engineered an Electron-based multi-agent supervisor system with automatic LLM provider failover and an autonomous AI critique loop for output verification.',
       'Constructed a 100% local vector retrieval pipeline leveraging ONNX Runtime and Xenova browser/node transformers, delivering sub-50ms local semantic embeddings.',
       'Architected an encrypted SQLite storage engine with SQLCipher for confidential CRM, financial ledgers, and automated publishing workflows.',
@@ -435,13 +292,12 @@ const projectData = {
     title: 'ATMA High-Throughput Distributed Microservices Hub',
     subtitle: 'Spring Boot 3, Kafka event queues, Solr search & Mongo optimization',
     date: 'Jul 2025 – Present',
-    category: 'Distributed & Cloud',
+    category: 'Distributed Systems & Cloud',
     image: 'assets/project-distributed.jpg',
     github: 'https://github.com/Abhitvg/ATMA-AI-Backend',
-    demo: '#',
-    techStack: ['Java 8/17', 'Spring Boot', 'Apache Kafka', 'Apache Solr', 'MongoDB', 'Oracle SQL', 'JUnit', 'Mockito'],
+    tech: ['Java 8/17+', 'Spring Boot', 'Apache Kafka', 'Apache Solr', 'MongoDB', 'Oracle SQL', 'JUnit', 'Mockito'],
     overview: 'Production backend architecture powering three platforms serving 10,000+ daily active users with 99.9% uptime. Designed for continuous zero-downtime microservice communication and high-load catalog search.',
-    architecturalHighlights: [
+    highlights: [
       'Engineered Kafka-based event streaming pipelines that replaced legacy hourly cron batches, providing immediate consistency for live inventory and promotion updates.',
       'Re-indexed MongoDB collections and designed compound covered indexes, slashing average read latency by 35%.',
       'Deployed Apache Solr with custom phonetic tokenizers and faceted filters across 50,000+ catalog items, driving a 20% increase in search conversion.',
@@ -453,13 +309,12 @@ const projectData = {
     title: 'CIET-NCERT Virasat – Cultural Heritage Explorer',
     subtitle: 'PAC Project 20.09: Survey of India SVG drill-down engine & 3D artifacts',
     date: 'Nov 2025 – Jun 2026',
-    category: 'Frontend & 3D',
+    category: 'Frontend Architecture & WebGL',
     image: 'assets/project-virasat.webp',
     github: 'https://github.com/Abhitvg/bharat-heritage',
-    demo: '#',
-    techStack: ['React.js', '@react-three/fiber', 'Three.js', 'TopoJSON', 'SVG Drill-Down Engine', 'Local JSON Pipeline'],
-    overview: 'A high-impact national heritage education platform developed for CIET-NCERT to enable millions of students across India to explore cultural artifacts and geographic landmarks with zero network latency.',
-    architecturalHighlights: [
+    tech: ['React.js', '@react-three/fiber', 'Three.js', 'TopoJSON', 'SVG Engine', 'Local JSON Pipeline'],
+    overview: 'A national heritage education platform developed for CIET-NCERT to enable millions of students across India to explore cultural artifacts and geographic landmarks with zero network latency.',
+    highlights: [
       'Engineered a 100% local JSON data pipeline, eliminating external network round-trips and making the platform resilient even in low-connectivity rural school labs.',
       'Architected a Survey of India-compliant SVG drill-down map engine featuring three-tier zoom logic (Country → State → District heritage nodes).',
       'Integrated @react-three/fiber and Three.js for interactive, photorealistic 3D artifact rendering directly in browser canvas with WebGL hardware acceleration.',
@@ -469,14 +324,13 @@ const projectData = {
   'media-bias': {
     title: 'Computational NLP Media Bias Detection Engine',
     subtitle: 'M.Tech Thesis at JNU: Social Network Analysis across 50,000+ articles',
-    date: '2024 – 2025',
-    category: 'AI & Data Science',
+    date: '2024 – 2025 (JNU Thesis)',
+    category: 'Computational NLP & Graph Science',
     image: 'assets/project-thesis.jpg',
     github: 'https://github.com/Abhitvg/Media-Bias-Analysis-in-Indian-News-Articles',
-    demo: '#',
-    techStack: ['Python', 'NLP', 'NetworkX', 'Graph Data Science', 'Topic Modeling', 'Pandas', 'BERT Embeddings'],
+    tech: ['Python', 'NLP Pipelines', 'NetworkX', 'Graph Data Science', 'Topic Modeling', 'Pandas', 'BERT Embeddings'],
     overview: 'Master of Technology research thesis exploring computational media bias and agenda-setting in major Indian news publications. Processed a massive corpus of 50,000+ news articles with automated NLP entity extraction.',
-    architecturalHighlights: [
+    highlights: [
       'Built a distributed NLP scraping and ingestion pipeline that normalized over 50,000 news articles from top national digital dailies.',
       'Constructed social co-occurrence networks using NetworkX, revealing hidden framing topologies, sentiment skew, and entity centrality metrics.',
       'Implemented unsupervised topic modeling (LDA & BERTopic) combined with transformer sentiment scoring to quantify political and socioeconomic framing.',
@@ -487,13 +341,12 @@ const projectData = {
     title: 'Embassy of Israel – Zubin Mehta Cultural Portal',
     subtitle: 'Interactive frontend portal commemorating Maestro Zubin Mehta',
     date: 'May 2026',
-    category: 'Frontend & Web',
+    category: 'Frontend & Cultural Tech',
     image: 'assets/project-zubin.jpg',
     github: 'https://github.com/Abhitvg/zubin-mehta-project',
-    demo: '#',
-    techStack: ['React.js', 'Modern CSS', 'State Management', 'Lazy Loading', 'Responsive Asset Pipelines'],
+    tech: ['React.js', 'Modern CSS', 'Asset Pipelines', 'Lazy Loading', 'Responsive Audio/Visual'],
     overview: 'An interactive cultural initiative portal developed for the Embassy of Israel honoring the legendary conductor Zubin Mehta, showcasing orchestral archives, interactive timeline, and visual retrospectives.',
-    architecturalHighlights: [
+    highlights: [
       'Architected modular React component hierarchy with fine-grained state management to orchestrate high-resolution visual storytelling.',
       'Implemented progressive image loading, WebP asset compression, and lazy-loading wrappers to ensure instant First Contentful Paint (FCP).',
       'Designed responsive, accessible audio/visual galleries with keyboard navigation support compliant with WCAG 2.1 AA standards.'
@@ -503,13 +356,12 @@ const projectData = {
     title: 'Uttarakhand Shashan Co-Operative / DoonSilk',
     subtitle: 'Real-time supply chain networking platform for artisan sericulture',
     date: 'Jan 2024',
-    category: 'Full Stack & Web',
+    category: 'Full Stack & Supply Chain',
     image: 'assets/project-doonsilk.jpg',
     github: 'https://github.com/Abhitvg/uk-coop-main',
-    demo: '#',
-    techStack: ['MERN Stack', 'Next.js', 'MongoDB', 'Express', 'Node.js', 'REST APIs'],
+    tech: ['MERN Stack', 'Next.js', 'MongoDB', 'Express', 'Node.js', 'REST APIs'],
     overview: 'A digital transformation platform built for state artisan cooperatives, streamlining the supply chain from raw cocoon harvesting to handloom distribution and direct consumer ordering.',
-    architecturalHighlights: [
+    highlights: [
       'Engineered normalized MongoDB NoSQL schemas for multi-tier product inventories, batch traceability, and artisan cooperative payouts.',
       'Developed RESTful endpoints with role-based JWT authorization for regional inspectors, warehouse managers, and retail distributors.',
       'Built reactive Next.js interfaces with real-time stock alert webhooks, cutting inventory reconciliation lag from days to seconds.'
@@ -519,13 +371,12 @@ const projectData = {
     title: 'Indian Eurasia Research Forum (IERF) Infrastructure',
     subtitle: 'Digital infrastructure for international geopolitics & research dissemination',
     date: 'Oct 2025 – Jul 2026',
-    category: 'Full Stack & Web',
+    category: 'Digital Infrastructure',
     image: 'assets/project-ierf.png',
     github: 'https://github.com/Abhitvg/india-eurasia-research-forum',
-    demo: '#',
-    techStack: ['Next.js', 'TypeScript', 'Cloud Hosting', 'SEO Optimization', 'CI/CD Pipelines'],
+    tech: ['Next.js', 'TypeScript', 'Cloud Hosting', 'SEO Optimization', 'CI/CD Pipelines'],
     overview: 'Led technical initiatives as Technical Lead (Part-time), architecting digital publication and repository infrastructure for global research scholars, diplomatic think tanks, and policy analysis.',
-    architecturalHighlights: [
+    highlights: [
       'Orchestrated multi-region Next.js deployment with automated incremental static regeneration (ISR) for fast international page loads.',
       'Implemented automated document indexing and metadata pipelines for peer-reviewed working papers and monographs.',
       'Established GitHub Actions CI/CD workflows for automated accessibility audits, link verification, and security scanning.'
@@ -535,15 +386,15 @@ const projectData = {
 
 function initProjectModal() {
   const modal = document.getElementById('projectModal');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const closeBtn = document.getElementById('modalCloseBtn');
   const projectCards = document.querySelectorAll('.project-card');
 
   if (!modal) return;
 
   projectCards.forEach(card => {
     card.addEventListener('click', () => {
-      const projectId = card.getAttribute('data-project');
-      const data = projectData[projectId];
+      const id = card.getAttribute('data-project');
+      const data = projectDetails[id];
       if (!data) return;
 
       document.getElementById('modalImg').src = data.image;
@@ -554,30 +405,25 @@ function initProjectModal() {
       document.getElementById('modalSubtitle').textContent = data.subtitle;
       document.getElementById('modalOverview').textContent = data.overview;
 
-      // Populate highlights
-      const highlightsContainer = document.getElementById('modalHighlights');
-      highlightsContainer.innerHTML = '';
-      data.architecturalHighlights.forEach(item => {
+      const highlights = document.getElementById('modalHighlights');
+      highlights.innerHTML = '';
+      data.highlights.forEach(h => {
         const li = document.createElement('li');
-        li.textContent = item;
-        highlightsContainer.appendChild(li);
+        li.textContent = h;
+        highlights.appendChild(li);
       });
 
-      // Populate tech stack
-      const techContainer = document.getElementById('modalTech');
-      techContainer.innerHTML = '';
-      data.techStack.forEach(t => {
+      const tech = document.getElementById('modalTech');
+      tech.innerHTML = '';
+      data.tech.forEach(t => {
         const span = document.createElement('span');
         span.className = 'tech-chip';
         span.textContent = t;
-        techContainer.appendChild(span);
+        tech.appendChild(span);
       });
 
-      // Links
-      const githubLink = document.getElementById('modalGithubLink');
-      if (githubLink) {
-        githubLink.href = data.github;
-      }
+      const ghLink = document.getElementById('modalGithubLink');
+      if (ghLink) ghLink.href = data.github;
 
       modal.showModal();
       document.body.style.overflow = 'hidden';
@@ -589,18 +435,13 @@ function initProjectModal() {
     document.body.style.overflow = '';
   }
 
-  if (modalCloseBtn) {
-    modalCloseBtn.addEventListener('click', closeModal);
-  }
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-  // Light dismiss: click outside modal backdrop
   modal.addEventListener('click', (e) => {
-    const dialogDimensions = modal.getBoundingClientRect();
+    const rect = modal.getBoundingClientRect();
     if (
-      e.clientX < dialogDimensions.left ||
-      e.clientX > dialogDimensions.right ||
-      e.clientY < dialogDimensions.top ||
-      e.clientY > dialogDimensions.bottom
+      e.clientX < rect.left || e.clientX > rect.right ||
+      e.clientY < rect.top || e.clientY > rect.bottom
     ) {
       closeModal();
     }
@@ -612,34 +453,28 @@ function initProjectModal() {
 }
 
 /* ==========================================================================
-   7. One-Click Copy Buttons & Toast Notifications
+   6. Copy Triggers & Toast Notifications
    ========================================================================== */
-function initCopyButtons() {
+function initCopyTriggers() {
   const copyBtns = document.querySelectorAll('.copy-btn');
 
   copyBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      const textToCopy = btn.getAttribute('data-copy');
-      if (!textToCopy) return;
+      const text = btn.getAttribute('data-copy');
+      if (!text) return;
 
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        const originalIcon = btn.innerHTML;
-        btn.innerHTML = '<i class="fa-solid fa-check" style="color: #10b981;"></i>';
-        showToast(`Copied to clipboard: ${textToCopy}`, 'success');
-
-        setTimeout(() => {
-          btn.innerHTML = originalIcon;
-        }, 2000);
-      }).catch(err => {
-        console.error('Copy failed', err);
-        showToast('Failed to copy to clipboard', 'error');
+      navigator.clipboard.writeText(text).then(() => {
+        const prev = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check" style="color: var(--accent-emerald);"></i>';
+        showToast(`Copied to clipboard: ${text}`);
+        setTimeout(() => { btn.innerHTML = prev; }, 1800);
       });
     });
   });
 }
 
-function showToast(message, type = 'info') {
+function showToast(msg) {
   let container = document.querySelector('.toast-container');
   if (!container) {
     container = document.createElement('div');
@@ -649,26 +484,18 @@ function showToast(message, type = 'info') {
 
   const toast = document.createElement('div');
   toast.className = 'toast';
-
-  let icon = 'fa-circle-info';
-  if (type === 'success') icon = 'fa-circle-check';
-  if (type === 'error') icon = 'fa-circle-exclamation';
-
-  toast.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
+  toast.innerHTML = `<i class="fa-solid fa-check" style="color: var(--accent-emerald); font-size: 0.85rem;"></i> <span>${msg}</span>`;
   container.appendChild(toast);
 
-  // Trigger animation
   setTimeout(() => toast.classList.add('show'), 20);
-
-  // Dismiss
   setTimeout(() => {
     toast.classList.remove('show');
-    setTimeout(() => toast.remove(), 300);
-  }, 3500);
+    setTimeout(() => toast.remove(), 250);
+  }, 2800);
 }
 
 /* ==========================================================================
-   8. Contact Form Interaction
+   7. Contact Form
    ========================================================================== */
 function initContactForm() {
   const form = document.getElementById('contactForm');
@@ -678,43 +505,37 @@ function initContactForm() {
     e.preventDefault();
     const name = document.getElementById('formName').value.trim();
     const email = document.getElementById('formEmail').value.trim();
-    const subject = document.getElementById('formSubject').value.trim();
+    const subject = document.getElementById('formSubject').value.trim() || `Portfolio Inquiry from ${name}`;
     const message = document.getElementById('formMessage').value.trim();
 
-    if (!name || !email || !message) {
-      showToast('Please fill in all required fields.', 'error');
-      return;
-    }
+    if (!name || !email || !message) return;
 
-    const mailtoSubject = encodeURIComponent(subject ? `Portfolio Inquiry: ${subject}` : `Inquiry from ${name}`);
-    const mailtoBody = encodeURIComponent(`Sender: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-    const mailtoUrl = `mailto:Abhisheksingh1thakur@gmail.com?subject=${mailtoSubject}&body=${mailtoBody}`;
-
-    window.location.href = mailtoUrl;
-    showToast('Opening your email client...', 'success');
+    const mailto = `mailto:Abhisheksingh1thakur@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
+    window.location.href = mailto;
+    showToast('Opening your email client...');
     form.reset();
   });
 }
 
 /* ==========================================================================
-   9. Live Clock for Local Time (IST / New Delhi)
+   8. Live IST Clock
    ========================================================================== */
 function initLiveClock() {
-  const clockElement = document.getElementById('liveClock');
-  if (!clockElement) return;
+  const clock = document.getElementById('liveClock');
+  if (!clock) return;
 
-  function update() {
-    const options = {
+  function tick() {
+    const now = new Date();
+    const str = new Intl.DateTimeFormat([], {
       timeZone: 'Asia/Kolkata',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
       hour12: true
-    };
-    const timeStr = new Intl.DateTimeFormat([], options).format(new Date());
-    clockElement.textContent = `${timeStr} (IST, New Delhi)`;
+    }).format(now);
+    clock.textContent = `${str} (IST, New Delhi)`;
   }
 
-  update();
-  setInterval(update, 1000);
+  tick();
+  setInterval(tick, 1000);
 }
