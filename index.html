@@ -12,7 +12,7 @@
   <!-- OpenGraph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Abhishek Singh | Software Development Engineer">
-  <meta property="og:description" content="Distributed systems, Kafka pipelines, and local-first software. Dual Degree from JNU New Delhi.">
+  <meta property="og:description" content="Distributed systems, Kafka pipelines, and live production platforms. Dual Degree from JNU New Delhi.">
   <meta property="og:image" content="assets/avatar.jpg">
   <meta property="og:url" content="https://abhitvg.github.io">
 
@@ -101,17 +101,17 @@
             </p>
 
             <div class="hero-actions">
-              <a href="#experience" class="btn btn-primary" id="heroExpBtn">
-                <span>View Track Record</span>
+              <a href="#projects" class="btn btn-primary" id="heroExpBtn">
+                <span>Explore Live Platforms</span>
                 <i class="fa-solid fa-arrow-down" style="font-size: 0.8rem;"></i>
               </a>
               <a href="assets/Abhishek_Singh_Resume.pdf" download="Abhishek_Singh_Resume.pdf" class="btn btn-secondary" id="heroDownloadBtn">
                 <i class="fa-solid fa-file-pdf"></i>
                 <span>Download Resume</span>
               </a>
-              <a href="#contact" class="btn btn-ghost" id="heroContactBtn">
-                <span>Let's talk</span>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+              <a href="https://github.com/Abhitvg" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" id="heroGithubBtn">
+                <i class="fa-brands fa-github"></i>
+                <span>github.com/Abhitvg</span>
               </a>
             </div>
 
@@ -318,6 +318,9 @@
                 <div class="exp-company">
                   <i class="fa-regular fa-building" style="color: var(--accent-light);"></i>
                   <span>ATMA Research & Consultancy</span>
+                  <a href="https://www.atma-ai.co.in/" target="_blank" rel="noopener noreferrer" class="live-site-pill" style="margin-left: 0.5rem;">
+                    <span class="live-dot"></span> atma-ai.co.in
+                  </a>
                 </div>
               </div>
               <div class="exp-meta">
@@ -368,6 +371,9 @@
                 <div class="exp-company">
                   <i class="fa-solid fa-landmark" style="color: var(--accent-light);"></i>
                   <span>CIET-NCERT Virasat – PAC Project 20.09</span>
+                  <a href="https://ncert-ruby.vercel.app/explore" target="_blank" rel="noopener noreferrer" class="live-site-pill" style="margin-left: 0.5rem;">
+                    <span class="live-dot"></span> Live Portal
+                  </a>
                 </div>
               </div>
               <div class="exp-meta">
@@ -409,6 +415,9 @@
                 <div class="exp-company">
                   <i class="fa-solid fa-earth-americas" style="color: var(--accent-light);"></i>
                   <span>Indian Eurasia Research Forum</span>
+                  <a href="https://www.indiaeurasia.org/" target="_blank" rel="noopener noreferrer" class="live-site-pill" style="margin-left: 0.5rem;">
+                    <span class="live-dot"></span> indiaeurasia.org
+                  </a>
                 </div>
               </div>
               <div class="exp-meta">
@@ -452,7 +461,7 @@
 
             <ul class="exp-bullets">
               <li>
-                <strong>End-to-End Delivery:</strong> Delivered four web applications spanning Spring Boot REST APIs, MongoDB/Cassandra schemas, Angular frontends, and production deployment.
+                <strong>End-to-End Delivery:</strong> Delivered web applications spanning Spring Boot REST APIs, MongoDB/Cassandra schemas, Angular frontends, and production deployment.
               </li>
               <li>
                 <strong>Fast Catalog Search:</strong> Configured Solr search across a 50,000-SKU catalog with custom tokenizers and sub-200ms query times.
@@ -479,15 +488,15 @@
     </section>
 
     <!-- ==========================================================================
-         Featured Engineering Projects
+         Featured Engineering Projects (With Verified Live Production URLs)
          ========================================================================== -->
     <section id="projects" style="border-top: 1px solid var(--border-subtle); background: var(--bg-surface);">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Portfolio</span>
-          <h2 class="section-title">Selected Projects</h2>
+          <span class="section-label">Live Systems</span>
+          <h2 class="section-title">Production Deployments & Projects</h2>
           <p class="section-desc">
-            Architectural case studies spanning distributed backends, local-first RAG desktop applications, and web platforms. Click any project card to review full engineering details.
+            Shipped systems currently serving users in production across distributed backends, cultural technology, state cooperatives, and e-commerce platforms. Click any card for the architecture breakdown or open the live site.
           </p>
         </div>
 
@@ -495,46 +504,16 @@
         <div class="project-filters">
           <button class="filter-btn active" data-filter="all">All</button>
           <button class="filter-btn" data-filter="distributed">Distributed Systems</button>
-          <button class="filter-btn" data-filter="ai">Local AI & NLP</button>
           <button class="filter-btn" data-filter="web">Full Stack</button>
+          <button class="filter-btn" data-filter="ai">AI & NLP</button>
           <button class="filter-btn" data-filter="frontend">Frontend & 3D</button>
         </div>
 
         <!-- Projects Grid -->
         <div class="projects-grid">
           
-          <!-- Project 1: Porcupine -->
-          <article class="project-card" data-category="ai distributed" data-project="porcupine">
-            <div class="project-img-box">
-              <img src="assets/project-porcupine.png" alt="Porcupine AI Orchestrator" loading="lazy">
-              <span class="project-category-badge">Local AI & Architecture</span>
-            </div>
-            <div class="project-body">
-              <span class="project-date">February 2026</span>
-              <h3 class="project-name">
-                <span>Porcupine – Local-First AI Orchestrator</span>
-                <i class="fa-solid fa-arrow-right project-arrow"></i>
-              </h3>
-              <p class="project-description">
-                Multi-agent ERP desktop application with secure offline RAG. Automated LLM provider failover, 
-                AI critique validation loop, and sub-50ms vector search using ONNX Runtime without external cloud leaks.
-              </p>
-              <div class="project-tags">
-                <span class="tech-chip">Electron</span>
-                <span class="tech-chip">ONNX Runtime</span>
-                <span class="tech-chip">Transformers</span>
-                <span class="tech-chip">SQLite</span>
-                <span class="tech-chip">Next.js</span>
-              </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 2: ATMA Distributed Backend -->
-          <article class="project-card" data-category="distributed" data-project="distributed-backend">
+          <!-- Project 1: ATMA AI -->
+          <article class="project-card" data-category="distributed" data-project="atma">
             <div class="project-img-box">
               <img src="assets/project-distributed.jpg" alt="ATMA Microservices Hub" loading="lazy">
               <span class="project-category-badge">Distributed Systems & Cloud</span>
@@ -542,7 +521,7 @@
             <div class="project-body">
               <span class="project-date">Jul 2025 – Present</span>
               <h3 class="project-name">
-                <span>Distributed Microservices Hub (ATMA)</span>
+                <span>ATMA AI – Distributed Microservices Hub</span>
                 <i class="fa-solid fa-arrow-right project-arrow"></i>
               </h3>
               <p class="project-description">
@@ -556,14 +535,19 @@
                 <span class="tech-chip">Apache Solr</span>
                 <span class="tech-chip">MongoDB</span>
               </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://www.atma-ai.co.in/" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3: NCERT Virasat -->
+          <!-- Project 2: NCERT Virasat -->
           <article class="project-card" data-category="frontend web" data-project="virasat">
             <div class="project-img-box">
               <img src="assets/project-virasat.webp" alt="CIET-NCERT Virasat Map Engine" loading="lazy">
@@ -586,14 +570,226 @@
                 <span class="tech-chip">TopoJSON</span>
                 <span class="tech-chip">SVG</span>
               </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://ncert-ruby.vercel.app/explore" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Portal
+                </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 4: M.Tech Thesis NLP Engine -->
+          <!-- Project 3: Embassy of Israel Zubin Mehta Portal -->
+          <article class="project-card" data-category="frontend web" data-project="zubin-mehta">
+            <div class="project-img-box">
+              <img src="assets/project-zubin.jpg" alt="Zubin Mehta Portal" loading="lazy">
+              <span class="project-category-badge">Frontend & Cultural Tech</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">May 2026</span>
+              <h3 class="project-name">
+                <span>Embassy of Israel – Zubin Mehta Portal</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Interactive frontend architecture honoring Maestro Zubin Mehta. Fine-grained component state, 
+                asset lazy loading, and responsive media galleries for an international cultural initiative.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">React.js</span>
+                <span class="tech-chip">Modern CSS</span>
+                <span class="tech-chip">Lazy Loading</span>
+                <span class="tech-chip">WebP</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://ipomehta-mural.com/" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4: Indian Eurasia Research Forum -->
+          <article class="project-card" data-category="web" data-project="ierf">
+            <div class="project-img-box">
+              <img src="assets/project-ierf.png" alt="IERF Platform" loading="lazy">
+              <span class="project-category-badge">Digital Infrastructure</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">Oct 2025 – Jul 2026</span>
+              <h3 class="project-name">
+                <span>IERF Digital Research Infrastructure</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Platform for international research dissemination. Next.js multi-region deployment, 
+                automated PDF document metadata pipelines, and structured SEO optimization.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">SEO</span>
+                <span class="tech-chip">CI/CD</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://www.indiaeurasia.org/" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5: DoonSilk -->
+          <article class="project-card" data-category="web distributed" data-project="doonsilk">
+            <div class="project-img-box">
+              <img src="assets/project-doonsilk.jpg" alt="DoonSilk Cooperative Platform" loading="lazy">
+              <span class="project-category-badge">Full Stack & Supply Chain</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">Jan 2024</span>
+              <h3 class="project-name">
+                <span>Uttarakhand Shashan Co-Operative / DoonSilk</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Real-time networking platform and distributed web architecture for artisan sericulture cooperatives. 
+                RESTful APIs and normalized NoSQL schemas for multi-tier inventory and supply-chain tracking.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">MERN Stack</span>
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">MongoDB</span>
+                <span class="tech-chip">REST APIs</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://doonsilk.com/" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6: Sheetal Electrotech -->
+          <article class="project-card" data-category="web frontend" data-project="sheetal">
+            <div class="project-img-box">
+              <img src="assets/project-sheetal.webp" alt="Sheetal Electrotech Portal" loading="lazy">
+              <span class="project-category-badge">Full Stack & 3D Web</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">Oct 2026</span>
+              <h3 class="project-name">
+                <span>Sheetal Electrotech – Enterprise Portal</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Corporate web portal and interactive digital showroom featuring 3D electrical product models (Three.js/Draco), 
+                international multi-language support (i18n), and dynamic technical catalog routing.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Three.js</span>
+                <span class="tech-chip">Draco</span>
+                <span class="tech-chip">i18n</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://sheetal-electrotech-pvt-ltd.vercel.app/en" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 7: Fashion Look -->
+          <article class="project-card" data-category="web" data-project="fashion-look">
+            <div class="project-img-box">
+              <img src="assets/project-fashion.png" alt="Fashion Look Luxury Tailoring" loading="lazy">
+              <span class="project-category-badge">Full Stack & E-Commerce</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">Sep 2026</span>
+              <h3 class="project-name">
+                <span>Fashion Look – Bespoke Luxury Platform</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Multilingual bespoke tailoring and apparel platform featuring interactive fabric selection, 
+                real-time measurement appointment bookings, and cloud messaging notifications.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Next.js</span>
+                <span class="tech-chip">Firebase</span>
+                <span class="tech-chip">Firestore</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Tailwind</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://www.fashion-look.in/en" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link">
+                  <span class="live-dot"></span> Live Site
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 8: Porcupine -->
+          <article class="project-card" data-category="ai distributed" data-project="porcupine">
+            <div class="project-img-box">
+              <img src="assets/project-porcupine.png" alt="Porcupine AI Orchestrator" loading="lazy">
+              <span class="project-category-badge">Local AI & Architecture</span>
+            </div>
+            <div class="project-body">
+              <span class="project-date">February 2026</span>
+              <h3 class="project-name">
+                <span>Porcupine – Local-First AI Orchestrator</span>
+                <i class="fa-solid fa-arrow-right project-arrow"></i>
+              </h3>
+              <p class="project-description">
+                Multi-agent ERP desktop application with secure offline RAG. Automated LLM provider failover, 
+                AI critique validation loop, and sub-50ms vector search using ONNX Runtime without external cloud leaks.
+              </p>
+              <div class="project-tags">
+                <span class="tech-chip">Electron</span>
+                <span class="tech-chip">ONNX Runtime</span>
+                <span class="tech-chip">Transformers</span>
+                <span class="tech-chip">SQLite</span>
+                <span class="tech-chip">Next.js</span>
+              </div>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://github.com/Abhitvg/porcupine" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link" style="color: var(--text-main); border-color: var(--border-medium); background: var(--bg-surface-elevated);">
+                  <i class="fa-brands fa-github"></i> Source
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 9: M.Tech Thesis NLP Engine -->
           <article class="project-card" data-category="ai" data-project="media-bias">
             <div class="project-img-box">
               <img src="assets/project-thesis.jpg" alt="M.Tech Thesis NLP Media Bias Analysis" loading="lazy">
@@ -616,96 +812,14 @@
                 <span class="tech-chip">BERT</span>
                 <span class="tech-chip">Pandas</span>
               </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 5: Embassy of Israel Zubin Mehta Portal -->
-          <article class="project-card" data-category="frontend web" data-project="zubin-mehta">
-            <div class="project-img-box">
-              <img src="assets/project-zubin.jpg" alt="Zubin Mehta Portal" loading="lazy">
-              <span class="project-category-badge">Frontend & Cultural Tech</span>
-            </div>
-            <div class="project-body">
-              <span class="project-date">May 2026</span>
-              <h3 class="project-name">
-                <span>Embassy of Israel – Zubin Mehta Portal</span>
-                <i class="fa-solid fa-arrow-right project-arrow"></i>
-              </h3>
-              <p class="project-description">
-                Interactive frontend architecture honoring Maestro Zubin Mehta. Fine-grained component state, 
-                asset lazy loading, and responsive media galleries for an international cultural initiative.
-              </p>
-              <div class="project-tags">
-                <span class="tech-chip">React.js</span>
-                <span class="tech-chip">Modern CSS</span>
-                <span class="tech-chip">Lazy Loading</span>
-                <span class="tech-chip">WebP</span>
-              </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 6: DoonSilk -->
-          <article class="project-card" data-category="web distributed" data-project="doonsilk">
-            <div class="project-img-box">
-              <img src="assets/project-doonsilk.jpg" alt="DoonSilk Cooperative Platform" loading="lazy">
-              <span class="project-category-badge">Full Stack & Supply Chain</span>
-            </div>
-            <div class="project-body">
-              <span class="project-date">Jan 2024</span>
-              <h3 class="project-name">
-                <span>Uttarakhand Shashan Co-Operative / DoonSilk</span>
-                <i class="fa-solid fa-arrow-right project-arrow"></i>
-              </h3>
-              <p class="project-description">
-                Real-time networking platform and distributed web architecture for artisan sericulture cooperatives. 
-                RESTful APIs and normalized NoSQL schemas for multi-tier inventory and supply-chain tracking.
-              </p>
-              <div class="project-tags">
-                <span class="tech-chip">MERN Stack</span>
-                <span class="tech-chip">Next.js</span>
-                <span class="tech-chip">MongoDB</span>
-                <span class="tech-chip">REST APIs</span>
-              </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-              </div>
-            </div>
-          </article>
-
-          <!-- Project 7: IERF -->
-          <article class="project-card" data-category="web" data-project="ierf">
-            <div class="project-img-box">
-              <img src="assets/project-ierf.png" alt="IERF Platform" loading="lazy">
-              <span class="project-category-badge">Digital Infrastructure</span>
-            </div>
-            <div class="project-body">
-              <span class="project-date">Oct 2025 – Jul 2026</span>
-              <h3 class="project-name">
-                <span>IERF Digital Research Infrastructure</span>
-                <i class="fa-solid fa-arrow-right project-arrow"></i>
-              </h3>
-              <p class="project-description">
-                Platform for international research dissemination. Next.js multi-region deployment, 
-                automated PDF document metadata pipelines, and structured SEO optimization.
-              </p>
-              <div class="project-tags">
-                <span class="tech-chip">Next.js</span>
-                <span class="tech-chip">TypeScript</span>
-                <span class="tech-chip">SEO</span>
-                <span class="tech-chip">CI/CD</span>
-              </div>
-              <div class="project-footer-link">
-                <span>Architecture Case Study</span>
-                <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+              <div class="project-card-actions">
+                <div class="project-footer-link">
+                  <span>Architecture</span>
+                  <i class="fa-solid fa-layer-group" style="font-size: 0.75rem;"></i>
+                </div>
+                <a href="https://github.com/Abhitvg/Media-Bias-Analysis-in-Indian-News-Articles" target="_blank" rel="noopener noreferrer" class="live-site-pill external-card-link" style="color: var(--text-main); border-color: var(--border-medium); background: var(--bg-surface-elevated);">
+                  <i class="fa-brands fa-github"></i> Thesis Repo
+                </a>
               </div>
             </div>
           </article>
@@ -1073,7 +1187,11 @@
         </div>
       </div>
 
-      <div class="modal-actions-bar">
+      <div class="modal-actions-bar" style="gap: 0.75rem;">
+        <a id="modalLiveLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>Open Live Site</span>
+        </a>
         <a id="modalGithubLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
           <i class="fa-brands fa-github"></i>
           <span>View on GitHub</span>
