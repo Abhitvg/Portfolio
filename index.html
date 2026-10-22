@@ -9,12 +9,20 @@
   <meta name="keywords" content="Abhishek Singh, abhitvg, Software Development Engineer, Java, Spring Boot, Distributed Systems, Kafka, Solr, MongoDB, JNU, New Delhi">
   <meta name="author" content="Abhishek Singh">
 
+  <link rel="canonical" href="https://abhishek-jade.vercel.app">
+
   <!-- OpenGraph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Abhishek Singh | Software Development Engineer">
   <meta property="og:description" content="Distributed systems, Kafka pipelines, and live production platforms. Dual Degree from JNU New Delhi.">
   <meta property="og:image" content="assets/avatar.jpg">
-  <meta property="og:url" content="https://abhitvg.github.io">
+  <meta property="og:url" content="https://abhishek-jade.vercel.app">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Abhishek Singh | Software Development Engineer">
+  <meta name="twitter:description" content="Distributed systems, Kafka pipelines, and live production platforms. Dual Degree from JNU New Delhi.">
+  <meta name="twitter:image" content="assets/avatar.jpg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2309090b'/><text x='50%' y='63%' font-size='48' font-family='sans-serif' font-weight='800' fill='%23f4f4f5' text-anchor='middle'>AS</text></svg>">
@@ -85,7 +93,7 @@
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#experience" class="nav-link">Experience</a></li>
           <li><a href="#architecture" class="nav-link">Architecture</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#projects" class="nav-link">Projects <span class="nav-pill-count">12</span></a></li>
           <li><a href="#skills" class="nav-link">Skills</a></li>
           <li><a href="#education" class="nav-link">Education</a></li>
           <li><a href="#credentials" class="nav-link">Credentials</a></li>
@@ -1512,11 +1520,17 @@
         <div class="modal-slide-caption-bar" id="modalSlideCaptionBar">
           <span class="modal-slide-counter-badge" id="modalSlideCounterBadge"><i class="fa-solid fa-camera"></i> 1 / 4</span>
           <span class="modal-slide-title" id="modalSlideTitle">Hero Showcase</span>
+          <button class="modal-tour-btn" id="modalTourBtn" title="Play automatic feature tour (Space)">
+            <i class="fa-solid fa-play"></i> <span>Tour</span>
+          </button>
         </div>
         <div class="modal-slide-dots" id="modalSlideDots">
           <!-- Populated dynamically -->
         </div>
         <div class="modal-actions-top">
+          <button class="modal-icon-btn" id="modalExpandBtn" aria-label="View Fullscreen" title="View Fullscreen (F)">
+            <i class="fa-solid fa-expand"></i>
+          </button>
           <button class="modal-icon-btn" id="modalShareBtn" aria-label="Copy direct link" title="Copy project direct link">
             <i class="fa-solid fa-link"></i>
           </button>
@@ -1568,6 +1582,32 @@
           <i class="fa-brands fa-github"></i>
           <span>View on GitHub</span>
         </a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- High-Resolution Fullscreen Lightbox Modal -->
+  <dialog id="lightboxModal" class="lightbox-dialog" aria-label="Full-resolution image preview">
+    <div class="lightbox-wrap">
+      <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close fullscreen view" title="Close (Esc)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="lightbox-img-container">
+        <img id="lightboxImg" src="" alt="Fullscreen preview">
+      </div>
+      <div class="lightbox-footer">
+        <div class="lightbox-caption">
+          <span id="lightboxBadge" class="lightbox-badge">1 / 4</span>
+          <span id="lightboxTitle" class="lightbox-title">Slide Title</span>
+        </div>
+        <div class="lightbox-nav-buttons">
+          <button class="lightbox-nav-btn prev" id="lightboxPrevBtn" aria-label="Previous image" title="Previous (←)">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="lightbox-nav-btn next" id="lightboxNextBtn" aria-label="Next image" title="Next (→)">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
   </dialog>
