@@ -82,25 +82,47 @@ function initNavigation() {
     });
   }
 
-  window.addEventListener('scroll', () => {
-    let current = '';
-    const scrollY = window.pageYOffset;
-
-    sections.forEach(section => {
-      const top = section.offsetTop - 120;
-      const height = section.offsetHeight;
-      if (scrollY >= top && scrollY < top + height) {
-        current = section.getAttribute('id');
-      }
+  // Modern IntersectionObserver for active nav links without scroll layout-thrashing
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, {
+      rootMargin: '-20% 0px -65% 0px',
+      threshold: 0
     });
 
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === `#${current}`) {
-        link.classList.add('active');
+    sections.forEach(section => observer.observe(section));
+  } else {
+    // Fallback throttled scroll listener for legacy environments
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          let current = '';
+          const scrollY = window.pageYOffset;
+          sections.forEach(section => {
+            const top = section.offsetTop - 120;
+            const height = section.offsetHeight;
+            if (scrollY >= top && scrollY < top + height) {
+              current = section.getAttribute('id');
+            }
+          });
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${current}`);
+          });
+          ticking = false;
+        });
+        ticking = true;
       }
-    });
-  });
+    }, { passive: true });
+  }
 }
 
 /* ==========================================================================
@@ -960,6 +982,9 @@ function initProjectModal() {
         closeLightbox();
       }
     });
+    lightbox.addEventListener('cancel', () => {
+      // Lightbox native dismiss
+    });
   }
 
   if (lightboxPrevBtn) {
@@ -1547,6 +1572,10 @@ function initCommandPalette() {
     if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
       closePalette();
     }
+  });
+
+  dialog.addEventListener('cancel', () => {
+    document.body.style.overflow = '';
   });
 }
 
