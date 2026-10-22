@@ -1716,6 +1716,17 @@ function initEngineerTerminal() {
     });
   }
 
+  // Scroll-triggered visibility for floating launcher (hides on hero fold to prevent portrait collision)
+  function updateFloatVisibility() {
+    if (window.scrollY > 380) {
+      floatBtn?.classList.add('visible');
+    } else {
+      floatBtn?.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', updateFloatVisibility, { passive: true });
+  updateFloatVisibility();
+
   // Global hotkey '~' (tilde / backquote) to toggle terminal
   document.addEventListener('keydown', (e) => {
     if (e.key === '`' || e.key === '~') {
