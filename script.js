@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initCardSpotlight();
   initAnimatedCounters();
   initProjectDeepLinking();
+  initRecruiterModal();
+  initEngineerTerminal();
 });
 
 /* ==========================================================================
@@ -1410,7 +1412,10 @@ function initCommandPalette() {
     { type: 'nav', title: 'Get In Touch', icon: 'fa-regular fa-envelope', action: () => scrollToSection('#contact'), badge: 'Section' },
 
     // Actions
+    { type: 'action', title: 'Open Recruiter Fast-Track (60s Summary)', icon: 'fa-solid fa-bolt', action: () => { window.openRecruiterModal?.(); }, badge: 'Executive' },
+    { type: 'action', title: 'Launch Engineer Terminal Simulator (~)', icon: 'fa-solid fa-terminal', action: () => { window.openTerminalModal?.(); }, badge: 'CLI' },
     { type: 'action', title: 'Download Resume (PDF)', icon: 'fa-solid fa-file-pdf', action: () => { window.open('assets/Abhishek_Singh_Resume.pdf', '_blank'); }, badge: 'Download' },
+    { type: 'action', title: 'Instant Chat on WhatsApp', icon: 'fa-brands fa-whatsapp', action: () => { window.open('https://wa.me/918850970898?text=Hi%20Abhishek,%20reviewed%20your%20portfolio.', '_blank'); }, badge: 'Connect' },
     { type: 'action', title: 'Copy Email Address', icon: 'fa-regular fa-copy', action: () => { navigator.clipboard.writeText('Abhisheksingh1thakur@gmail.com'); showToast('Copied email to clipboard!'); }, badge: 'Action' },
     { type: 'action', title: 'View Embassy of Israel Letter', icon: 'fa-solid fa-award', action: () => window.openDocPreview('assets/Letter_of_Recommendation_Embassy_of_Israel.pdf', 'Embassy of Israel Recommendation', 'Signed by Avital Barak, Cultural Attaché'), badge: 'PDF' },
     { type: 'action', title: 'View NCERT Project 20.09 Dossier', icon: 'fa-solid fa-file-contract', action: () => window.openDocPreview('assets/Bharat_Heritage_Project_Dossier.pdf', 'NCERT Bharat Heritage Dossier', 'Technical Compliance Build'), badge: 'PDF' },
@@ -1616,6 +1621,357 @@ function initCardSpotlight() {
       card.style.setProperty('--mouse-x', `${x}px`);
       card.style.setProperty('--mouse-y', `${y}px`);
     });
+  });
+}
+
+/* ==========================================================================
+   12. Recruiter Fast-Track (60s Executive Summary Modal)
+   ========================================================================== */
+function initRecruiterModal() {
+  const dialog = document.getElementById('recruiterModal');
+  const triggerBtn = document.getElementById('recruiterFastTrackBtn');
+  const closeBtn = document.getElementById('recruiterCloseBtn');
+
+  if (!dialog) return;
+
+  window.openRecruiterModal = function() {
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+  };
+
+  function closeRecruiterModal() {
+    dialog.close();
+    document.body.style.overflow = '';
+  }
+
+  if (triggerBtn) {
+    triggerBtn.addEventListener('click', window.openRecruiterModal);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeRecruiterModal);
+  }
+
+  dialog.addEventListener('click', (e) => {
+    const rect = dialog.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+      closeRecruiterModal();
+    }
+  });
+
+  dialog.addEventListener('cancel', () => {
+    document.body.style.overflow = '';
+  });
+}
+
+/* ==========================================================================
+   13. Engineer Cockpit CLI Terminal Simulator (abhitvg@engine:~$)
+   ========================================================================== */
+function initEngineerTerminal() {
+  const dialog = document.getElementById('terminalModal');
+  const floatBtn = document.getElementById('floatingTerminalBtn');
+  const heroBtn = document.getElementById('heroTerminalBtn');
+  const closeBtn = document.getElementById('termCloseBtn');
+  const escBtn = document.getElementById('termEscBtn');
+  const minBtn = document.getElementById('termMinBtn');
+  const maxBtn = document.getElementById('termMaxBtn');
+  const form = document.getElementById('terminalForm');
+  const input = document.getElementById('terminalInput');
+  const body = document.getElementById('terminalBody');
+  const chips = document.querySelectorAll('.term-chip');
+
+  if (!dialog || !input || !body) return;
+
+  const commandHistory = [];
+  let historyIndex = -1;
+
+  window.openTerminalModal = function() {
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      input.focus();
+      scrollTerminal();
+    }, 50);
+  };
+
+  function closeTerminalModal() {
+    dialog.close();
+    document.body.style.overflow = '';
+  }
+
+  if (floatBtn) floatBtn.addEventListener('click', window.openTerminalModal);
+  if (heroBtn) heroBtn.addEventListener('click', window.openTerminalModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeTerminalModal);
+  if (escBtn) escBtn.addEventListener('click', closeTerminalModal);
+  if (minBtn) minBtn.addEventListener('click', closeTerminalModal);
+
+  let isMax = false;
+  if (maxBtn) {
+    maxBtn.addEventListener('click', () => {
+      isMax = !isMax;
+      dialog.style.maxWidth = isMax ? '98vw' : 'min(880px, 94vw)';
+      const wrap = dialog.querySelector('.terminal-wrap');
+      if (wrap) wrap.style.maxHeight = isMax ? '94vh' : '84vh';
+      if (body) body.style.maxHeight = isMax ? 'calc(94vh - 120px)' : '440px';
+    });
+  }
+
+  // Global hotkey '~' (tilde / backquote) to toggle terminal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '`' || e.key === '~') {
+      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      if (activeTag !== 'input' && activeTag !== 'textarea') {
+        e.preventDefault();
+        if (dialog.open) {
+          closeTerminalModal();
+        } else {
+          window.openTerminalModal();
+        }
+      }
+    }
+  });
+
+  dialog.addEventListener('click', (e) => {
+    const rect = dialog.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+      closeTerminalModal();
+    }
+  });
+
+  dialog.addEventListener('cancel', () => {
+    document.body.style.overflow = '';
+  });
+
+  function scrollTerminal() {
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function appendOutput(cmd, outputHtml) {
+    const line = document.createElement('div');
+    line.className = 'term-line';
+    line.innerHTML = `
+      <div><span class="term-prompt">abhitvg@engine:~$</span><span class="term-cmd">${escapeHtml(cmd)}</span></div>
+      <div class="term-output">${outputHtml}</div>
+    `;
+    body.appendChild(line);
+    scrollTerminal();
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  const commandsMap = {
+    'help': () => `
+<span class="term-success">Available Engine Commands:</span>
+  <span class="term-cmd-highlight">cat profile.json</span>        Print candidate background &amp; engineering spec
+  <span class="term-cmd-highlight">systemctl status arch</span>   Inspect ATMA microservices daemon &amp; cluster state
+  <span class="term-cmd-highlight">kafka-topics --describe</span> Examine Kafka cluster partitions, ISR &amp; consumer lag
+  <span class="term-cmd-highlight">run benchmarks</span>          Simulate 50,000 events/sec pipeline stress test
+  <span class="term-cmd-highlight">curl /skills</span>            Fetch verified technical competency matrix
+  <span class="term-cmd-highlight">sudo hire abhisheksingh</span>  Execute hiring handshake sequence [Easter Egg]
+  <span class="term-cmd-highlight">whoami</span>                  Display identity descriptor
+  <span class="term-cmd-highlight">uptime</span>                  Production SLA &amp; service runtime telemetry
+  <span class="term-cmd-highlight">projects</span>                List all 12 production platforms
+  <span class="term-cmd-highlight">contact</span>                 Instant clipboard phone &amp; email credentials
+  <span class="term-cmd-highlight">clear</span>                   Wipe terminal viewport
+    `,
+
+    'whoami': () => `
+abhitvg (Abhishek Singh) — Software Development Engineer
+Dual Degree (B.Tech + M.Tech CSE), Jawaharlal Nehru University (JNU)
+Specialization: Java 17+, Distributed Microservices, Kafka &amp; High-Throughput DB Tuning
+    `,
+
+    'uptime': () => `
+01:15:00 up 420 days, 14:32,  1 user,  load average: 0.12, 0.08, 0.05
+Production SLA Availability: <span class="term-success">99.9% Uptime</span>
+Timezone: Asia/Kolkata (IST UTC+05:30) | Latency: 18ms
+    `,
+
+    'cat profile.json': () => `
+{
+  <span class="term-cyan">"candidate"</span>: <span class="term-success">"Abhishek Singh"</span>,
+  <span class="term-cyan">"handle"</span>: <span class="term-success">"abhitvg"</span>,
+  <span class="term-cyan">"role"</span>: <span class="term-success">"Software Development Engineer"</span>,
+  <span class="term-cyan">"education"</span>: {
+    <span class="term-cyan">"degree"</span>: <span class="term-success">"Dual Degree (B.Tech + M.Tech CSE)"</span>,
+    <span class="term-cyan">"institution"</span>: <span class="term-success">"Jawaharlal Nehru University (JNU), New Delhi"</span>,
+    <span class="term-cyan">"honors"</span>: [<span class="term-success">"GATE CS/IT Qualified"</span>, <span class="term-success">"JEE Mains AIR 6126"</span>]
+  },
+  <span class="term-cyan">"production_impact"</span>: {
+    <span class="term-cyan">"organization"</span>: <span class="term-success">"ATMA Research &amp; Consultancy"</span>,
+    <span class="term-cyan">"daily_active_users"</span>: <span class="term-warn">"10,000+"</span>,
+    <span class="term-cyan">"read_latency_cut"</span>: <span class="term-success">"-35%"</span>,
+    <span class="term-cyan">"query_optimization"</span>: <span class="term-success">"-40%"</span>,
+    <span class="term-cyan">"availability"</span>: <span class="term-success">"99.9%"</span>
+  },
+  <span class="term-cyan">"location"</span>: <span class="term-success">"New Delhi, India (Open to Remote / Hybrid / Relocation)"</span>
+}
+    `,
+
+    'systemctl status arch': () => `
+<span class="term-success">●</span> atma-backend.service - ATMA Production Core Microservice Engine
+     Loaded: loaded (/etc/systemd/system/atma.service; enabled; vendor preset: enabled)
+     Active: <span class="term-success">active (running)</span> since Sun 2025-08-10 04:12:00 UTC; 420d 14h ago
+   Main PID: 1042 (java -jar atma-core.jar)
+      Tasks: 48 (limit: 4915)
+     Memory: 1.4G (pool limit: 4.0G max)
+     CGroup: /system.slice/atma-backend.service
+             ├─ 1042 /usr/bin/java -Xms2g -Xmx4g -XX:+UseG1GC -jar atma-core.jar
+             └─ 1105 /usr/bin/solr -c -p 8983 -z zk1:2181,zk2:2181,zk3:2181 (50,000 docs)
+
+Oct 23 01:15:01 engine atma-core[1042]: [INFO] Kafka consumer group 'inventory-sync' rebalance complete (lag: 0).
+Oct 23 01:15:02 engine atma-core[1042]: [INFO] Health check: Solr collection 'catalog_v2' status green, QTime: 4ms.
+Oct 23 01:15:03 engine atma-core[1042]: [INFO] Active DB pool: 12 idle, 4 active, max 32. Uptime: 99.9% verified.
+    `,
+
+    'kafka-topics --describe': () => `
+Topic: <span class="term-cyan">atma.inventory.events</span>	TopicId: k9B3xL-7R_G9	PartitionCount: 12	ReplicationFactor: 3	Configs: min.insync.replicas=2
+	Topic: atma.inventory.events	Partition: 0	Leader: 101	Replicas: 101,102,103	Isr: 101,102,103	<span class="term-success">Lag: 0</span>
+	Topic: atma.inventory.events	Partition: 1	Leader: 102	Replicas: 102,103,101	Isr: 102,103,101	<span class="term-success">Lag: 0</span>
+	Topic: atma.inventory.events	Partition: 2	Leader: 103	Replicas: 103,101,102	Isr: 103,101,102	<span class="term-success">Lag: 0</span>
+	[... 9 additional partitions omitted for brevity ...]
+
+<span class="term-success">Metrics:</span> Throughput: <span class="term-warn">14,200 msg/sec</span> | P99 Latency: <span class="term-success">1.8ms</span> | Producer ACK: <span class="term-cyan">all</span> | Status: <span class="term-success">HEALTHY</span>
+    `,
+
+    'run benchmarks': () => `
+<span class="term-warn">[INIT]</span> Initializing 50,000 Event Batch Simulation...
+[==================================================] 100% (50,000 / 50,000 events)
+<span class="term-success">[PASS]</span> Benchmark completed in <span class="term-cyan">3.120 seconds</span>.
+  • Throughput Rate:     <span class="term-warn">16,025 events/sec</span>
+  • P50 / P95 / P99:     <span class="term-success">0.9ms / 1.6ms / 2.3ms</span>
+  • DB Query Plan:       <span class="term-success">Index Scan (Compound B-Tree) [84ms vs 1420ms baseline]</span>
+  • Consumer Lag:        <span class="term-success">0 ms (Zero Backpressure)</span>
+  • Memory Overhead:     <span class="term-cyan">Low (G1GC young-gen pause: 7.8ms)</span>
+    `,
+
+    'curl /skills': () => `
+HTTP/2 200 OK
+content-type: application/json; charset=utf-8
+
+{
+  <span class="term-cyan">"backend"</span>: [<span class="term-success">"Java 8/17/21"</span>, <span class="term-success">"Spring Boot 3"</span>, <span class="term-success">"Spring Cloud"</span>, <span class="term-success">"Microservices"</span>, <span class="term-success">"REST APIs"</span>],
+  <span class="term-cyan">"event_streaming"</span>: [<span class="term-success">"Apache Kafka"</span>, <span class="term-success">"Kafka Streams"</span>, <span class="term-success">"Pub/Sub"</span>],
+  <span class="term-cyan">"databases_search"</span>: [<span class="term-success">"MongoDB"</span>, <span class="term-success">"PostgreSQL"</span>, <span class="term-success">"Oracle DB"</span>, <span class="term-success">"Apache Solr"</span>, <span class="term-success">"ChromaDB"</span>],
+  <span class="term-cyan">"devops_cloud"</span>: [<span class="term-success">"Docker"</span>, <span class="term-success">"Kubernetes"</span>, <span class="term-success">"Linux/Bash"</span>, <span class="term-success">"Git"</span>, <span class="term-success">"CI/CD Pipelines"</span>],
+  <span class="term-cyan">"frontend_web"</span>: [<span class="term-success">"React.js"</span>, <span class="term-success">"Next.js 14/15"</span>, <span class="term-success">"TypeScript"</span>, <span class="term-success">"Three.js"</span>, <span class="term-success">"Tailwind"</span>]
+}
+    `,
+
+    'projects': () => `
+<span class="term-cyan">The 12 Featured Engineering Platforms:</span>
+ 1. atma          - Distributed Microservices &amp; Kafka Hub (Java 17, Spring Boot, Kafka, Solr)
+ 2. virasat       - NCERT Cultural Heritage Portal (React, Three.js, WebGL, GeoJSON)
+ 3. zubin-mehta   - Cultural Exhibition Portal (Embassy of Israel Commission)
+ 4. ierf          - Indian Eurasia Research Forum (Next.js 14, TypeScript, ISR)
+ 5. doonsilk      - Co-Operative Silk Supply Chain (MERN Stack)
+ 6. sheetal       - 3D Industrial Equipment Portal (Three.js, Draco, WebGL)
+ 7. fashion-look  - Luxury Bespoke Tailoring Platform (Next.js, Firebase)
+ 8. porcupine     - Local-First AI Knowledge Engine (Python 3.11, ChromaDB, RAG)
+ 9. media-bias    - Computational NLP Bias Detection Engine (JNU M.Tech Thesis)
+ 10. docflow      - Real-Time Collaborative Workspace (Next.js 15, Liveblocks)
+ 11. quorum       - AI Video &amp; Meeting Intelligence (WebRTC, Whisper, Fastify)
+ 12. balancebite  - Nutrition Intelligence Tracker (Android, Firebase, Cloud Functions)
+    `,
+
+    'contact': () => `
+<span class="term-success">Direct Contact Channels:</span>
+  • Email:    <a href="mailto:Abhisheksingh1thakur@gmail.com" style="color: var(--accent-light);">Abhisheksingh1thakur@gmail.com</a>
+  • Phone:    <a href="tel:+918850970898" style="color: var(--accent-light);">+91-8850970898</a>
+  • WhatsApp: <a href="https://wa.me/918850970898" target="_blank" style="color: #25d366;">wa.me/918850970898</a>
+  • GitHub:   <a href="https://github.com/Abhitvg" target="_blank" style="color: #ffffff;">github.com/Abhitvg</a>
+  • LinkedIn: <a href="https://www.linkedin.com/in/abhisheksingh22141" target="_blank" style="color: #0077b5;">linkedin.com/in/abhisheksingh22141</a>
+    `,
+
+    'sudo hire abhisheksingh': () => `
+[sudo] password for recruiter: ********************
+<span class="term-success">ACCESS GRANTED: Excellent strategic decision!</span>
+
+Initiating candidate onboarding handshake:
+  • Candidate:     Abhishek Singh (Dual Degree B.Tech + M.Tech, JNU)
+  • Role Track:    Software Development Engineer (SDE-2 / Senior Backend)
+  • Primary Stack: Java 17+, Spring Boot, Kafka, Distributed Architecture
+  • Notice Period: <span class="term-success">Immediate / Flexible</span>
+
+<span class="term-cyan">Triggering resume download and connecting recruiter direct channel...</span>
+    `,
+
+    'clear': () => {
+      body.innerHTML = '';
+      return '';
+    }
+  };
+
+  function executeCommand(rawCmd) {
+    const trimmed = rawCmd.trim();
+    if (!trimmed) return;
+
+    commandHistory.push(trimmed);
+    historyIndex = commandHistory.length;
+
+    const lower = trimmed.toLowerCase();
+
+    if (lower === 'clear') {
+      commandsMap['clear']();
+      return;
+    }
+
+    if (lower === 'sudo hire abhisheksingh' || lower === 'sudo hire') {
+      const output = commandsMap['sudo hire abhisheksingh']();
+      appendOutput(trimmed, output);
+      setTimeout(() => {
+        window.open('assets/Abhishek_Singh_Resume.pdf', '_blank');
+        showToast('Initiating handshake! Official resume opened.');
+      }, 700);
+      return;
+    }
+
+    if (commandsMap[lower]) {
+      const output = commandsMap[lower]();
+      appendOutput(trimmed, output);
+    } else {
+      appendOutput(trimmed, `<span style="color: #f87171;">bash: ${escapeHtml(trimmed)}: command not found</span>. Type <span class="term-cmd-highlight">'help'</span> for available commands.`);
+    }
+  }
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = input.value;
+      input.value = '';
+      executeCommand(val);
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const cmd = chip.getAttribute('data-cmd');
+      if (cmd) {
+        input.value = '';
+        executeCommand(cmd);
+      }
+    });
+  });
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length > 0 && historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        input.value = '';
+      }
+    }
   });
 }
 

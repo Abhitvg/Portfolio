@@ -102,6 +102,12 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="recruiter-fast-track-btn" id="recruiterFastTrackBtn" aria-label="Open Recruiter Fast-Track (60s Summary)">
+          <i class="fa-solid fa-bolt" style="color: var(--accent-amber); font-size: 0.75rem;"></i>
+          <span class="recruiter-btn-text">Recruiter Fast-Track</span>
+          <span class="recruiter-pill">60s</span>
+        </button>
+
         <button class="cmd-k-trigger" id="cmdKTrigger" aria-label="Open Command Palette (Cmd + K)">
           <i class="fa-solid fa-terminal" style="font-size: 0.75rem;"></i>
           <span class="cmd-k-label">Search</span>
@@ -176,6 +182,10 @@
                 <i class="fa-brands fa-github"></i>
                 <span>github.com/Abhitvg</span>
               </a>
+              <button class="btn btn-ghost hero-terminal-btn" id="heroTerminalBtn" title="Launch Interactive Engineer Terminal (~)">
+                <i class="fa-solid fa-terminal" style="font-size: 0.8rem; color: var(--accent-light);"></i>
+                <span>abhitvg@engine:~$</span>
+              </button>
             </div>
 
             <!-- Engineering Metrics with Scroll-Triggered Counters -->
@@ -1291,6 +1301,103 @@
           </p>
         </div>
 
+        <!-- Verified Institutional Endorsements Showcase -->
+        <div class="endorsements-showcase">
+          <div class="endorsements-header">
+            <div class="endorsements-label">
+              <i class="fa-solid fa-shield-halved" style="color: var(--accent-emerald);"></i>
+              <span>Verified Institutional Endorsements</span>
+            </div>
+            <p class="endorsements-sub">Official commendations and project sign-offs from diplomatic missions and governmental institutions.</p>
+          </div>
+
+          <div class="endorsements-grid">
+            <!-- Card 1: Embassy of Israel -->
+            <div class="endorsement-card">
+              <div class="endorsement-top">
+                <div class="endorsement-entity">
+                  <div class="entity-seal-badge embassy-seal">
+                    <i class="fa-solid fa-landmark-dome"></i>
+                  </div>
+                  <div>
+                    <h4 class="entity-name">Embassy of Israel, New Delhi</h4>
+                    <span class="entity-role">Diplomatic Mission • Cultural Division</span>
+                  </div>
+                </div>
+                <span class="verified-doc-pill"><i class="fa-solid fa-circle-check"></i> Official Letter</span>
+              </div>
+              <p class="endorsement-quote">
+                “Abhishek demonstrated exceptional technical proficiency and dedication in developing the <strong>Zubin Mehta Cultural Exhibition Portal</strong>. His expertise in interactive 3D WebGL workflows and performant responsive architecture brought our cultural initiative to international audiences seamlessly.”
+              </p>
+              <div class="endorsement-author-row">
+                <div class="author-details">
+                  <div class="author-name">Avital Barak</div>
+                  <div class="author-title">Cultural Attaché, Embassy of Israel</div>
+                </div>
+                <button class="btn btn-secondary btn-xs preview-doc-btn" data-doc-title="Embassy of Israel — Official Recommendation Letter" data-doc-meta="Diplomatic Commendation by Cultural Attaché" data-doc-src="assets/Letter_of_Recommendation_Embassy_of_Israel.pdf">
+                  <i class="fa-regular fa-file-pdf"></i> <span>View Letter</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 2: NCERT - CIET -->
+            <div class="endorsement-card">
+              <div class="endorsement-top">
+                <div class="endorsement-entity">
+                  <div class="entity-seal-badge ncert-seal">
+                    <i class="fa-solid fa-building-columns"></i>
+                  </div>
+                  <div>
+                    <h4 class="entity-name">CIET — NCERT, Government of India</h4>
+                    <span class="entity-role">National Council of Educational Research &amp; Training</span>
+                  </div>
+                </div>
+                <span class="verified-doc-pill"><i class="fa-solid fa-circle-check"></i> PAC 20.09 Sign-Off</span>
+              </div>
+              <p class="endorsement-quote">
+                “Engineered the <strong>Bharat Heritage Virasat Portal</strong> to stringent national educational digital guidelines. Delivered an interactive GeoJSON cultural map and accessible multimedia repository capable of handling large-scale curriculum distribution.”
+              </p>
+              <div class="endorsement-author-row">
+                <div class="author-details">
+                  <div class="author-name">Division of Educational Technology</div>
+                  <div class="author-title">CIET-NCERT PAC Project 20.09</div>
+                </div>
+                <button class="btn btn-secondary btn-xs preview-doc-btn" data-doc-title="NCERT Bharat Heritage Portal Technical Dossier" data-doc-meta="National Project PAC 20.09 Official Build Dossier" data-doc-src="assets/Bharat_Heritage_Project_Dossier.pdf">
+                  <i class="fa-regular fa-file-pdf"></i> <span>View Dossier</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Card 3: ATMA Research & Consultancy -->
+            <div class="endorsement-card">
+              <div class="endorsement-top">
+                <div class="endorsement-entity">
+                  <div class="entity-seal-badge atma-seal">
+                    <i class="fa-solid fa-network-wired"></i>
+                  </div>
+                  <div>
+                    <h4 class="entity-name">ATMA Research &amp; Consultancy</h4>
+                    <span class="entity-role">Enterprise Distributed Engineering</span>
+                  </div>
+                </div>
+                <span class="verified-doc-pill"><i class="fa-solid fa-circle-check"></i> Production Core</span>
+              </div>
+              <p class="endorsement-quote">
+                “Orchestrated our core backend services with <strong>Java 17, Spring Boot, and Apache Kafka</strong>. Cut database read latency by 35% and scaled our Solr catalog to 50K+ records with 99.9% uptime across 10,000+ daily active users.”
+              </p>
+              <div class="endorsement-author-row">
+                <div class="author-details">
+                  <div class="author-name">Engineering Leadership</div>
+                  <div class="author-title">ATMA Research &amp; Consultancy</div>
+                </div>
+                <a href="#experience" class="btn btn-secondary btn-xs">
+                  <i class="fa-solid fa-arrow-right"></i> <span>Experience</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="resume-banner">
           <div class="resume-summary">
             <h3>Official Engineering & Academic Portfolio</h3>
@@ -1435,6 +1542,20 @@
                 </button>
               </div>
 
+              <!-- WhatsApp Direct -->
+              <div class="contact-row contact-row-highlight">
+                <div class="contact-row-left">
+                  <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.25rem;"></i>
+                  <div>
+                    <div class="contact-type" style="color: #25d366; font-weight: 600;">Instant WhatsApp Chat</div>
+                    <span class="contact-value">+91-8850970898</span>
+                  </div>
+                </div>
+                <a href="https://wa.me/918850970898?text=Hi%20Abhishek,%20I%20reviewed%20your%20engineering%20portfolio%20and%20would%20like%20to%20connect%20regarding%20an%20opportunity." target="_blank" rel="noopener noreferrer" class="btn btn-success btn-xs" aria-label="Chat on WhatsApp">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> <span>Chat</span>
+                </a>
+              </div>
+
               <!-- Location -->
               <div class="contact-row">
                 <div class="contact-row-left">
@@ -1481,11 +1602,32 @@
               <textarea id="formMessage" class="form-input" placeholder="Tell me about your team or project..." required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;" id="formSubmitBtn">
-              <span>Send Message</span>
-              <i class="fa-regular fa-paper-plane" style="font-size: 0.85rem;"></i>
-            </button>
+            <div class="contact-form-actions">
+              <button type="submit" class="btn btn-primary" id="formSubmitBtn">
+                <span>Send Message</span>
+                <i class="fa-regular fa-paper-plane" style="font-size: 0.85rem;"></i>
+              </button>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=Abhisheksingh1thakur@gmail.com&su=SDE%20Engineering%20Discussion" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" id="formGmailBtn" title="Compose directly in Gmail Web">
+                <i class="fa-solid fa-envelope-open-text" style="color: #ea4335;"></i>
+                <span>Gmail Web</span>
+              </a>
+            </div>
           </form>
+        </div>
+
+        <!-- Live Engineering Telemetry Status Strip -->
+        <div class="system-status-bar">
+          <div class="status-indicator">
+            <span class="status-pulse-dot"></span>
+            <span class="status-text">Production Infrastructure Operational</span>
+          </div>
+          <div class="status-telemetry">
+            <span><strong>Production SLA:</strong> 99.9% Uptime</span>
+            <span class="status-divider">•</span>
+            <span><strong>Timezone:</strong> IST (UTC+05:30)</span>
+            <span class="status-divider">•</span>
+            <span><strong>Availability:</strong> Immediate / SDE-2 &amp; Senior Backend</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1654,6 +1796,168 @@
       </div>
       <div class="doc-preview-body" id="docPreviewBody">
         <iframe id="docPreviewIframe" src="" title="Document Preview" class="doc-preview-iframe"></iframe>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Floating Engineer Terminal Pill Launcher -->
+  <button class="floating-terminal-btn" id="floatingTerminalBtn" aria-label="Open Interactive Engineer Terminal (~)" title="Open Engineer Terminal (~)">
+    <i class="fa-solid fa-terminal"></i>
+    <span class="floating-term-label">abhitvg@engine:~$</span>
+    <span class="floating-term-hint">~</span>
+  </button>
+
+  <!-- Interactive Engineer Cockpit Terminal Modal -->
+  <dialog id="terminalModal" class="terminal-dialog" aria-label="Interactive Engineer Cockpit">
+    <div class="terminal-wrap">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <button class="term-dot term-dot-close" id="termCloseBtn" aria-label="Close terminal" title="Close (Esc)"></button>
+          <button class="term-dot term-dot-min" id="termMinBtn" aria-label="Minimize terminal"></button>
+          <button class="term-dot term-dot-max" id="termMaxBtn" aria-label="Maximize terminal"></button>
+        </div>
+        <div class="terminal-title">
+          <i class="fa-solid fa-terminal" style="font-size: 0.72rem; color: var(--accent-light);"></i>
+          <span>abhitvg@engine:~$ — bash 5.2.15 (x86_64-apple-darwin23)</span>
+        </div>
+        <button class="terminal-esc-hint" id="termEscBtn"><kbd>ESC</kbd></button>
+      </div>
+
+      <!-- Quick Command Chips Toolbar -->
+      <div class="terminal-chips-bar">
+        <span class="term-chips-label"><i class="fa-solid fa-bolt" style="color: var(--accent-amber); font-size: 0.7rem;"></i> Run:</span>
+        <button class="term-chip" data-cmd="cat profile.json">profile.json</button>
+        <button class="term-chip" data-cmd="systemctl status arch">systemctl status arch</button>
+        <button class="term-chip" data-cmd="kafka-topics --describe">kafka-topics</button>
+        <button class="term-chip" data-cmd="run benchmarks">run benchmarks</button>
+        <button class="term-chip" data-cmd="curl /skills">curl /skills</button>
+        <button class="term-chip" data-cmd="sudo hire abhisheksingh">sudo hire</button>
+        <button class="term-chip" data-cmd="help">help</button>
+        <button class="term-chip" data-cmd="clear">clear</button>
+      </div>
+
+      <!-- Terminal Output Screen -->
+      <div class="terminal-body" id="terminalBody">
+        <div class="term-line term-banner">
+          <span class="term-banner-title">ABHISHEK SINGH — SDE ENGINE COCKPIT [v2.4.0-release]</span><br>
+          <span class="term-muted">Dual Degree (B.Tech + M.Tech CSE) • JNU New Delhi | SDE at ATMA Research</span><br>
+          <span class="term-muted">Type <span class="term-cmd-highlight">'help'</span> for command listing or click any chip above.</span>
+        </div>
+      </div>
+
+      <!-- Command Prompt Input Bar -->
+      <form class="terminal-input-bar" id="terminalForm">
+        <span class="term-prompt">abhitvg@engine:~$</span>
+        <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" spellcheck="false" placeholder="type command (e.g. cat profile.json, help)...">
+        <button type="submit" class="term-run-btn" id="termRunBtn" aria-label="Run command">
+          <i class="fa-solid fa-arrow-turn-down fa-rotate-90"></i>
+        </button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Recruiter Fast-Track (60s Summary) Executive Modal -->
+  <dialog id="recruiterModal" class="recruiter-dialog" aria-label="Recruiter Fast-Track Executive Summary">
+    <div class="recruiter-modal-wrap">
+      <div class="recruiter-header">
+        <div class="recruiter-header-left">
+          <div class="recruiter-badge">
+            <i class="fa-solid fa-bolt" style="color: var(--accent-amber);"></i>
+            <span>Executive Candidate Dossier • 60-Second TL;DR</span>
+          </div>
+          <h3 class="recruiter-title">Abhishek Singh</h3>
+          <p class="recruiter-subtitle">Software Development Engineer — Java 17+, Distributed Systems, Kafka &amp; Full Stack</p>
+        </div>
+        <button class="modal-close-btn" id="recruiterCloseBtn" aria-label="Close Recruiter Overview">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="recruiter-body">
+        <!-- Top Fast Facts Grid -->
+        <div class="recruiter-facts-grid">
+          <div class="fact-card">
+            <span class="fact-label">Target Roles</span>
+            <span class="fact-val">SDE-2 / Senior Backend / Distributed Systems</span>
+          </div>
+          <div class="fact-card">
+            <span class="fact-label">Education</span>
+            <span class="fact-val">Dual Degree (B.Tech + M.Tech CSE), JNU New Delhi</span>
+          </div>
+          <div class="fact-card">
+            <span class="fact-label">Notice Period</span>
+            <span class="fact-val highlight-emerald">Immediate / Flexible (0 Days)</span>
+          </div>
+          <div class="fact-card">
+            <span class="fact-label">Location</span>
+            <span class="fact-val">New Delhi (Open to Remote / Hybrid / Relocation)</span>
+          </div>
+        </div>
+
+        <!-- 4 Key Quantified Production Metrics -->
+        <div class="recruiter-metrics-grid">
+          <div class="recruiter-metric-box">
+            <span class="rm-num">10K+</span>
+            <span class="rm-desc">Daily Active Users on Production Core</span>
+          </div>
+          <div class="recruiter-metric-box">
+            <span class="rm-num">99.9%</span>
+            <span class="rm-desc">Production SLA Uptime Recorded</span>
+          </div>
+          <div class="recruiter-metric-box">
+            <span class="rm-num">-35%</span>
+            <span class="rm-desc">Database Read Latency Reduction</span>
+          </div>
+          <div class="recruiter-metric-box">
+            <span class="rm-num">-40%</span>
+            <span class="rm-desc">SQL &amp; Solr Query Execution Time Cut</span>
+          </div>
+        </div>
+
+        <!-- Core Tech Stack -->
+        <div class="recruiter-section-box">
+          <div class="rs-title"><i class="fa-solid fa-code"></i> Core Competencies &amp; Primary Stack</div>
+          <div class="recruiter-pills-wrap">
+            <span class="recruiter-pill primary">Java 17+</span>
+            <span class="recruiter-pill primary">Spring Boot 3</span>
+            <span class="recruiter-pill primary">Apache Kafka</span>
+            <span class="recruiter-pill primary">Distributed Systems</span>
+            <span class="recruiter-pill primary">Kubernetes &amp; Docker</span>
+            <span class="recruiter-pill">Apache Solr</span>
+            <span class="recruiter-pill">MongoDB &amp; PostgreSQL</span>
+            <span class="recruiter-pill">React &amp; Next.js</span>
+            <span class="recruiter-pill">Three.js &amp; WebGL</span>
+            <span class="recruiter-pill">Natural Language Processing</span>
+          </div>
+        </div>
+
+        <!-- Verified Accolades & Research -->
+        <div class="recruiter-section-box">
+          <div class="rs-title"><i class="fa-solid fa-certificate"></i> Verified Accolades &amp; Leadership</div>
+          <ul class="recruiter-checklist">
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Dual Degree (B.Tech + M.Tech CSE):</strong> Jawaharlal Nehru University (JNU), New Delhi.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Official Diplomatic Recommendation:</strong> Commended by Embassy of Israel Cultural Attaché for Zubin Mehta Portal.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>National Cultural Heritage Portal:</strong> CIET-NCERT PAC 20.09 project delivery sign-off.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Competitive Qualifications:</strong> GATE CS/IT Qualified, JEE Mains AIR 6126 (Top 0.5%).</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Institutional Governance:</strong> Joint Secretary, JNU Alumni Association (JAA) &amp; JNUSU Councillor.</li>
+          </ul>
+        </div>
+
+        <!-- Direct Action Buttons -->
+        <div class="recruiter-actions-footer">
+          <a href="assets/Abhishek_Singh_Resume.pdf" download="Abhishek_Singh_Resume.pdf" class="btn btn-primary">
+            <i class="fa-solid fa-download"></i> <span>Download Official Resume (PDF)</span>
+          </a>
+          <a href="https://wa.me/918850970898?text=Hi%20Abhishek,%20reviewed%20your%20fast-track%20dossier%20and%20would%20like%20to%20schedule%20a%20discussion." target="_blank" rel="noopener noreferrer" class="btn btn-success">
+            <i class="fa-brands fa-whatsapp"></i> <span>Instant WhatsApp Chat</span>
+          </a>
+          <a href="mailto:Abhisheksingh1thakur@gmail.com?subject=SDE%20Role%20Inquiry%20%E2%80%94%20Recruiter%20Fast-Track" class="btn btn-secondary">
+            <i class="fa-regular fa-envelope"></i> <span>Send Email</span>
+          </a>
+          <button class="btn btn-ghost copy-btn" data-copy="Abhisheksingh1thakur@gmail.com">
+            <i class="fa-regular fa-copy"></i> <span>Copy Email</span>
+          </button>
+        </div>
       </div>
     </div>
   </dialog>
