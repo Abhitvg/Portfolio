@@ -111,6 +111,9 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   color-scheme: dark light;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
@@ -119,6 +122,8 @@ body {
   color: var(--text-main);
   line-height: 1.65;
   overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   background-image: 
     radial-gradient(circle, var(--dot-grid) 1px, transparent 1px);
@@ -134,11 +139,13 @@ body {
   left: 50%;
   transform: translateX(-50%);
   width: 900px;
+  max-width: 100vw;
   height: 450px;
   background: radial-gradient(circle, rgba(99, 102, 241, 0.09) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 70%);
   filter: blur(90px);
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
 
 /* Typography */
@@ -332,6 +339,10 @@ section {
 .nav-link:hover,
 .nav-link.active {
   color: var(--text-main);
+}
+
+.mobile-drawer-actions {
+  display: none;
 }
 
 .nav-actions {
@@ -635,6 +646,7 @@ section {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
+  max-width: 100%;
 }
 
 .playground-nav {
@@ -645,11 +657,20 @@ section {
   background: var(--bg-surface-elevated);
   padding: 0 1rem;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  max-width: 100%;
+  width: 100%;
+}
+
+.playground-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .playground-tabs {
   display: flex;
   gap: 0.25rem;
+  min-width: max-content;
 }
 
 .playground-tab {
@@ -684,6 +705,7 @@ section {
   grid-template-columns: 1.15fr 0.85fr;
   gap: 2rem;
   align-items: center;
+  min-width: 0;
 }
 
 .code-editor-box {
@@ -694,6 +716,8 @@ section {
   font-family: var(--font-mono);
   font-size: 0.84rem;
   box-shadow: var(--shadow-sm);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .code-editor-header {
@@ -2617,6 +2641,20 @@ dialog#projectModal::backdrop {
     transform: translateY(0);
   }
 
+  .mobile-drawer-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .mobile-drawer-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .nav-link {
     display: block;
     padding: 0.75rem 1rem;
@@ -2663,43 +2701,97 @@ dialog#projectModal::backdrop {
 /* 2. Tablets & Mobile Landscape (<= 768px) */
 @media (max-width: 768px) {
   section {
-    padding: 3.75rem 0;
+    padding: 3.5rem 0;
   }
 
   .section-header {
-    margin-bottom: 2.25rem;
+    margin-bottom: 2rem;
   }
 
   .section-title {
-    font-size: clamp(1.65rem, 6.2vw, 2.1rem);
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
   }
 
   .section-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  /* Header & Navigation */
+  .nav-brand {
+    margin-right: 0.5rem;
+  }
+
+  .nav-brand-title {
     font-size: 0.95rem;
-    line-height: 1.65;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-actions {
+    gap: 0.45rem;
+  }
+
+  #navResumeBtn {
+    display: none !important;
+  }
+
+  .recruiter-btn-text,
+  .cmd-k-label,
+  .cmd-k-kbd {
+    display: none !important;
+  }
+
+  .cmd-k-trigger {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .theme-toggle-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-toggle {
+    width: 36px;
+    height: 36px;
   }
 
   /* Hero Section */
   .hero {
-    padding-top: 2.5rem;
-    padding-bottom: 3rem;
+    padding-top: 2rem;
+    padding-bottom: 2.75rem;
   }
 
   .hero-headline {
-    font-size: clamp(1.85rem, 6.5vw, 2.45rem);
+    font-size: clamp(1.8rem, 6.5vw, 2.35rem);
     line-height: 1.2;
-    margin-bottom: 1rem;
+    margin-bottom: 0.9rem;
   }
 
   .hero-bio {
-    font-size: 0.98rem;
-    line-height: 1.68;
-    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.35rem;
+    max-width: 100%;
+  }
+
+  .hero-tech-stack {
+    margin-bottom: 1.4rem !important;
+  }
+
+  .tech-chip {
+    font-size: 0.78rem;
+    padding: 0.28rem 0.6rem;
   }
 
   .hero-actions {
-    gap: 0.65rem;
-    margin-bottom: 2rem;
+    gap: 0.6rem;
+    margin-bottom: 1.75rem;
   }
 
   .hero-portrait-card {
@@ -2708,19 +2800,28 @@ dialog#projectModal::backdrop {
 
   .metrics-strip {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding-top: 1.5rem;
+    gap: 0.85rem;
+    padding-top: 1.25rem;
   }
 
   .metric-val {
-    font-size: 1.5rem;
+    font-size: 1.45rem;
   }
 
   .metric-label {
-    font-size: 0.76rem;
+    font-size: 0.75rem;
   }
 
   /* Interactive Architecture & Code Playground */
+  .playground-nav {
+    padding: 0 0.75rem;
+  }
+
+  .playground-tab {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
   .playground-content {
     padding: 1rem;
     gap: 1.25rem;
@@ -2757,14 +2858,14 @@ dialog#projectModal::backdrop {
   /* Projects Section */
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .project-controls-bar {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.85rem;
-    margin-bottom: 1rem;
+    gap: 0.75rem;
+    margin-bottom: 0.85rem;
   }
 
   .project-search-box {
@@ -2802,7 +2903,7 @@ dialog#projectModal::backdrop {
     scrollbar-width: none;
     flex-wrap: nowrap;
     margin-top: 0.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
     padding: 0.5rem 0.75rem;
   }
 
@@ -2822,7 +2923,7 @@ dialog#projectModal::backdrop {
 
   /* Experience Cards */
   .experience-card {
-    padding: 1.35rem 1.15rem;
+    padding: 1.25rem 1rem;
   }
 
   .exp-header {
@@ -2841,39 +2942,44 @@ dialog#projectModal::backdrop {
   }
 
   .exp-bullets li {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     padding-left: 1.15rem;
   }
 
   /* Skills Matrix */
   .skills-categories-grid {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.15rem;
   }
 
   .skills-group {
-    padding: 1.25rem;
+    padding: 1.15rem 1rem;
   }
 
-  /* Education & Verified Dossiers */
+  /* Education & Endorsements */
   .edu-box {
-    padding: 1.35rem 1.15rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .endorsements-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .endorsement-card {
-    padding: 1.5rem 1.15rem;
-    margin-top: 1.75rem;
+    padding: 1.25rem 1rem;
+    margin-top: 1rem;
   }
 
   .endorsement-quote {
-    font-size: 0.95rem;
-    line-height: 1.65;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .endorsement-footer {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.85rem;
   }
 
   .endorsement-footer .doc-download-pill {
@@ -2887,12 +2993,12 @@ dialog#projectModal::backdrop {
   }
 
   .doc-card {
-    padding: 1.1rem;
+    padding: 1rem;
   }
 
   /* Contact Section */
   .contact-form {
-    padding: 1.35rem 1.15rem;
+    padding: 1.25rem 1rem;
   }
 
   .contact-row {
@@ -2901,16 +3007,41 @@ dialog#projectModal::backdrop {
 
   .contact-value {
     font-size: 0.85rem;
+    word-break: break-all;
   }
 
   .social-links {
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.55rem;
   }
 
   .social-link-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .contact-form-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-form-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* System Status Bar */
+  .system-status-bar {
+    padding: 0.85rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .status-telemetry {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.75rem;
   }
 
   /* Native Modals & Dialogs */
@@ -2925,12 +3056,12 @@ dialog#projectModal::backdrop {
   }
 
   .modal-title {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .modal-subtitle {
-    font-size: 0.88rem;
-    margin-bottom: 1rem;
+    font-size: 0.86rem;
+    margin-bottom: 0.85rem;
   }
 
   .modal-slide-caption-bar {
@@ -3008,24 +3139,92 @@ dialog#projectModal::backdrop {
     display: none;
   }
 
-  .cmd-k-trigger .cmd-k-label {
+  /* Modals: Terminal & Recruiter */
+  .terminal-dialog,
+  .recruiter-dialog {
+    max-width: 95vw;
+    width: 95vw;
+    margin: auto;
+  }
+
+  .terminal-wrap {
+    max-height: 86vh;
+  }
+
+  .terminal-chips-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0.4rem 0.65rem;
+  }
+
+  .terminal-chips-bar::-webkit-scrollbar {
     display: none;
   }
 
-  .cmd-k-trigger .cmd-k-kbd {
-    display: none;
+  .terminal-body {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.76rem;
+    max-height: 320px;
+    min-height: 220px;
+  }
+
+  .recruiter-header {
+    padding: 1.1rem 1.15rem;
+  }
+
+  .recruiter-title {
+    font-size: 1.25rem;
+  }
+
+  .recruiter-body {
+    padding: 1.15rem;
+    gap: 1rem;
+  }
+
+  .recruiter-facts-grid,
+  .recruiter-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+
+  .fact-card {
+    padding: 0.65rem 0.8rem;
+  }
+
+  .recruiter-metric-box {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .rm-num {
+    font-size: 1.3rem;
+  }
+
+  .recruiter-actions-footer {
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .recruiter-actions-footer .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
 /* 3. Small Mobile Phones (<= 480px) */
 @media (max-width: 480px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
+  }
+
+  .nav-brand {
+    margin-right: 0.35rem;
+    gap: 0.45rem;
   }
 
   .nav-brand-title {
-    font-size: 0.95rem;
-    max-width: 135px;
+    font-size: 0.9rem;
+    max-width: 125px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -3036,26 +3235,63 @@ dialog#projectModal::backdrop {
     height: 28px;
   }
 
+  .nav-actions {
+    gap: 0.3rem;
+  }
+
+  #recruiterFastTrackBtn {
+    display: none !important;
+  }
+
   .cmd-k-trigger {
     width: 34px;
     height: 34px;
-    padding: 0;
-    justify-content: center;
+    font-size: 0.75rem;
   }
 
   .theme-toggle-btn {
     width: 34px;
     height: 34px;
+    font-size: 0.85rem;
+  }
+
+  .mobile-toggle {
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  /* Hero Section */
+  .hero-headline {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+    letter-spacing: -0.025em;
   }
 
   .hero-actions {
-    flex-direction: column;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
   }
 
-  .hero-actions .btn {
+  #heroExpBtn {
+    grid-column: span 2;
     width: 100%;
     justify-content: center;
+  }
+
+  #heroDownloadBtn,
+  #heroGithubBtn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.82rem;
+    padding: 0.5rem 0.65rem;
+  }
+
+  #heroTerminalBtn {
+    grid-column: span 2;
+    width: 100%;
+    justify-content: center;
+    font-size: 0.82rem;
   }
 
   .hero-portrait-card {
@@ -3069,11 +3305,11 @@ dialog#projectModal::backdrop {
 
   .metrics-strip {
     grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    gap: 0.65rem;
   }
 
   .metric-val {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
 
   .metric-label {
@@ -3099,6 +3335,41 @@ dialog#projectModal::backdrop {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
+  }
+
+  .recruiter-facts-grid,
+  .recruiter-metrics-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+}
+
+/* 4. Ultra-Small Devices (<= 360px) */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 0.65rem;
+  }
+
+  .nav-brand-title {
+    max-width: 105px;
+    font-size: 0.82rem;
+  }
+
+  .hero-headline {
+    font-size: 1.55rem;
+  }
+
+  .metric-val {
+    font-size: 1.15rem;
+  }
+
+  .metric-label {
+    font-size: 0.68rem;
+  }
+
+  .btn {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.6rem;
   }
 }
 
@@ -3508,7 +3779,7 @@ dialog#lightboxModal::backdrop {
 
 .endorsements-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 1.25rem;
 }
 

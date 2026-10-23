@@ -61,25 +61,57 @@ function initNavigation() {
   const sections = document.querySelectorAll('section[id]');
 
   if (mobileToggle && navMenu) {
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
+    const closeDrawer = () => {
+      navMenu.classList.remove('open');
+      document.body.style.overflow = '';
       const icon = mobileToggle.querySelector('i');
       if (icon) {
-        icon.classList.toggle('fa-bars');
-        icon.classList.toggle('fa-xmark');
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-xmark');
+      }
+    };
+
+    mobileToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMenu.classList.toggle('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('fa-bars', !isOpen);
+        icon.classList.toggle('fa-xmark', isOpen);
       }
     });
 
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        const icon = mobileToggle.querySelector('i');
-        if (icon) {
-          icon.classList.add('fa-bars');
-          icon.classList.remove('fa-xmark');
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Close when clicking outside drawer
+    document.addEventListener('click', (e) => {
+      if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+        closeDrawer();
+      }
+    });
+
+    // Mobile drawer action buttons
+    const mobileFastTrackBtn = document.getElementById('mobileFastTrackBtn');
+    if (mobileFastTrackBtn) {
+      mobileFastTrackBtn.addEventListener('click', () => {
+        closeDrawer();
+        const recruiterModal = document.getElementById('recruiterModal');
+        if (recruiterModal) {
+          recruiterModal.showModal();
+          document.body.style.overflow = 'hidden';
         }
       });
-    });
+    }
+
+    const mobileResumeBtn = document.getElementById('mobileResumeBtn');
+    if (mobileResumeBtn) {
+      mobileResumeBtn.addEventListener('click', () => {
+        closeDrawer();
+      });
+    }
   }
 
   // Modern IntersectionObserver for active nav links without scroll layout-thrashing
