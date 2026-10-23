@@ -64,6 +64,9 @@
       "PostgreSQL",
       "React.js",
       "Next.js",
+      "Node.js",
+      "Express",
+      "TypeScript",
       "Natural Language Processing"
     ],
     "url": "https://abhitvg.github.io",
@@ -74,7 +77,7 @@
   </script>
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.4.1">
 </head>
 <body>
 
@@ -549,45 +552,59 @@
             </div>
           </article>
 
-          <!-- Role 4: Freelance Full Stack -->
+          <!-- Role 4: Freelance Full Stack (React, Next.js & Node.js) -->
           <article class="experience-card">
             <div class="exp-header">
               <div>
-                <h3 class="exp-role-title">Full Stack Developer (Contract / Freelance)</h3>
+                <h3 class="exp-role-title">Full Stack Engineer – React, Next.js &amp; Node.js</h3>
                 <div class="exp-company">
                   <i class="fa-solid fa-code" style="color: var(--accent-light);"></i>
-                  <span>Independent Client Delivery</span>
+                  <span>Freelance &amp; Client Projects</span>
+                  <a href="#projects" class="live-site-pill" style="margin-left: 0.5rem;">
+                    <span class="live-dot"></span> 8+ Hosted Live Platforms
+                  </a>
                 </div>
               </div>
               <div class="exp-meta">
-                <span class="exp-tag">Mar 2022 – Jun 2025</span>
-                <span class="exp-location"><i class="fa-solid fa-globe"></i> India</span>
+                <span class="exp-tag">Mar 2022 – Present</span>
+                <span class="exp-location"><i class="fa-solid fa-globe"></i> India &amp; Remote</span>
               </div>
             </div>
 
             <ul class="exp-bullets">
               <li>
-                <strong>End-to-End Delivery:</strong> Delivered web applications spanning Spring Boot REST APIs, MongoDB/Cassandra schemas, Angular frontends, and production deployment.
+                <strong>React &amp; Next.js Commercial Delivery:</strong> Architected, developed, and deployed high-performance full-stack web applications and client portals using <strong>React.js</strong>, <strong>Next.js (App Router/SSR/ISR)</strong>, and <strong>TypeScript</strong>, powering platforms like <strong>Doon Silk</strong> (e-commerce supply chain), <strong>Sheetal Chilling</strong> (interactive 3D equipment catalog), and <strong>Fashion Look</strong>.
               </li>
               <li>
-                <strong>Fast Catalog Search:</strong> Configured Solr search across a 50,000-SKU catalog with custom tokenizers and sub-200ms query times.
+                <strong>Node.js &amp; Express Microservices:</strong> Built resilient, scalable backend REST APIs and event handlers using <strong>Node.js</strong> and <strong>Express</strong>, implementing secure JWT authentication, session handling, file processing pipelines, and transactional database schemas in <strong>MongoDB</strong> and <strong>PostgreSQL</strong>.
               </li>
               <li>
-                <strong>Decoupled Messaging:</strong> Integrated Kafka and ActiveMQ for reliable asynchronous order dispatch and notification processing.
+                <strong>Real-Time Systems &amp; WebSockets:</strong> Engineered low-latency real-time collaboration engines using <strong>Socket.io</strong> and <strong>WebRTC</strong> for live chat, multi-user document synchronization (DocFlow), and audio/video meeting intelligence (Quorum).
               </li>
               <li>
-                <strong>CI/CD & Containers:</strong> Built automated deployment workflows using Jenkins, GitHub Actions, <strong>Docker</strong>, and <strong>Kubernetes</strong> manifests, reducing post-release issues by <strong>45%</strong>.
+                <strong>Frontend Performance &amp; UI Architecture:</strong> Engineered accessible, modern component libraries and responsive user interfaces with <strong>Tailwind CSS</strong> and modular CSS, achieving <strong>95+ Lighthouse performance scores</strong> and sub-second Time to Interactive (TTI) across mobile and desktop devices.
+              </li>
+              <li>
+                <strong>Cloud Deployment &amp; CI/CD:</strong> Implemented automated deployment workflows with <strong>Docker</strong> containerization, GitHub Actions CI/CD pipelines, and edge deployments on <strong>Vercel</strong>, ensuring zero-downtime releases and automated environment staging.
               </li>
             </ul>
 
             <div class="exp-stack">
-              <span class="tech-chip">Spring Boot</span>
-              <span class="tech-chip">Cassandra</span>
-              <span class="tech-chip">ActiveMQ</span>
-              <span class="tech-chip">Kubernetes</span>
+              <span class="tech-chip">React.js</span>
+              <span class="tech-chip">Next.js 14/15</span>
+              <span class="tech-chip">Node.js</span>
+              <span class="tech-chip">Express.js</span>
+              <span class="tech-chip">TypeScript</span>
+              <span class="tech-chip">MongoDB</span>
+              <span class="tech-chip">PostgreSQL</span>
+              <span class="tech-chip">Socket.io</span>
+              <span class="tech-chip">Tailwind CSS</span>
               <span class="tech-chip">Docker</span>
-              <span class="tech-chip">Jenkins</span>
-              <span class="tech-chip">GitHub Actions</span>
+              <span class="tech-chip">Vercel &amp; CI/CD</span>
+              <a href="#projects" class="doc-download-pill" style="margin-left: auto;">
+                <i class="fa-solid fa-layer-group" style="color: var(--accent-light);"></i>
+                <span>View Hosted Projects</span>
+              </a>
             </div>
           </article>
         </div>
@@ -1837,6 +1854,7 @@
       <div class="terminal-chips-bar">
         <span class="term-chips-label"><i class="fa-solid fa-bolt" style="color: var(--accent-amber); font-size: 0.7rem;"></i> Run:</span>
         <button class="term-chip" data-cmd="cat profile.json">profile.json</button>
+        <button class="term-chip" data-cmd="experience">experience</button>
         <button class="term-chip" data-cmd="systemctl status arch">systemctl status arch</button>
         <button class="term-chip" data-cmd="kafka-topics --describe">kafka-topics</button>
         <button class="term-chip" data-cmd="run benchmarks">run benchmarks</button>
@@ -1931,11 +1949,13 @@
             <span class="recruiter-pill primary">Java 17+</span>
             <span class="recruiter-pill primary">Spring Boot 3</span>
             <span class="recruiter-pill primary">Apache Kafka</span>
-            <span class="recruiter-pill primary">Distributed Systems</span>
-            <span class="recruiter-pill primary">Kubernetes &amp; Docker</span>
+            <span class="recruiter-pill primary">React &amp; Next.js</span>
+            <span class="recruiter-pill primary">Node.js &amp; Express</span>
+            <span class="recruiter-pill">TypeScript</span>
+            <span class="recruiter-pill">Distributed Systems</span>
+            <span class="recruiter-pill">Kubernetes &amp; Docker</span>
             <span class="recruiter-pill">Apache Solr</span>
             <span class="recruiter-pill">MongoDB &amp; PostgreSQL</span>
-            <span class="recruiter-pill">React &amp; Next.js</span>
             <span class="recruiter-pill">Three.js &amp; WebGL</span>
             <span class="recruiter-pill">Natural Language Processing</span>
           </div>
@@ -1946,6 +1966,7 @@
           <div class="rs-title"><i class="fa-solid fa-certificate"></i> Verified Accolades &amp; Leadership</div>
           <ul class="recruiter-checklist">
             <li><i class="fa-solid fa-circle-check"></i> <strong>Dual Degree (B.Tech + M.Tech CSE):</strong> Jawaharlal Nehru University (JNU), New Delhi.</li>
+            <li><i class="fa-solid fa-circle-check"></i> <strong>Full-Stack Commercial Delivery:</strong> Architected &amp; deployed 8+ live client platforms in React, Next.js &amp; Node.js.</li>
             <li><i class="fa-solid fa-circle-check"></i> <strong>Official Diplomatic Recommendation:</strong> Commended by Embassy of Israel Cultural Attaché for Zubin Mehta Portal.</li>
             <li><i class="fa-solid fa-circle-check"></i> <strong>National Cultural Heritage Portal:</strong> CIET-NCERT PAC 20.09 project delivery sign-off.</li>
             <li><i class="fa-solid fa-circle-check"></i> <strong>Competitive Qualifications:</strong> GATE CS/IT Qualified, JEE Mains AIR 6126 (Top 0.5%).</li>
@@ -1973,6 +1994,6 @@
   </dialog>
 
   <!-- Core Script -->
-  <script src="script.js"></script>
+  <script src="script.js?v=2.4.1"></script>
 </body>
 </html>

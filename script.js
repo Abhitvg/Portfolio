@@ -1837,6 +1837,7 @@ function initEngineerTerminal() {
     'help': () => `
 <span class="term-success">Available Engine Commands:</span>
   <span class="term-cmd-highlight">cat profile.json</span>        Print candidate background &amp; engineering spec
+  <span class="term-cmd-highlight">experience</span>              Print production work history &amp; client platforms
   <span class="term-cmd-highlight">systemctl status arch</span>   Inspect ATMA microservices daemon &amp; cluster state
   <span class="term-cmd-highlight">kafka-topics --describe</span> Examine Kafka cluster partitions, ISR &amp; consumer lag
   <span class="term-cmd-highlight">run benchmarks</span>          Simulate 50,000 events/sec pipeline stress test
@@ -1852,7 +1853,7 @@ function initEngineerTerminal() {
     'whoami': () => `
 abhitvg (Abhishek Singh) — Software Development Engineer
 Dual Degree (B.Tech + M.Tech CSE), Jawaharlal Nehru University (JNU)
-Specialization: Java 17+, Distributed Microservices, Kafka &amp; High-Throughput DB Tuning
+Specialization: Java 17+, Distributed Microservices, Kafka &amp; Full-Stack (React, Next.js, Node.js)
     `,
 
     'uptime': () => `
@@ -1878,8 +1879,37 @@ Timezone: Asia/Kolkata (IST UTC+05:30) | Latency: 18ms
     <span class="term-cyan">"query_optimization"</span>: <span class="term-success">"-40%"</span>,
     <span class="term-cyan">"availability"</span>: <span class="term-success">"99.9%"</span>
   },
+  <span class="term-cyan">"fullstack_delivery"</span>: {
+    <span class="term-cyan">"stack"</span>: <span class="term-success">"React.js, Next.js 14/15, Node.js, Express, TypeScript"</span>,
+    <span class="term-cyan">"live_platforms_shipped"</span>: <span class="term-warn">"8+ Commercial Deployments"</span>,
+    <span class="term-cyan">"highlight_clients"</span>: [<span class="term-success">"Doon Silk (MERN)"</span>, <span class="term-success">"Sheetal Chilling (Next.js/Three.js)"</span>, <span class="term-success">"Embassy of Israel"</span>, <span class="term-success">"IERF"</span>]
+  },
   <span class="term-cyan">"location"</span>: <span class="term-success">"New Delhi, India (Open to Remote / Hybrid / Relocation)"</span>
 }
+    `,
+
+    'experience': () => `
+<span class="term-cyan">Production Work Experience &amp; Commercial Client Delivery:</span>
+
+ 1. <span class="term-warn">ATMA Research &amp; Consultancy</span> (Jul 2025 – Present)
+    • Role: Software Development Engineer – Java Full Stack
+    • Tech: Java 17+, Spring Boot, Apache Kafka, Apache Solr, MongoDB, Oracle, Kubernetes
+    • Highlights: 10,000+ daily users, -35% read latency, 99.9% production SLA uptime
+
+ 2. <span class="term-warn">Freelance Full Stack Projects</span> (Mar 2022 – Present)
+    • Role: Full Stack Engineer – React, Next.js &amp; Node.js
+    • Tech: React.js, Next.js 14/15, Node.js, Express, TypeScript, MongoDB, PostgreSQL, Socket.io
+    • Highlights: Shipped 8+ live platforms (Doon Silk, Sheetal Chilling, Fashion Look, DocFlow, Quorum)
+
+ 3. <span class="term-warn">CIET-NCERT Virasat (PAC Project 20.09)</span> (Nov 2025 – Jun 2026)
+    • Role: Project Associate (Contract)
+    • Tech: React.js, Three.js, @react-three/fiber, TopoJSON, WebGL, SVG Engine
+    • Highlights: Survey of India-compliant interactive heritage portal, 60fps low-spec performance
+
+ 4. <span class="term-warn">Indian Eurasia Research Forum</span> (Oct 2025 – Jul 2026)
+    • Role: Technical Lead (Part-time)
+    • Tech: Next.js 14, TypeScript, Automated SEO, Document Metadata Pipelines
+    • Highlights: High-availability multilateral research publication portal
     `,
 
     'systemctl status arch': () => `
@@ -1924,11 +1954,11 @@ HTTP/2 200 OK
 content-type: application/json; charset=utf-8
 
 {
-  <span class="term-cyan">"backend"</span>: [<span class="term-success">"Java 8/17/21"</span>, <span class="term-success">"Spring Boot 3"</span>, <span class="term-success">"Spring Cloud"</span>, <span class="term-success">"Microservices"</span>, <span class="term-success">"REST APIs"</span>],
-  <span class="term-cyan">"event_streaming"</span>: [<span class="term-success">"Apache Kafka"</span>, <span class="term-success">"Kafka Streams"</span>, <span class="term-success">"Pub/Sub"</span>],
+  <span class="term-cyan">"backend"</span>: [<span class="term-success">"Java 8/17/21"</span>, <span class="term-success">"Spring Boot 3"</span>, <span class="term-success">"Node.js"</span>, <span class="term-success">"Express.js"</span>, <span class="term-success">"Microservices"</span>, <span class="term-success">"REST APIs"</span>],
+  <span class="term-cyan">"event_streaming"</span>: [<span class="term-success">"Apache Kafka"</span>, <span class="term-success">"Kafka Streams"</span>, <span class="term-success">"Socket.io / WebRTC"</span>],
   <span class="term-cyan">"databases_search"</span>: [<span class="term-success">"MongoDB"</span>, <span class="term-success">"PostgreSQL"</span>, <span class="term-success">"Oracle DB"</span>, <span class="term-success">"Apache Solr"</span>, <span class="term-success">"ChromaDB"</span>],
-  <span class="term-cyan">"devops_cloud"</span>: [<span class="term-success">"Docker"</span>, <span class="term-success">"Kubernetes"</span>, <span class="term-success">"Linux/Bash"</span>, <span class="term-success">"Git"</span>, <span class="term-success">"CI/CD Pipelines"</span>],
-  <span class="term-cyan">"frontend_web"</span>: [<span class="term-success">"React.js"</span>, <span class="term-success">"Next.js 14/15"</span>, <span class="term-success">"TypeScript"</span>, <span class="term-success">"Three.js"</span>, <span class="term-success">"Tailwind"</span>]
+  <span class="term-cyan">"devops_cloud"</span>: [<span class="term-success">"Docker"</span>, <span class="term-success">"Kubernetes"</span>, <span class="term-success">"Linux/Bash"</span>, <span class="term-success">"Git"</span>, <span class="term-success">"CI/CD Pipelines"</span>, <span class="term-success">"Vercel Edge"</span>],
+  <span class="term-cyan">"frontend_web"</span>: [<span class="term-success">"React.js"</span>, <span class="term-success">"Next.js 14/15"</span>, <span class="term-success">"TypeScript"</span>, <span class="term-success">"Node.js Full Stack"</span>, <span class="term-success">"Three.js"</span>, <span class="term-success">"Tailwind"</span>]
 }
     `,
 
